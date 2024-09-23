@@ -10,13 +10,15 @@
          class="tournament-item__image"
          [ngClass]="{'tournament-item__finished-image': tournament.ended}"
          src="{{getImagePatch(tournament.image)}}"
-         (error)="errorHandler($event)">
+         (error)="errorHandler($event)"
+         alt="tournament">
 
     <img *ngIf="pageName == 'tournaments'"
          class="tournament-item__image"
          [ngClass]="{'tournament-item__finished-image': tournament.ended}"
          src="{{getImagePatch(tournament.image_b)}}"
-         (error)="errorHandler($event)">
+         (error)="errorHandler($event)"
+         alt="tournament">
 
   </div>
 

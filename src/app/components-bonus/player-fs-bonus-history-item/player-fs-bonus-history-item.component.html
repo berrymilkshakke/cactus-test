@@ -2,10 +2,10 @@
      (click)="openModalPlayerFsBonus(bonus, showButtons)"> 
 
   <img *ngIf="bonus.image" class="bonus-item__image" 
-        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)">
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="bonus">
 
   <img *ngIf="bonus.game_id && !bonus.image" class="bonus-item__image"
-       src="{{getGameImagePatch(bonus.game_id)}}" (error)="errorHandler($event)">
+       src="{{getGameImagePatch(bonus.game_id)}}" (error)="errorHandler($event)" alt="bonus">
 
   <div class="bonus-item__content">
     

@@ -15,8 +15,10 @@
                       style="width: 100%">
   </app-section-header>
 
-  <app-games-list-carousel [categoryName]="'new'" style="width: 100%"></app-games-list-carousel>
-
+  <div class="home_page__games-container">
+    <app-games-list-carousel [categoryName]="'new'" style="width: 100%"></app-games-list-carousel>
+  </div>
+  
   <app-see-more url="/games/new" style="width: 100%;" class="mobile"></app-see-more>
 
   <div class="home_page__jackpot-container" *ngFor="let item of jackpots | slice: 0 : 1">

@@ -23,7 +23,8 @@
       <img class="lottery__tournament-image"
            [ngClass]="{'lottery__tournament-image_gray': tournament.ended}"
            src="{{getImagePatch(tournament.image_b)}}"
-           (error)="errorHandler($event)">
+           (error)="errorHandler($event)"
+           alt="tournament">
     </div>
 
     <div class="lottery__block lottery__block_with-icon">

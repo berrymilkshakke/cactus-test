@@ -23,7 +23,8 @@
       <img class="lottery__tournament-image"
            [ngClass]="{'lottery__tournament-image_gray': lottery.ended}"
            src="{{getImagePatch(lottery.image_b)}}"
-           (error)="errorHandler($event)">
+           (error)="errorHandler($event)"
+           alt="lottery">
     </div>
 
     <div class="lottery__block lottery__block_with-icon" *ngIf="!lottery.ended">
@@ -48,7 +49,7 @@
         {{'lotteries.you_are_winner' | translate: {value: 'Секреты Рождества'} }}
       </div>
       <div class="lottery__lottery-win">
-        <img src="{{lottery.win}}" class="lottery__lottery-win-image">
+        <img src="{{lottery.win}}" class="lottery__lottery-win-image" alt="win">
         <div class="lottery__lottery-win-data">
           <div class="lottery__lottery-win-title">{{lottery.win}}</div>
           <div class="lottery__lottery-win-info">{{lottery.win}}</div>

@@ -2,9 +2,9 @@
 
   <div class="bonus-item-big__image-container" [ngClass]="{'disabled': !isBonusAllowed}">
     <img class="bonus-item-big__image" *ngIf="bonus.image_b" src="{{getImagePatch(bonus.image_b)}}"
-         (error)="errorHandler($event)" alt="">
+         (error)="errorHandler($event)" alt="bonus">
     <img class="bonus-item-big__image" *ngIf="!bonus.image_b" src="{{getGameImagePatch()}}"
-         (error)="errorHandler($event)" alt="">
+         (error)="errorHandler($event)" alt="bonus">
   </div>
 
   <div class="bonus-item-big__info">

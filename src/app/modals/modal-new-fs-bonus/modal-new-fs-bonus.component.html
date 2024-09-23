@@ -4,7 +4,7 @@
 
   <div class="modal-common__text center">
       <div class="modal-new-fs__image" *ngIf="bonus.image">
-        <img *ngIf="bonus.image" src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+        <img *ngIf="bonus.image" src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="bonus">
       </div>
       <span *ngIf="!bonus.activated">
         {{'notifications.you_have_a_new_fs_bonus_in_game' | translate:{'amount': bonus.amount, 'gameTitle': bonus.gameTitle} }}

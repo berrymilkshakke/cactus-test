@@ -1,9 +1,9 @@
 <div class="bonus-item" 
      (click)="openModalFsBonus(bonus, showLink, showCancel, promoCode)">  
   <img class="bonus-item__image" *ngIf="bonus.image" 
-        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="bonus">
   <img class="bonus-item__image" *ngIf="!bonus.image" 
-        src="{{getGameImagePatch()}}" (error)="errorHandler($event)" alt="">
+        src="{{getGameImagePatch()}}" (error)="errorHandler($event)" alt="bonus">
 
   <div class="bonus-item__content">
 

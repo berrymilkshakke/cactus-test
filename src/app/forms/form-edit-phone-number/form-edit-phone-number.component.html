@@ -22,7 +22,7 @@
                 <span class="form__dropdown-arrow"></span>
 
                 <div *ngIf="selectedPhoneCode">
-                  <img class="group-phone__image" src="assets/img/phone-code/{{selectedPhoneCode.country_code.toLowerCase()}}.svg">
+                  <img class="group-phone__image" alt="phone-code" src="assets/img/phone-code/{{selectedPhoneCode.country_code.toLowerCase()}}.svg">
                   <span class="form__dropdown-value form-desktop">{{selectedPhoneCode.phone_code}}</span>
                 </div>
 
@@ -34,7 +34,7 @@
                   <button type="button" *ngFor="let phoneCode of getPhoneCodes()"
                           (click)="onChangePhoneCode(phoneCode)"
                           class="form__dropdown-item dropdown-item">
-                    <img class="group-phone__image" src="assets/img/phone-code/{{phoneCode.country_code.toLowerCase()}}.svg">
+                    <img class="group-phone__image" alt="phone-code" src="assets/img/phone-code/{{phoneCode.country_code.toLowerCase()}}.svg">
                     <span>{{phoneCode.phone_code}}</span>
                   </button>
                 </perfect-scrollbar>

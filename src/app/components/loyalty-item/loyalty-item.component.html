@@ -19,7 +19,10 @@
           {{ level.title | translate }}
         </div>
 
-        <ngb-progressbar *ngIf="nextLevel && level.pointsToNextLevel"
+        <ngb-progressbar role="progressbar" 
+                         id="level" 
+                         aria-label="Level"
+                         *ngIf="nextLevel && level.pointsToNextLevel"
                          [value]="level.currentGroupProgress"
                          class="w-100 d-block loyalty-item__progress">
         </ngb-progressbar>

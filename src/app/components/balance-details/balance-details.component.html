@@ -21,6 +21,11 @@
     </div>
   </div>
   <div class="balance-details__progress">
-    <ngb-progressbar [value]="getActiveBonusProgress()" class="w-100 d-block balance-details__progressbar"></ngb-progressbar>
+    <ngb-progressbar role="progressbar" 
+                      id="balance" 
+                      aria-label="Balance"
+                      [value]="getActiveBonusProgress()" 
+                      class="w-100 d-block balance-details__progressbar">
+    </ngb-progressbar>
   </div>
 </div>

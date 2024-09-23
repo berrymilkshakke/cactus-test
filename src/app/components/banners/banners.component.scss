@@ -4,6 +4,7 @@
 
 .banners {
   position: relative;
+  min-height: 342.21px;
 
   &__banner {
     @include media($desktop-layout) {

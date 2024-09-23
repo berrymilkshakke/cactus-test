@@ -5,12 +5,12 @@
   <img class="bonus-item-simple__image"
        *ngIf="bonus.image"
        src="{{getImagePatch(bonus.image)}}"
-       (error)="errorHandler($event)" alt="">
+       (error)="errorHandler($event)" alt="bonus">
 
   <img class="bonus-item-simple__image"
        *ngIf="!bonus.image"
        src="{{getGameImagePatch()}}"
-       (error)="errorHandler($event)" alt="">
+       (error)="errorHandler($event)" alt="bonus">
 
   <div class="bonus-item-simple__header">
 

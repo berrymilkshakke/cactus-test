@@ -10,13 +10,15 @@
          class="lottery-item__image"
          [ngClass]="{'lottery-item__finished-image': lottery.ended}"
          src="{{getImagePatch(lottery.image)}}"
-         (error)="errorHandler($event)">
+         (error)="errorHandler($event)"
+         alt="lottery">
 
     <img *ngIf="pageName == 'lotteries'"
          class="lottery-item__image"
          [ngClass]="{'lottery-item__finished-image': lottery.ended}"
          src="{{getImagePatch(lottery.image_b)}}"
-         (error)="errorHandler($event)">
+         (error)="errorHandler($event)"
+         alt="lottery">
 
   </div>
 

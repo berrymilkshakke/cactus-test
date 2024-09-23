@@ -2,7 +2,7 @@
      (click)="openModalMoneyBonus(bonus, showLink, showCancel, promoCode)">
 
   <img class="bonus-item__image" *ngIf="bonus.image" 
-        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="bonus">
 
   <div class="bonus-item__content">
 

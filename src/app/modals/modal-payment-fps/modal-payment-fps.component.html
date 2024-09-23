@@ -13,7 +13,7 @@
 	<div class="modal-common__information">
 		<div class="modal-common__container d-flex">
 			<div class="modal-common__img left">
-				<img src="assets/img/payment-logo/{{bank}}.svg" (error)="errorHandler($event)" alt="">
+				<img alt="{{bank}}" src="assets/img/payment-logo/{{bank}}.svg" (error)="errorHandler($event)">
 			</div>
 		</div>
 		<div class="modal-common__card mt-3">{{'modal.phone_number' | translate}}</div>

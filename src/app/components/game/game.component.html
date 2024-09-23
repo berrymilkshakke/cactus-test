@@ -29,6 +29,7 @@
 
         <div class="game__iframe">
           <iframe *ngIf="!isHtml && gameUrl" [src]="gameUrl"
+                  title="Game"
                   sandbox="allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation
                   allow-orientation-lock allow-popups allow-popups-to-escape-sandbox allow-presentation"
                   allowfullscreen="allowfullscreen">
