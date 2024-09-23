@@ -1,0 +1,400 @@
+@import "src/assets/scss/_variables.scss";
+
+
+$btn-primary-color: #E10600;
+$red_color: #E10600;
+$red_color_hover: #E63E39;
+$red_color_active: #CC0600;
+$grey_color: #E9ECF2;
+$grey_color_hover: #D8E0E8;
+$grey_color_active: #CFD9E3;
+$black_color: #151225;
+$black_color_hover: #364359;
+$black_color_active: #202C40;
+$urlImageDir: '/assets/img/';
+$bluecolor: #1dabdd;
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+button {
+  outline: none;
+}
+
+@mixin noscroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin imgBg($img, $size: cover) {
+  $path: '#{$urlImageDir}#{$img}';
+  background: {
+    image: url('#{$path}');
+    size: $size;
+    repeat: no-repeat;
+  }
+}
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: 70em) {
+      @content ;
+    }
+  } @else if $point == laptop {
+    @media (min-width: 64em) {
+      @content ;
+    }
+  } @else if $point == tablet {
+    @media (min-width: 50em) {
+      @content ;
+    }
+  } @else if $point == phablet {
+    @media (min-width: 37.5em) {
+      @content ;
+    }
+  } @else if $point == mobileonly {
+    @media (max-width: 37.5em) {
+      @content ;
+    }
+
+  } @else {
+    @media (max-width: $point) {
+      @content ;
+    }
+  }
+}
+
+
+@mixin btnSquard($color: $bluecolor, $text: #fff, $hover: $bluecolor, $focus: $bluecolor) {
+  font-family: Rubik, sans-serif;
+  background: {
+    color: $color;
+  }
+  color: $text;
+  border: {
+    radius: 4px;
+    color: $color;
+  }
+  line-height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  height: 40px;
+  width: 128px;
+  margin: 0;
+  cursor: pointer;
+  border-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: $hover;
+    @include breakpoint(500px) {
+      background-color: $color;
+    }
+  }
+  &:active {
+    opacity: 0.8;
+    background-color: $focus;
+    border-style: none;
+    @include breakpoint(500px) {
+      background-color: $color;
+    }
+  }
+  &:disabled {
+    color: rgba(23, 33, 51, 0.5);
+    background-color: #E9EEF2;
+
+  }
+}
+
+[flex] {
+  display: flex;
+}
+
+[center] {
+  margin: 0 auto;
+}
+
+@mixin type($s: 16px, $c: #fff) {
+  font: {
+    size: $s;
+    weight: normal;
+  }
+  color: $c;
+  line-height: 1.5;
+}
+
+@mixin select($bgColor: #fff, $fontColor: #444, $fontSize: 16px) {
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: {
+      width: 1px;
+      color: #868a92;
+      radius: 3px;
+    }
+    background: $bgColor;
+    background-image: none;
+    @include type($fontSize, $fontColor);
+  }
+
+  .select {
+    position: relative;
+    display: block;
+    width: 4em;
+    height: 2em;
+    line-height: 2;
+    background: #fff;
+    overflow: hidden;
+    border-radius: .25em;
+
+  }
+  select {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .2em;
+    cursor: pointer;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+@each $paymentsProviders in visa, visa_1, visa_2, visa_rub, visa_rub_1, visa_rub_2, visa_uah, visa_uah_1, visa_uah_2,
+mastercard, mastercard_1, mastercard_2, mastercard_rub, mastercard_rub_1, mastercard_rub_2, mastercard_uah, mastercard_uah_1, mastercard_uah_2,
+cards, cards_1, cards_2, cards_rub, cards_rub_1, cards_rub_2, cards_uah, cards_uah_1, cards_uah_2,
+bitcoin, alfa, applePay, carduah, googlePay, payeer, perfect_money, piastrix_wallet, visaMastercard,
+webMoney, qiwi, mir, carduah, megafon, tele2, beeline, mts, yandex, advcash, Tinkoff, fk_wallet, yoo_money, tether_erc20,
+tether_trc20, ethereum, cards_rub_500, cards_mir {
+  .#{$paymentsProviders}_icon {
+    $iconPath: 'payments-icon-new/#{$paymentsProviders}@1x.png';
+    @include imgBg($iconPath);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: {
+      position: center;
+    }
+  }
+}
+
+@each $paymentsProvidersGray in mc-symbol,
+visa, visa_1, visa_2, visa_rub, visa_rub_1, visa_rub_2, visa_uah, visa_uah_1, visa_uah_2,
+mastercard, mastercard_1, mastercard_2, mastercard_rub, mastercard_rub_1, mastercard_rub_2, mastercard_uah, mastercard_uah_1, mastercard_uah_2,
+cards, cards_1, cards_2, cards_rub, cards_rub_1, cards_rub_2, cards_uah, cards_uah_1, cards_uah_2,
+mir, qiwi, ym, mf, lq, wm, skrill, ep, bitcoin, fk_wallet, yoo_money, tether_erc20,
+tether_trc20, ethereum, cards_rub_500, cards_mir {
+
+  .#{$paymentsProvidersGray}_icon_footer {
+    $iconPath: 'payments-gray/#{$paymentsProvidersGray}@2x.png';
+    @include imgBg($iconPath);
+    max-width: 162px;
+    width: 100%;
+    margin: 0 auto;
+    height: 24px;
+    text-align: center;
+    object-fit: contain;
+    //opacity: 0.2;
+    mix-blend-mode: luminosity;
+    background: {
+      position: center;
+    }
+  }
+
+}
+
+@each $gamble in curacao, ecogra, essa, gamcare {
+  .#{$gamble}_icon_gamble {
+    $iconPath: 'gamble/#{$gamble}@2x.png';
+    @include imgBg($iconPath);
+    max-width: 85px;
+    width: 100%;
+    margin: 0 auto;
+    height: 24px;
+    text-align: center;
+    object-fit: contain;
+    background: {
+      position: center;
+    }
+  }
+}
+
+@each $gameProviders in amatic, apollo, aristocrat, atronic, belatra, bet2tech, cyberslot, egt, erotic, igrosoft, merkur, microgaming, netent, novomatic, play_n_go, playtech, quickspin, unicum, wazdan, yggdrasil {
+  .#{$gameProviders}__icon {
+    $iconPath: 'providers/#{$gameProviders}.png';
+    @include imgBg($iconPath);
+    width: 110px;
+    height: 26px;
+    background: {
+      position: center;
+    }
+  }
+}
+
+input.ng-touched.ng-invalid + span span {
+  color: red !important;
+}
+
+input.ng-touched.ng-invalid {
+  // border-color: red !important;
+  border: 1px solid red !important;
+}
+
+.line {
+  background: linear-gradient(90deg, #131A26 0%, rgba(19, 26, 38, 0) 100%);
+  width: 80%;
+  height: 1px;
+  @include breakpoint(450px) {
+    display: none;
+  }
+}
+
+.group {
+  width: 100%;
+  margin: 24px 0 0;
+  height: auto;
+  position: relative;
+  clear: both;
+
+  &.group-phone {
+    @media (max-width: $mobile-layout) {
+      max-width: 134px;
+    }
+  }
+
+  input {
+    font-size: 16px;
+    //padding: 10px;
+    display: block;
+    width: 100%;
+    //border: none;
+    //border-bottom: 1px solid #ccc;
+    height: 56px;
+    padding: 16px 16px 0;
+    border: 1px solid $divider-border;
+    background-color: $background-secondary;
+    color: $text-primary;
+    border-radius: 4px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $button-active !important;
+    }
+  }
+
+  label {
+    font-size: 14px;
+    position: absolute;
+    pointer-events: none;
+    top: 21px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    z-index: 1;
+    line-height: 16px;
+    color: $text-secondary;
+    text-indent: 16px;
+    margin: 0;
+
+    &.wallet-withdrawal__label {
+      font-size: 12px;
+      top: 8px;
+    }
+
+  }
+
+  input.ng-valid, input.ng-invalid {
+    ~ label {
+      top: 8px;
+      font-size: 12px;
+    }
+  }
+
+  input.ng-untouched {
+    ~ label {
+      top: 21px;
+      font-size: 14px;
+
+      &.wallet-withdrawal__label {
+        top: 8px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  input.ng-untouched.ng-valid {
+    ~ label {
+      top: 8px;
+      font-size: 12px;
+    }
+  }
+
+  input.null {
+    ~ label {
+      top: 21px !important;
+      font-size: 14px !important;
+    }
+  }
+
+  input:read-only.ng-untouched {
+    ~ label {
+      top: 8px;
+      font-size: 12px;
+    }
+  }
+
+  input {
+    &:focus ~ label {
+      top: 8px !important;
+      font-size: 12px !important;
+    }
+  }
+
+  &.wallet-withdrawal-group {
+    max-width: 344px !important;
+    margin-top: 0 !important;
+
+    &.group-phone {
+      margin-top: 0 !important;
+    }
+
+    @media (max-width: $mobile-layout) {
+      max-width: 100% !important;
+      width: 100%;
+    }
+  }
+
+}
+
+.password-control {
+  position: absolute;
+  border: none;
+  display: inline-block;
+  width: 24px;
+  background: url("/assets/img/eye.svg") center no-repeat;
+  top: 0;
+  right: 12px;
+  // height: 100%;
+  cursor: pointer;
+  height: 55px;
+}
+
+.password-control.view {
+  background: url("/assets/img/eye-open.svg") center no-repeat;
+}
+

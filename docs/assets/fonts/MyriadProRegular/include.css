@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: 'MyriadProRegular';
+    src: url('myriadpe-webfont.eot');
+    src: url('myriadpe-webfont.eot?#iefix') format('embedded-opentype'),
+         url('myriadpe-webfont.woff') format('woff'),
+         url('myriadpe-webfont.ttf') format('truetype'),
+         url('myriadpe-webfont.svg#MyriadProRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

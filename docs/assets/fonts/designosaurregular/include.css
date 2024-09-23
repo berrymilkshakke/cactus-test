@@ -1,0 +1,12 @@
+
+@font-face {
+    font-family: 'designosaurregular';
+    src: url('designosaur-regular-webfont.eot');
+    src: url('designosaur-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('designosaur-regular-webfont.woff') format('woff'),
+    url('designosaur-regular-webfont.ttf') format('truetype'),
+    url('designosaur-regular-webfont.svg#designosaurregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

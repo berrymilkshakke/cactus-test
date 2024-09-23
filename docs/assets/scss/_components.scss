@@ -1,0 +1,389 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+
+.faq__questions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+
+  * > {
+    display: block;
+  }
+}
+
+
+.show-more {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  &__link {
+    cursor: pointer;
+  }
+}
+
+// Выпадающее меню с провайдерами в браузерах
+
+.dropdown-component__dropdown-toggle:after {
+  display: none;
+}
+
+.dropdown-component__dropdown-toggle:before {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  content: '';
+  background: url('/assets/img/icons/arrow_down.svg') no-repeat;
+  filter: brightness(0) saturate(100%) invert(64%) sepia(15%) saturate(284%) hue-rotate(169deg) brightness(94%) contrast(90%);
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown-component__dropdown.show > .dropdown-component__dropdown-toggle.dropdown-toggle {
+  color: $text-primary;
+  border-color: $divider-border-active;
+  &:before {
+    background: url('/assets/img/icons/arrow_up.svg') no-repeat;
+    filter: brightness(0) saturate(100%) invert(46%) sepia(76%) saturate(2998%) hue-rotate(123deg) brightness(92%) contrast(101%);
+  }
+}
+
+.dropdown-component__dropdown > .dropdown-menu {
+  width: 260px;
+  border-radius: 8px;
+  background-color: $background-tertiary;
+}
+
+.dropdown-component__dropdown > .dropdown-menu .dropdown-item {
+  @extend .body2;
+  color: $text-primary;
+  position: relative;
+
+  &:hover {
+    background-color: $background-hover !important;
+  }
+
+  &:focus {
+    background-color: $background-tertiary;
+  }
+}
+
+// .dropdown-component__dropdown-selected::after {
+//   position: absolute;
+//   right: 24px;
+//   top: 6px;
+//   content: '';
+//   background: url('/assets/img/icons/tick.svg') no-repeat;
+//   width: 16px;
+//   height: 16px;
+// }
+
+
+.currency-select-radio {
+
+  &__currency {
+    position: relative;
+    @extend .body2;
+    color: $text-primary;
+    margin-bottom: 24px;
+    padding-left: 36px;
+    cursor: pointer;
+
+    &::after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      @include imgBg('icons/radio.svg');
+      width: 20px;
+      height: 20px;
+    }
+
+    &-selected {
+      &::after {
+        @include imgBg('icons/radio_selected.svg');
+      }
+    }
+  }
+}
+
+input:checked+.switchery-success {
+  background-color: #00AB55 !important;
+  border-color: #00AB55 !important;
+  box-shadow: none !important;
+}
+
+.switchery {
+  height: 24px !important;
+  width: 42px !important;
+}
+
+.switchery>small {
+  width: 18px !important;
+  height: 18px !important;
+  top: 3px !important;
+  left: 3px !important;
+}
+
+input+.switchery {
+  margin-right: 0 !important;
+}
+
+input:checked+.switchery>small {
+  left: 22px !important;
+}
+
+.search2 {
+  &__bonus-home {
+    position: relative;
+    background-color: #212B36;
+    padding: 3px 16px 3px 6px;
+    border-radius: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    white-space: nowrap;
+    .checkbox {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: $mobile-layout) {
+      display: none;
+    }
+
+    &.mobile {
+      display: none;
+      @media (max-width: $mobile-layout) {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        margin-top: 16px;
+      }
+    }
+  }
+  &__bonus {
+    position: relative;
+    background-color: #212B36;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    .checkbox {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  &__providers-length {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    border-radius: 24px;
+    background: red;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    padding-top: 2px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__providers-desktop {
+    @media (max-width: 576px) {
+      display: none;
+    }
+  }
+
+  &__providers-btn {
+    position: relative;
+    background-color: #212B36;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    img {
+      max-width: 100%;
+    }
+
+    @media (max-width: 576px) {
+      padding: 8px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__form-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-grow: 1;
+  }
+
+  &__input-container {
+    position: relative;
+    background-color: $background-secondary;
+    border-radius: 8px;
+    padding: 7px 40px 7px 16px;
+    display: flex;
+    align-items: center;
+    flex-grow: 3;
+    border: 1px solid $divider-border;
+
+    &::before {
+      content: '';
+      background: url("/assets/img/icons/search.svg") no-repeat;
+      background-size: 100% 100%;
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      margin-right: 12px;
+    }
+  }
+
+  &__clear_button {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/img/icons/cancel_filled.svg") no-repeat;
+    cursor: pointer;
+  }
+
+  &__search-entry {
+    @extend .body2;
+    color: $text-secondary;
+    background-color: $background-secondary;
+    border: 0;
+    width: 100%;
+
+    &:focus {
+      color: $text-primary;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+  }
+
+  // Выезжающее меню с провайдерами на мобильных устройствах
+
+  &__search-filter-mobile {
+    background: $background-secondary url('/assets/img/icons/filter.svg') no-repeat 50% 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  &__select-title {
+    @extend .header3;
+    color: $text-primary;
+  }
+
+  &__select-provider {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: $z-index-l4;
+    background-color: $background-tertiary;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px 16px 24px 16px;
+    transition: bottom .4s ease-out;
+  }
+
+  &__selector-close {
+    position: absolute;
+    content: '';
+    background: url('/assets/img/icons/close_gray.svg') no-repeat;
+    right: 16px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__providers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__provider {
+    display: inline-block;
+    @extend .body2;
+    color: $text-primary;
+    padding: 6px 12px;
+    background-color: $background-secondary;
+    border-radius: 999px;
+    &_selected {
+      background-color: $button-active;
+    }
+  }
+
+  &__provider-buttons {
+    display: flex;
+    > * {
+      flex-basis: 50%;
+      text-align: center;
+    }
+  }
+
+  &__dropdown-toggle.dropdown-toggle {
+    @extend .body2;
+    cursor: pointer;
+    height: 40px;
+    width: 260px;
+    color: $text-secondary;
+    background: $background-secondary;
+    border: 1px solid $divider-border;
+    border-radius: 8px;
+    padding: 10px 16px;
+  }
+
+  &__dropdown > .dropdown-menu {
+    height: 190px;
+  }
+}
+
+.search2__select-provider_closed {
+  bottom: -100%;
+}
+
+.search2__select-provider_opened {
+  bottom: 0;
+}

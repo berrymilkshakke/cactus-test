@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'PragmaticaCondensed';
+    src: url('prgcond-webfont.eot');
+    src: url('prgcond-webfont.eot?#iefix') format('embedded-opentype'),
+         url('prgcond-webfont.woff') format('woff'),
+         url('prgcond-webfont.ttf') format('truetype'),
+         url('prgcond-webfont.svg#PragmaticaCondensed') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

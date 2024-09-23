@@ -1,0 +1,14 @@
+.document_type_image {
+
+  &_personal {
+    @include imgBg('icons/document_types/personal.svg');
+  }
+
+  &_payments {
+    @include imgBg('icons/document_types/payments.svg');
+  }
+
+  &_address {
+    @include imgBg('icons/document_types/address.svg');
+  }
+}

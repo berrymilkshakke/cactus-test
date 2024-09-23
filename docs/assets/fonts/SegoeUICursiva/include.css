@@ -1,0 +1,11 @@
+
+@font-face {
+    font-family: 'SegoeUICursiva';
+    src: url('segoeuii-webfont.eot');
+    src: url('segoeuii-webfont.eot?#iefix') format('embedded-opentype'),
+         url('segoeuii-webfont.woff') format('woff'),
+         url('segoeuii-webfont.ttf') format('truetype'),
+         url('segoeuii-webfont.svg#SegoeUICursiva') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
