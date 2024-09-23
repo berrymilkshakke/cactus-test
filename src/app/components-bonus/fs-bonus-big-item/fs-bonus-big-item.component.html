@@ -1,0 +1,77 @@
+<div class="bonus-item-big">
+
+  <div class="bonus-item-big__image-container" [ngClass]="{'disabled': !isBonusAllowed}">
+    <img class="bonus-item-big__image" *ngIf="bonus.image_b" src="{{getImagePatch(bonus.image_b)}}"
+         (error)="errorHandler($event)" alt="">
+    <img class="bonus-item-big__image" *ngIf="!bonus.image_b" src="{{getGameImagePatch()}}"
+         (error)="errorHandler($event)" alt="">
+  </div>
+
+  <div class="bonus-item-big__info">
+
+    <div class="bonus-item-big__title">
+      <!-- <div *ngIf="!bonus.title_in_locale" [innerHTML]="bonus.title"></div> -->
+      <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+
+      <ng-container *ngIf="!bonus.title_in_locale">
+        <app-bonus-item-currencies-value
+          *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+          [title]="'forms.min_deposit'"
+          [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+          [style]="''">
+        </app-bonus-item-currencies-value>
+      </ng-container>
+
+    </div>
+
+    <div class="bonus-item-big__description">
+      <span class="bonus-item-big__description-text">
+      <ng-container *ngIf="getBonusOptionValue(bonus, 'amount_percent')">
+        {{ getBonusOptionValue(bonus, 'amount_percent') + '%' }}
+        <span *ngIf="getBonusOptionValue(bonus, 'fs_amount')">
+          {{ 'other.and' | translate }}
+        </span>
+      </ng-container>
+
+
+      <ng-container *ngIf="getBonusOptionValue(bonus, 'fs_amount')">
+        {{getBonusOptionValue(bonus, 'fs_amount')}}
+        free spins
+      </ng-container>
+      </span>
+    </div>
+
+  </div>
+
+  <ng-container *ngIf="!isAuthorized()">
+
+    <ng-container>
+      <div class="bonus-item-big__button button-mini"
+           (click)="openModalRegistration()">
+        {{'buttons.registration' | translate}}
+      </div>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="isAuthorized()">
+
+    <ng-container *ngIf="allowDirectActivation">
+      <div class="bonus-item-big__button button-mini"
+           (click)="activateBonus()">
+        {{'other.bezdep_bon' | translate}}
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!allowDirectActivation && isBonusAllowed && showLink">
+      <div class="bonus-item-big__button button-mini"
+           routerLink="/wallet/deposit"
+           [queryParams]="{ fsBonusId: bonus.id}">
+        {{'buttons.activate' | translate}}
+      </div>
+    </ng-container>
+
+  </ng-container>
+
+
+</div>

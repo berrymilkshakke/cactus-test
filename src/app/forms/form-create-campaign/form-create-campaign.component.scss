@@ -1,0 +1,32 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+
+.form-create-campaign {
+  &__button {
+    display: block;
+    line-height: 24px;
+    text-align: center;
+    height: 48px;
+    border: none;
+  }
+
+  button .label {
+    color: $text-secondary !important;
+  }
+
+  button.dropdown-component__dropdown-toggle {
+    background-color: $background-secondary;
+    border-color: $divider-border;
+  }
+
+  button.dropdown-component__dropdown-toggle:focus {
+    background-color: $background-secondary;
+    border-color: $divider-border;
+    outline-color: $button-active !important;
+    box-shadow: none;
+  }
+
+  &__value {
+    color: $text-primary;
+  }
+}

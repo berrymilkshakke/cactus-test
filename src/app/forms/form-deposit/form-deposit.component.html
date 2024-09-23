@@ -1,0 +1,398 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="wallet-deposit-form">
+
+  <div class="wallet-deposit-form__inputs">
+
+    <div class="wallet-deposit-form__header">{{'forms.choose_account' | translate}}</div>
+
+    <div class="group">
+
+      <div ngbDropdown class="form__dropdown">
+
+        <button type="button" class="form__dropdown-toggle" ngbDropdownToggle id="dropdownCurrency">
+          <span class="form__dropdown-label label">{{'other.currency' | translate}}</span>
+          <span class="form__dropdown-arrow"></span>
+          <span class="form__dropdown-value" *ngIf="selectedCurrencyCode">
+            {{ 'currencies.' + selectedCurrencyCode | translate}}
+          </span>
+        </button>
+
+        <div ngbDropdownMenu class="form__dropdown-list">
+          <button type="button" *ngFor="let currency of currencies"
+                  (click)="onChangeCurrency(currency.code)"
+                  class="form__dropdown-item dropdown-item">
+            <span>{{ 'currencies.' + currency.code | translate}}</span>
+          </button>
+        </div>
+
+      </div>
+
+      <div *ngIf="submitted && f.currency.errors" class="error-bl">
+        <div *ngIf="f.currency.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['currency']" class="error-bl">{{ error_value }}</div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="lastSuccessDepositMethod && (lastSuccessDepositMethod.currency_code == selectedCurrencyCode)"
+       class="wallet-deposit-form__inputs">
+    <div class="wallet-deposit-form__header">{{'payments.last_success_deposit' | translate}}</div>
+
+    <div (click)="onChangeMethod(lastSuccessDepositMethod)"
+         [ngClass]="{'wallet-deposit-form__payment-provider_selected': lastSuccessDepositMethod === selectedPaymentMethod}"
+         class="wallet-deposit-form__payment-provider wallet-deposit-form__payment-provider_last"
+         [ngStyle]="getStyleBack(lastSuccessDepositMethod)">
+    </div>
+
+  </div>
+
+  <div class="wallet-deposit-form__inputs">
+
+    <div class="wallet-deposit-form__header">{{'forms.select_payment_method' | translate}}</div>
+
+    <div class="wallet-deposit-form__payment-sources">
+
+      <div *ngFor="let serviceGroup of serviceGroups"
+           (click)="selectGroup(serviceGroup)"
+           [ngClass]="{'wallet-deposit-form__payment-source_selected': (serviceGroup == selectedServiceGroup)}"
+           class="wallet-deposit-form__payment-source"> <!--  && !isLastSuccessGroupSelected -->
+        {{'payments.groups.' + serviceGroup | translate}}
+      </div>
+
+
+    </div>
+
+    <div class="wallet-deposit-form__payment-providers">
+
+
+      <div *ngFor="let paymentMethod of paymentMethodsFilteredByServiceGroup">
+        <div (click)="onChangeMethod(paymentMethod)"
+             [ngClass]="{'wallet-deposit-form__payment-provider_selected': paymentMethod === selectedPaymentMethod}"
+             class="wallet-deposit-form__payment-provider"
+             [ngStyle]="getStyleBack(paymentMethod)">
+        </div>
+        <div class="wallet-deposit-form__limit">
+          <span>{{'project.from' | translate}} </span>
+          <span>{{paymentMethod.limit_minimum | currency: paymentMethod.currency_code : 'symbol-narrow' : '1.0-0' : 'ru'}}</span>
+        </div>
+      </div>
+
+      <div *ngIf="submitted && f.paymentMethod.errors" class="error-bl">
+        <div *ngIf="f.paymentMethod.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['paymentMethod']" class="error-bl">{{ error_value }}</div>
+
+    </div>
+
+    <div *ngIf="accountRequired">
+
+      <div class="wallet-deposit-form__field-header">
+        <span>{{'forms.enter_card_number' | translate}}</span>
+      </div>
+
+      <div class="wallet-deposit-form__account-field group">
+        <input trim
+               type="text"
+               formControlName="account">
+        <label>{{getAccountPlaceholder(selectedPaymentMethod)}}</label>
+
+        <div *ngIf="submitted && f.account.errors" class="error-bl">
+          <div *ngIf="f.account.errors.required">{{'forms.required_to_fill' | translate}}</div>
+          <div *ngIf="f.account.errors.pattern">
+            <span>{{'forms.wrong_format' | translate}}</span><br>
+            <span *ngIf="accountFieldExample">Ex.: {{accountFieldExample}}</span>
+          </div>
+        </div>
+
+        <div *ngFor="let error_value of errors['account']" class="error-bl">{{ error_value }}</div>
+
+      </div>
+
+    </div>
+
+
+    <div *ngIf="expirationDateRequired">
+
+      <div class="wallet-deposit-form__field-header">
+        <span>{{'placeholders.expiration_date' | translate}}</span>
+      </div>
+
+      <div class="wallet-deposit-form__expiration-fields">
+
+        <div class="group">
+          <input trim
+                 type="text"
+                 [maxLength]="2"
+                 formControlName="expirationDateMonth">
+          <label>{{'forms.month' | translate}}</label>
+
+          <div *ngIf="submitted && f.expirationDateMonth.errors" class="error-bl">
+
+            <div *ngIf="f.expirationDateMonth.errors.required">
+              {{'forms.required_to_fill' | translate}}
+            </div>
+
+            <div *ngIf="f.expirationDateMonth.errors.minlength">
+              {{'forms.too_short' | translate: {value: f.expirationDateMonth.errors.minlength.requiredLength} }}
+            </div>
+
+            <div *ngIf="f.expirationDateMonth.errors.maxlength">
+              {{'forms.too_long' | translate: {value: f.expirationDateMonth.errors.maxlength.requiredLength} }}
+            </div>
+
+          </div>
+
+          <span *ngFor="let error_value of errors['expirationDateMonth']" class="error-bl">{{ error_value }}</span>
+        </div>
+
+        <span class="wallet-deposit-form__expiration-delimiter">/</span>
+
+        <div class="group">
+          <input trim
+                 type="text"
+                 [maxLength]="4"
+                 formControlName="expirationDateYear">
+          <label>{{'forms.year' | translate}}</label>
+
+          <div *ngIf="submitted && f.expirationDateYear.errors" class="error-bl">
+
+            <div *ngIf="f.expirationDateYear.errors.required">
+              {{'forms.required_to_fill' | translate}}
+            </div>
+
+            <div *ngIf="f.expirationDateYear.errors.minlength">
+              {{'forms.too_short' | translate: {value: f.expirationDateYear.errors.minlength.requiredLength} }}
+            </div>
+
+            <div *ngIf="f.expirationDateYear.errors.maxlength">
+              {{'forms.too_long' | translate: {value: f.expirationDateYear.errors.maxlength.requiredLength} }}
+            </div>
+
+          </div>
+
+          <span *ngFor="let error_value of errors['expirationDateYear']" class="error-bl">{{ error_value }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--
+    <div class="wallet-deposit-form__subheader wallet-deposit-form__select-payment-method">
+      {{'forms.choose_payment_method' | translate}}:
+    </div>
+
+    <div class="wallet-deposit-form__payment-methods">
+      <div class="wallet-deposit-form__payment-method wallet-deposit-form__payment-method_selected">
+        {{'other.method' | translate}} 1
+      </div>
+      <div class="wallet-deposit-form__payment-method">{{'other.method' | translate}} 2</div>
+      <div class="wallet-deposit-form__payment-method">{{'other.method' | translate}} 3</div>
+    </div>
+    -->
+  </div>
+
+
+  <!-- Play with bonus -->
+
+  <div *ngIf="selectedPaymentMethod" class="wallet-deposit-form__inputs">
+
+    <section class="slider-checkbox-left" style="width: 100%">
+      <input type="checkbox" id="2" formControlName="bonusAllowed" (change)="onChangeBonusAllowed()"/>
+      <label class="label" for="2" style="width: 100%">
+        <div class="wallet-deposit-form__header">{{'payments.play_with_bonus' | translate}}</div>
+      </label>
+    </section>
+
+    <ng-container *ngIf="f.bonusAllowed.value">
+
+      <div class="wallet-deposit-form__selector">
+
+        <div class="wallet-deposit-form__selector-item" (click)="selectTab('bonuses')"
+             [ngClass]="{'wallet-deposit-form__selector-item_active': tab == 'bonuses'}">
+          <div class="wallet-deposit-form__selector-item-text">{{'payments.select_bonus' | translate}}</div>
+        </div>
+
+        <div class="wallet-deposit-form__selector-item" (click)="selectTab('promo')"
+             [ngClass]="{'wallet-deposit-form__selector-item_active': tab == 'promo'}">
+          <div class="wallet-deposit-form__selector-item-text">{{'payments.enter_promo_code' | translate}}</div>
+        </div>
+
+      </div>
+
+      <div class="wallet-deposit-form__bonus-selected">
+
+        <div *ngIf="activeMoneyBonus" class="wallet-deposit-form__bonus-warning">
+          {{'bonuses.bonus_will_be_canceled' | translate}}
+        </div>
+
+        <div *ngIf="tab == 'bonuses'" class="wallet-deposit-form__bonus-text">
+          {{'payments.add_bonus_info' | translate}}
+        </div>
+
+        <div *ngIf="tab == 'bonuses'" class="wallet-deposit-form__bonuses">
+
+          <ngx-slick-carousel #slickModal="slick-carousel" 
+                              [config]="slideConfig" 
+                              (init)="slickInit($event)"
+                              [ngClass]="{'wallet-deposit-form__bonus-unslick': isUnslickSlider}">
+
+            <div ngxSlickItem
+                 class="slide"
+                 *ngIf="moneyBonus && moneyBonusId && checkAllowedBonus(moneyBonus)"
+                 [ngClass]="{'slide-single' : hasOneBonus()}">
+              <app-money-bonus-simple-item class="wallet-deposit-form__bonus-item"
+                                           [bonus]="moneyBonus"
+                                           [showLink]="false"
+                                           (bonusSelectedEvent)="selectMoneyBonus(moneyBonus.id)"
+                                           (bonusCanceledEvent)="cancelMoneyBonus()">
+              </app-money-bonus-simple-item>
+            </div>
+
+            <div ngxSlickItem
+                 class="slide"
+                 *ngIf="fsBonus && fsBonusId && checkAllowedBonus(fsBonus)"
+                 [ngClass]="{'slide-single' : hasOneBonus()}">
+              <app-fs-bonus-simple-item class="wallet-deposit-form__bonus-item"
+                                        [bonus]="fsBonus"
+                                        [showLink]="false"
+                                        (bonusSelectedEvent)="selectFsBonus(fsBonus.id)"
+                                        (bonusCanceledEvent)="cancelFsBonus()">
+              </app-fs-bonus-simple-item>
+            </div>
+
+            <ng-container *ngIf="moneyBonuses">
+              <ng-container  *ngFor="let item of moneyBonuses">
+                <div ngxSlickItem
+                    class="slide"
+                    *ngIf="checkAllowedBonus(item)"
+                    [hidden]="moneyBonusId && (item.id == moneyBonusId)"
+                    [ngClass]="{'slide-single' : hasOneBonus()}">
+                  <app-money-bonus-simple-item class="wallet-deposit-form__bonus-item"
+
+                                              [bonus]="item"
+                                              [showLink]="false"
+                                              (bonusSelectedEvent)="selectMoneyBonus(item.id)"
+                                              (bonusCanceledEvent)="cancelMoneyBonus()">
+                  </app-money-bonus-simple-item>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="fsBonuses">
+              <ng-container *ngFor="let item of fsBonuses">
+                <div ngxSlickItem
+                    class="slide"
+                    *ngIf="checkAllowedBonus(item)"
+                    [hidden]="fsBonusId && (item.id == fsBonusId)"
+                    [ngClass]="{'slide-single' : hasOneBonus()}">
+                  <app-fs-bonus-simple-item class="wallet-deposit-form__bonus-item"
+                                            [bonus]="item"
+                                            [showLink]="false"
+                                            (bonusSelectedEvent)="selectFsBonus(item.id)"
+                                            (bonusCanceledEvent)="cancelFsBonus()">
+                  </app-fs-bonus-simple-item>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <div class="wallet-deposit-form__margin-fix"></div>
+
+          </ngx-slick-carousel>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="tab == 'promo'">
+
+        <ng-container>
+          <app-form-promo-code *ngIf="!promoCode"></app-form-promo-code>
+
+          <app-form-promo-code *ngIf="promoCode" [code]="promoCode.code"></app-form-promo-code>
+        </ng-container>
+
+
+        <ng-container *ngIf="promoCode">
+
+          <div *ngIf="!promoCode.money_bonus && !promoCode.fs_bonus" class="mt-3">
+            {{'profile.activated_promocode' | translate}} {{promoCode.title}} ({{promoCode.code}})
+          </div>
+
+          <div class="bonuses__bonuses-list">
+            <app-money-bonus-item *ngIf="promoCode.money_bonus"
+                                  [bonus]="promoCode.money_bonus"
+                                  [showLink]="false"
+                                  [showCancel]="true"
+                                  [promoCode]="promoCode">
+            </app-money-bonus-item>
+
+            <app-fs-bonus-item *ngIf="promoCode.fs_bonus"
+                                [bonus]="promoCode.fs_bonus"
+                                [showLink]="false"
+                                [showCancel]="true"
+                                [promoCode]="promoCode">
+            </app-fs-bonus-item>
+          </div>
+
+        </ng-container>
+
+      </div>
+
+    </ng-container>
+
+
+  </div>
+
+  <!-- Amount -->
+
+  <div *ngIf="selectedPaymentMethod" class="wallet-deposit-form__inputs">
+
+    <div class="wallet-deposit-form__header">{{'forms.amount_dep' | translate}}</div>
+
+    <div *ngIf="this.selectedPaymentMethod" class="wallet-deposit-form__tip">
+      {{'payments.minimum_amount_for_deposit' | translate}}
+      {{ limitMinimum | currency: this.selectedPaymentMethod.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+    </div>
+
+    <div class="wallet-deposit-form__amount-and-tickets">
+      <div class="wallet-deposit-form__amount group">
+        <input type="number" formControlName="amount" (ngModelChange)="onChangeAmountInput($event)">
+        <label>{{'forms.amount' | translate}}</label>
+        <div class="wallet-form__amount-buttons">
+          <div *ngFor="let amount of amounts" (click)="onChangeAmountButtons(amount)"
+               class="wallet-form__amount-button"
+               [ngClass]="{'active': amount == selectedAmount}">
+            +{{amount}}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="submitted && f.amount.errors" class="error-bl">
+        <div *ngIf="f.amount.errors.required">{{'forms.required_to_fill' | translate}}</div>
+        <div *ngIf="f.amount.errors.min">{{'forms.minimum_amount' | translate}}: {{f.amount.errors.min.min}}</div>
+        <div *ngIf="f.amount.errors.max">{{'forms.maximum_amount' | translate}}: {{f.amount.errors.max.max}}</div>
+      </div>
+
+      <!--
+      <div class="wallet-deposit-form__tickets">
+        <div class="wallet-deposit-form__subheader">{{'lotteries.you_have_tickets' | translate: {value: 5} }}</div>
+        <div class="wallet-deposit-form__tip">{{'lotteries.ticket_price' | translate: {value: '200 ₽'} }}</div>
+      </div>
+      -->
+    </div>
+  </div>
+  
+  <div class="wallet-deposit-form__inputs"
+       *ngIf="selectedPaymentMethod && selectedPaymentMethod.description" 
+       [innerHTML]="selectedPaymentMethod.description">
+  </div>
+
+  <div class="form__button-holder">
+    <button type="submit" class="form__continue-button">{{'other.deposit_to_account' | translate}}</button>
+  </div>
+
+</form>

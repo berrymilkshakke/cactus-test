@@ -1,0 +1,39 @@
+<div class="main-menu-desktop">
+  <app-language-select class="main-menu-desktop__item main-menu-desktop__language-selector"></app-language-select>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" routerLink="/games/all" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_slot"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'menu.slots' | translate}}</div>
+    </a>
+  </div>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" routerLink="/lotteries" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_lottery"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'titles.lottery' | translate}}</div>
+    </a>
+  </div>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" routerLink="/tournaments" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_tournament"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'titles.tournaments' | translate}}</div>
+    </a>
+  </div>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" routerLink="/bonuses" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_bonus"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'menu.bonuses' | translate}}</div>
+    </a>
+  </div>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" routerLink="/jackpots" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_jackpot"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'titles.jackpots' | translate}}</div>
+    </a>
+  </div>
+  <div class="main-menu-desktop__item">
+    <a class="main-menu-desktop__link" (click)="openChat()" routerLinkActive="main-menu-desktop__link_active">
+      <div class="main-menu-desktop__image main-menu-desktop__image_support"></div>
+      <div class="main-menu-desktop__menu-tooltip">{{'other.support' | translate}}</div>
+    </a>
+  </div>
+</div>

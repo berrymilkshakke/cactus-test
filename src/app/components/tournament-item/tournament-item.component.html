@@ -1,0 +1,65 @@
+<div class="tournament-item" *ngIf="tournament">
+
+  <div class="tournament-item__active" *ngIf="!tournament.ended">{{'tournaments.is_active' | translate}}</div>
+
+  <div class="tournament-item__finished" *ngIf="tournament.ended">{{'tournaments.is_ended' | translate}}</div>
+
+  <div class="tournament-item__picture">
+
+    <img *ngIf="pageName == 'home'"
+         class="tournament-item__image"
+         [ngClass]="{'tournament-item__finished-image': tournament.ended}"
+         src="{{getImagePatch(tournament.image)}}"
+         (error)="errorHandler($event)">
+
+    <img *ngIf="pageName == 'tournaments'"
+         class="tournament-item__image"
+         [ngClass]="{'tournament-item__finished-image': tournament.ended}"
+         src="{{getImagePatch(tournament.image_b)}}"
+         (error)="errorHandler($event)">
+
+  </div>
+
+  <div class="tournament-item__title" *ngIf="tournament.title_in_locale">{{tournament.title_in_locale}}</div>
+  <div class="tournament-item__title" *ngIf="!tournament.title_in_locale">{{tournament.title}}</div>
+
+  <ng-container *ngIf="!tournament.ended">
+    <div class="tournament-item__deadline">{{'lotteries.time_to_completion' | translate}}
+
+      <app-countdown-timer class="countdown-timer" [seconds]="tournament.end_at_s"></app-countdown-timer>
+
+    </div>
+
+    <div class="tournament-item__prize-title">{{'lotteries.prize_fund' | translate}}</div>
+
+    <div class="tournament-item__prize-value">
+
+      <span *ngIf="tournament.prize_fund">
+        {{tournament.prize_fund}}
+      </span>
+
+      <span *ngIf="tournament.money_prize_fund">
+        {{tournament.money_prize_fund[tournament.currency_code] | currency: tournament.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+      </span>
+
+      <span *ngIf="tournament.money_prize_fund && tournament.fs_prize_fund">+</span>
+
+      <span *ngIf="tournament.fs_prize_fund">
+        {{tournament.fs_prize_fund}} FS
+      </span>
+
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="tournament.ended">
+    <div class="tournament-item__prize-title">{{'lotteries.finish_date' | translate}}</div>
+    <div class="tournament-item__prize-value">
+      {{tournament.end_at | date : 'short'  : null  : 'ru'}}
+    </div>
+  </ng-container>
+
+  <div class="tournament-item__details">
+    <a class="green-text-button" routerLink="/tournament/{{tournament.id}}">{{'buttons.read_more' | translate}}</a>
+  </div>
+
+</div>

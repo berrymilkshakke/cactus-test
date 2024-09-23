@@ -1,0 +1,29 @@
+<div class="games-list-home games-list-home-desktop" *ngIf="games">
+
+  <app-game-item *ngFor="let game of games | slice:0: limitCount"
+                 [game]="game"
+                 [ngClass]="{'d-none': isAuthorized() &&
+                                       !game.allowed &&
+                                       isActiveBonus() &&
+                                       isShowAllowedGames()}">
+  </app-game-item>
+
+</div>
+
+<div class="games-list-home games-list-home-mobile" *ngIf="games">
+
+  <app-game-item *ngFor="let game of games | slice:0: limitCountMobile"
+                 [game]="game"
+                 [ngClass]="{'d-none': isAuthorized() &&
+                                       !game.allowed &&
+                                       isActiveBonus() &&
+                                       isShowAllowedGames()}">
+  </app-game-item>
+
+</div>
+
+<div *ngIf="showMoreButton && games && (limitCount < games.length)"
+     (click)="onChangeLimitCount()"
+     class="show-more">
+  <a class="green-text-button show-more__link">{{'buttons.show_next' | translate}}</a>
+</div>

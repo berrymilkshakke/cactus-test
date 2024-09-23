@@ -1,0 +1,64 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.add-to-desktop {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background-color: $background-tertiary;
+  border-radius: 8px;
+  z-index: $z-index-l6;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1002;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      background: url("/assets/img/icons/close.svg") no-repeat 50% 50%;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      vertical-align: bottom;
+    }
+  }
+
+  &__title {
+    margin-left: 30px;
+    margin-right: 30px;
+    @extend .header4;
+    color: $text-primary;
+    text-align: center;
+  }
+
+  &__game-icon {
+    @include imgBg('cactus_icon.png');
+    width: 144px;
+    height: 144px;
+  }
+
+  &__share-icon {
+    display: inline-block;
+    vertical-align: -15%;
+    @include imgBg('icons/export.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__help {
+    @extend .body1;
+    color: $text-primary;
+    text-align: center;
+  }
+}

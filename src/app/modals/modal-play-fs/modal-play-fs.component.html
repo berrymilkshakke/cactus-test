@@ -1,0 +1,22 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header left">
+    {{'modal.attention' | translate}}!
+  </div>
+
+  <div class="modal-common__text">
+    {{'bonuses.play_fs_in_game' | translate: {'fsAmount': bonus.fs_balance, 'gameTitle': bonus.game_title} }}
+  </div>
+
+  <div class="modal-common__buttons-right">
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+    <a (click)="closeModal()"
+       [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': [bonus.game_brand_name, bonus.game_name]} }]"
+       class="button-large">
+      {{ 'buttons.play' | translate }}
+    </a>
+  </div>
+
+</div>

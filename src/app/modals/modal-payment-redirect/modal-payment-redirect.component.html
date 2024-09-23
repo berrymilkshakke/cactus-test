@@ -1,0 +1,28 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header left">
+    {{'modal.attention' | translate}}!
+  </div>
+
+  <div class="modal-common__text">
+    {{ 'modal.redirect_to_payment' | translate }}
+  </div>
+
+  <div *ngIf="commissionAmount > 0" class="modal-common__info">
+    {{ 'modal.commission_will_be_refunded' | translate}}:
+    <b>{{commissionAmount | currency: commissionCurrency : 'symbol-narrow' : '1.0-0' : 'ru'}}</b>.
+  </div>
+
+  <div class="modal-common__buttons-right">
+
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.cancel' | translate}}</a>
+
+    <a href="{{url}}" (click)="closeModal()" target="_blank" class="button-large">
+      {{ 'buttons.continue_payment' | translate }}
+    </a>
+
+  </div>
+
+</div>

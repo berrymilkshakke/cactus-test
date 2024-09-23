@@ -1,0 +1,25 @@
+@import "src/assets/scss/_utils.scss";
+
+
+.no-deposit-conditions {
+  padding: 16px;
+  background: rgba(255, 72, 66, 0.1);
+  border-radius: 4px;
+  margin-bottom: 24px;
+  color: #FF4842;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 6px;
+  }
+
+  &__item {
+    text-transform: lowercase;
+    // padding: 5px;
+    font-size: 14px;
+    // background-color: #eec368;
+    // max-width: 200px;
+    margin-top: 3px;
+  }
+}

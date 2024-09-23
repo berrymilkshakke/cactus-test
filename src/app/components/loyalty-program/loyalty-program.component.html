@@ -1,0 +1,29 @@
+<div class="loyalty-program">
+
+  <div>
+    <div class="loyalty-program__text">
+      <app-content [componentName]="'loyalty-program'"></app-content>
+    </div>
+  </div>
+
+  <div class="loyalty-program__items-holder" *ngIf="isAuthorized() && currentLevel">
+    <div class="loyalty-program__item">
+      <div class="loyalty-program__item-header">{{'components.current_status' | translate}}</div>
+      <app-loyalty-item [level]="currentLevel"
+                        [nextLevel]="nextLevel"
+                        [isCurrentLevel]="true">
+      </app-loyalty-item>
+    </div>
+  </div>
+
+  <div class="loyalty-program__items-holder" *ngIf="levels && getCurrentLevelName()">
+    <ng-container *ngFor="let level of levels; let i = index">
+      <div class="loyalty-program__item" *ngIf="level.name != getCurrentLevelName()">
+        <app-loyalty-item [level]="level"
+                          [nextLevel]="levels[i + 1]">
+        </app-loyalty-item>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

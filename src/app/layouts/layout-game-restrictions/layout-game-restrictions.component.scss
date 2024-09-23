@@ -1,0 +1,28 @@
+@import "src/assets/scss/_variables.scss";
+
+
+.game-warning {
+  background-color: #161c24;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1500;
+
+  &__text {
+    margin: 25% auto 0 auto;
+    font-size: 20px;
+    line-height: 28px;
+    padding: 0 20px;
+    font-weight: 400;
+  }
+}
+
+body {
+  position: fixed;
+}

@@ -1,0 +1,397 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+
+.wallet-deposit-form {
+
+  &__limit {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    color: #75737E;
+    text-align: center;
+    text-transform: lowercase;
+  }
+
+  &__inputs {
+    background-color: $background-secondary;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  &__inputs .group {
+    @media (min-width: $mobile-layout) {
+      width: 344px !important;
+    }
+  }
+
+  &__header {
+    @extend .header4;
+    color: $text-primary;
+  }
+
+  &__subheader {
+    @extend .subheader1;
+    color: $text-primary;
+  }
+
+  &__tip {
+    @extend .caption;
+    color: $text-secondary;
+    margin-top: 8px;
+  }
+
+  &__payment-sources {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    @media (min-width: $mobile-layout) {
+      display: inline-flex;
+      width: auto !important;
+    }
+    background-color: $background-tertiary;
+    border-radius: 8px;
+    padding: 4px;
+  }
+
+  &__payment-source {
+    @extend .button2;
+    padding: 12px 10px !important;
+    color: $text-secondary;
+    border-radius: 8px;
+    flex-grow: 1;
+    text-align: center;
+
+    &_selected {
+      color: $text-primary;
+      background-color: $button-active;
+    }
+  }
+
+  &__payment-providers {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @media (min-width: $mobile-layout) {
+      grid-template-columns: repeat(auto-fill, 148px);
+    }
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+
+  &__payment-provider {
+    height: 80px;
+    padding: 30px 18px;
+    background-color: $background-tertiary;
+    border: 2px solid $background-tertiary;
+    border-radius: 8px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    &_selected {
+      border: 2px solid $divider-border-active;
+    }
+
+    &_last {
+      margin-top: 16px;
+      width: 50%;
+      @media (min-width: $mobile-layout) {
+        width: 148px;
+      }
+    }
+  }
+
+  &__select-payment-method {
+    width: fit-content;
+    position: relative;
+    margin-top: 24px;
+
+    &::after {
+      position: absolute;
+      content: '';
+      background: url('../../../assets/img/icons/info_outline.svg') no-repeat;
+      top: 0;
+      right: -30px;
+      width: 20px;
+      height: 20px;
+      background-size: 100% 100%;
+    }
+  }
+
+  &__payment-methods {
+    margin-top: 24px;
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 8px 8px;
+  }
+
+  &__payment-method {
+    @extend .body2;
+    color: $text-primary;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: $background-tertiary;
+
+    &_selected {
+      background-color: $button-active;
+    }
+  }
+
+  &__field-header {
+    @extend .subheader1;
+    color: $text-primary;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__selector {
+    @include noscroll;
+    overflow: scroll;
+    gap: 16px;
+    margin: 16px 0 32px;
+    border-bottom: 1px solid $divider-divider;
+    width: 100%;
+    justify-content: flex-start;
+    display: flex;
+
+    /*
+    &_selected {
+      display: flex;
+    }
+     */
+  }
+
+  &__selector-item {
+    flex-basis: 50%;
+    @media (min-width: $mobile-layout) {
+      flex-grow: 0;
+      flex-basis: unset;
+    }
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    cursor: pointer;
+
+    &_active {
+      border-bottom: 2px solid $divider-border-active;
+
+      .wallet-deposit-form__bonus-selector__item__text {
+        color: $text-primary;
+      }
+    }
+  }
+
+  &__selector-item-text {
+    @extend .body2;
+    color: $text-secondary;
+    white-space: nowrap;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  /*
+  &__bonus-selected {
+    display: none;
+
+    &_selected {
+      display: block;
+    }
+  }
+   */
+
+  &__bonus-warning {
+    @extend .subheader1;
+    color: $accent-error;
+    padding: 8px 16px;
+    background: #322E37;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 20px;
+
+  }
+
+  &__bonus-text {
+    @extend .subheader1;
+    color: $text-primary;
+  }
+
+  &__bonus-filter {
+    @include noscroll;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  &__bonus-filter-value {
+    @extend .body2;
+    border-radius: 999px;
+    padding: 6px 16px;
+    color: $text-primary;
+    background-color: $background-tertiary;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &_selected {
+      color: $text-primary;
+      background-color: $button-active;
+
+      &:hover {
+        color: $text-primary;
+      }
+    }
+  }
+
+  &__bonuses {
+    box-sizing: border-box;
+    margin-top: 16px;
+    margin-left: -16px;
+    margin-right: -16px;
+    width: auto;
+
+    & > ngx-slick-carousel.wallet-deposit-form__bonus-unslick {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      display: flex;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media (max-width: $mobile-layout) {
+      & > ngx-slick-carousel {
+        @include noscroll;
+        display: flex;
+        overflow: scroll;
+      }
+    }
+
+    & .slide-single .bonus-item-simple {
+      width: calc(100% - 16px);
+    }
+
+    & .slick-dots {
+      bottom: -36px;
+    }
+
+    & .slick-dots li {
+      margin: 0;
+      width: 16px;
+    }
+
+    & .slick-dots li.slick-active button:before {
+      color: $button-active;
+      background: url('../../../assets/img/icons/current_page.svg');
+    }
+
+    & .slick-dots li button:before {
+      color: $icon-secondary;
+      content: '';
+      background: url('../../../assets/img/icons/next_page.svg');
+      width: 8px;
+      height: 8px;
+    }
+
+    & .slick-track {
+      margin-left: 0;
+      display: flex !important;
+    }
+
+    & .slick-slide {
+      height: inherit !important;
+    }
+  }
+
+  &__margin-fix {
+    display: none;
+    @include media($desktop-layout) {
+      display: block;
+    }
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__bonus-item {
+    display: block;
+    height: 100%;
+  }
+
+  &__promocode {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  &__amount-and-tickets {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+    flex-direction: column;
+    @media (min-width: $mobile-layout) {
+      flex-direction: row;
+    }
+  }
+
+  &__account-field.group {
+    margin-top: 0;
+  }
+
+  &__expiration-fields {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    @media (min-width: $mobile-layout) {
+      width: 344px;
+    }
+  }
+
+  &__expiration-fields > .group {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  &__expiration-delimiter {
+    @extend .subheader1;
+    color: $text-primary;
+    margin-top: 16px;
+  }
+
+  &__amount {
+    @media (min-width: $mobile-layout) {
+      flex-basis: 344px;
+    }
+  }
+
+  &__tickets {
+    position: relative;
+    padding-bottom: 8px;
+    padding-left: 36px;
+    flex-grow: 1;
+
+    &:before {
+      position: absolute;
+      content: '';
+      background: url('../../../assets/img/icons/ticket2.svg') no-repeat;
+      width: 24px;
+      height: 24px;
+      left: 0;
+      top: 0;
+      background-size: 100% 100%;
+    }
+  }
+}
+

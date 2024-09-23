@@ -1,0 +1,33 @@
+<div class="modal-common" *ngIf="bonus">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__text center">
+      <div class="modal-new-fs__image" *ngIf="bonus.image">
+        <img *ngIf="bonus.image" src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+      </div>
+      <span *ngIf="!bonus.activated">
+        {{'notifications.you_have_a_new_fs_bonus_in_game' | translate:{'amount': bonus.amount, 'gameTitle': bonus.gameTitle} }}
+      </span>
+    <span *ngIf="bonus.activated">
+        {{'notifications.you_have_a_new_activated_fs_bonus_in_game' | translate:{
+      'amount': bonus.amount,
+      'gameTitle': bonus.gameTitle
+    } }}
+      </span>
+  </div>
+
+  <div class="modal-common__buttons-center">
+    <a *ngIf="!bonus.activated" class="button-large" (click)="activatePlayerFsBonus(bonus.bonusId)">
+      {{'buttons.activate' | translate}}
+    </a>
+
+    <a *ngIf="bonus.activated"
+            class="button-large"
+            (click)="closeModal()"
+            [routerLink]="[getUrlPathWithoutParameters('/games/all'), { outlets: {'game': [bonus.gameBrandName, bonus.gameName]} }]">
+      {{'buttons.play' | translate}}
+    </a>
+  </div>
+
+</div>

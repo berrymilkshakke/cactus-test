@@ -1,0 +1,113 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.main-menu-desktop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  background-color: #1D2839;
+  height: 100%;
+  z-index: $z-index-l6;
+  display: flex;
+  flex-direction: column;
+  width: 64px !important;
+
+  &__language-selector {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 64px;
+    height: 64px;
+    text-align: center;
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    padding-top: 20px;
+    cursor: pointer;
+
+    &:hover {
+      .main-menu-desktop__image {
+        filter: hue-rotate(256deg) saturate(500%) drop-shadow(0px 6px 5px #11BB00);
+      }
+
+      .main-menu-desktop__menu-tooltip {
+        display: block;
+      }
+    }
+
+    &_active {
+      .main-menu-desktop__image {
+        filter: hue-rotate(256deg) saturate(500%) drop-shadow(0px 6px 5px #11BB00);
+      }
+    }
+  }
+
+  &__menu-tooltip {
+    @extend .caption;
+    display: none;
+    position: absolute;
+    background-color: #11BB00;
+    top: 20px;
+    left: 54px;
+    color: $text-primary;
+    padding: 5px 10px;
+    box-shadow: 0 4px 8px rgba(17, 187, 0, 0.3);
+
+    &::before {
+      content: '';
+      background: url("../../../assets/img/icons/tip_arrow_left.svg") no-repeat;
+      width: 4px;
+      height: 18px;
+      position: absolute;
+      top: 2px;
+      left: -4px;
+    }
+  }
+
+  &__image {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+
+    &_slot {
+      @include imgBg('menu/slot.svg');
+    }
+
+    &_lottery {
+      @include imgBg('menu/lottery.svg');
+    }
+
+    &_tournament {
+      @include imgBg('menu/tournament.svg');
+    }
+
+    &_bonus {
+      @include imgBg('menu/bonus.svg');
+    }
+
+    &_megaways {
+      @include imgBg('menu/megaways.svg');
+    }
+
+    &_jackpot {
+      @include imgBg('menu/jackpot.svg');
+    }
+
+    &_support {
+      @include imgBg('menu/support.svg');
+    }
+  }
+}

@@ -1,0 +1,94 @@
+<div class="games-list" *ngIf="games" [ngClass]="{
+  'games-list_one-rows': !showMoreButton && !isSimple && (categoryName == 'live') && isDesktop(),
+  'game-list_one-rows_scroll': !showMoreButton && !isSimple && (pageName != 'games-live')
+                               && (categoryName == 'live') && !isDesktop(),
+  'games-list_live': !showMoreButton && !isSimple && (pageName == 'games-live') && isDesktop(),
+  'game-list_scroll': !showMoreButton && !isSimple && (pageName == 'games-live') && !isDesktop(),
+  'games-list_four-columns': isSimple && (categoryName == 'favorites'),
+  'games-list_rows-simple': isSimple && (categoryName != 'favorites')
+  }">
+
+  <ng-container *ngIf="categoryName != 'favorites' && !pageName">
+
+    <ng-container *ngIf="!isSimple">
+      <app-game-item *ngFor="let game of games | slice:0: limitCount"
+                     [game]="game"
+                     [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}"
+                     class="game-list__game-item">
+      </app-game-item>
+    </ng-container>
+
+    <ng-container *ngIf="isSimple">
+      <app-game-item-simple *ngFor="let game of games | slice:0: limitCount" [game]="game"></app-game-item-simple>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="pageName == 'games-live' && !isDesktop() && categoryName != 'favorites'">
+
+    <ng-container *ngIf="!isSimple">
+      <app-game-item *ngFor="let game of games | slice:0: 10"
+                     [pageName]="'games-live'"
+                     [game]="game"
+                     [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}"
+                     class="game-list__game-favorite" ></app-game-item>
+    </ng-container>
+
+    <ng-container *ngIf="isSimple">
+      <app-game-item-simple *ngFor="let game of games | slice:0: 10"
+                            [game]="game"
+                            [ngClass]="{'d-none': isAuthorized() &&
+                                                  !game.allowed &&
+                                                  isActiveBonus() &&
+                                                  isShowAllowedGames()}">
+      </app-game-item-simple>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="pageName == 'games-live' && isDesktop() && categoryName != 'favorites'">
+
+    <ng-container *ngIf="!isSimple">
+      <app-game-item *ngFor="let game of games | slice:0: limitCount"
+                     [game]="game"
+                     [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}"
+                     class="game-list__game-item">
+      </app-game-item>
+    </ng-container>
+
+    <ng-container *ngIf="isSimple">
+      <app-game-item-simple *ngFor="let game of games | slice:0: limitCount"
+                            [game]="game"
+                            [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}">
+      </app-game-item-simple>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="categoryName == 'favorites' && !pageName">
+
+    <ng-container *ngIf="isSimple">
+      <app-game-item-simple *ngFor="let game of getFavoriteGames(brandName) | slice:0: limitCount" [game]="game"></app-game-item-simple>
+    </ng-container>
+
+  </ng-container>
+
+</div>
+
+<div *ngIf="showMoreButton && games && (limitCount < games.length) && categoryName != 'favorites'"
+     (click)="onChangeLimitCount()"
+     class="show-more" >
+  <a class="green-text-button show-more__link">{{'buttons.show_next' | translate}}</a>
+</div>

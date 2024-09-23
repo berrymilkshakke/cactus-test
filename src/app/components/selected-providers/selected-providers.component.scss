@@ -1,0 +1,38 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/styles.scss";
+
+
+.selected-providers {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    padding: 8px 32px 8px 12px;
+    background-color: $background-secondary;
+    border-radius: 999px;
+  }
+
+  &__remove {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: url('../../../assets/img/icons/cancel_filled.svg') 50% no-repeat;
+    cursor: pointer;
+  }
+
+  &__clear {
+    display: inline-block;
+    margin-left: 7px;
+    color: #74CAFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 32px;
+    cursor: pointer;
+  }
+}

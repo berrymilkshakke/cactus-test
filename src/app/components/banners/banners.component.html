@@ -1,0 +1,68 @@
+<div class="banners">
+
+  <ngx-slick-carousel [config]="slideConfig" class="banners__carousel" *ngIf="!isAuthorized() && bannersNotAuthorized">
+
+    <div class="banners__banner" ngxSlickItem *ngFor="let banner of bannersNotAuthorized">
+      <picture class="banners__image">
+        <source media="(min-width: 960px)" srcset="{{getImagePatch(banner.image)}}">
+        <img class="banners__image" src="{{getImagePatch(banner.image_mobile)}}">
+      </picture>
+      <div class="banners__text">
+        <div class="banners__text-title" [innerHTML]="banner.text_1"></div>
+        <div class="banners__text-subtitle" [innerHTML]="banner.text_2"></div>
+        <div class="banners__text-subtitle" [innerHTML]="banner.text_3"></div>
+
+        <ng-container *ngIf="banner.link.url.includes('http')">
+          <a (click)="navigateToLink(banner.link.url, banner.link.url.target)"
+             [innerHTML]="banner.button_text"
+             class="banners__text-register button-mini">
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="!banner.link.url.includes('http')">
+          <a [routerLink]="[banner.link.url, {outlets: banner.link.outlet}]"
+             [innerHTML]="banner.button_text"
+             class="banners__text-register button-mini">
+          </a>
+        </ng-container>
+
+      </div>
+    </div>
+
+  </ngx-slick-carousel>
+
+  <ngx-slick-carousel [config]="slideConfig" class="banners__carousel" *ngIf="isAuthorized() && bannersAuthorized">
+
+    <div class="banners__banner" ngxSlickItem *ngFor="let banner of bannersAuthorized">
+      <picture class="banners__image">
+        <source media="(min-width: 960px)" srcset="{{getImagePatch(banner.image)}}">
+        <img class="banners__image" src="{{getImagePatch(banner.image_mobile)}}">
+      </picture>
+      <div class="banners__text">
+        <div class="banners__text-title" [innerHTML]="banner.text_1"></div>
+        <div class="banners__text-subtitle" [innerHTML]="banner.text_2"></div>
+        <div class="banners__text-subtitle" [innerHTML]="banner.text_3"></div>
+
+        <ng-container *ngIf="banner.link.url.includes('http')">
+          <a (click)="navigateToLink(banner.link.url, banner.link.url.target)"
+             [innerHTML]="banner.button_text"
+             class="banners__text-register button-mini">
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="!banner.link.url.includes('http')">
+          <a [routerLink]="[banner.link.url, {outlets: banner.link.outlet}]"
+             [innerHTML]="banner.button_text"
+             class="banners__text-register button-mini">
+          </a>
+        </ng-container>
+
+      </div>
+    </div>
+
+  </ngx-slick-carousel>
+
+  <app-recent-games-desktop *ngIf="isAuthorized()" class="banners__recent-games desktop"></app-recent-games-desktop>
+
+</div>
+

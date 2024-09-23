@@ -1,0 +1,4 @@
+<div class="faq-item">
+  <div class="faq-item__question" [ngClass]="{'faq-item__question_expanded': answerExpanded}" (click)="toggle()" [innerHTML]="question"></div>
+  <div *ngIf="answerExpanded" class="faq-item__answer" [innerHTML]="answer"></div>
+</div>

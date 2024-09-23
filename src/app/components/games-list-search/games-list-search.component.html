@@ -1,0 +1,32 @@
+<div class="games-list-search__wrap">
+  <div class="games-list-search">
+
+    <div *ngFor="let game of searchedGames | slice:0: limitCount"
+         class="games-list-search__item"
+         (click)="closeModal()"
+         [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': [game.brand_name, game.name]} }]">
+
+      <div class="games-list-search__image">
+        <a class="game-item-simple__link">
+          <img [src]="getImagePatch(game.brand_name, game.image)" (error)="errorHandler($event)"
+               class="game-item-simple__image" alt="">
+        </a>
+      </div>
+
+      <div class="games-list-search__content">
+        <div class="games-list-search__title">{{game.title}}</div>
+        <div class="games-list-search__brand">{{game.brand_title}}</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="games-list-search__notfound" *ngIf="searchedGames.length == 0">{{'project.games_not_found' | translate}}</div>
+
+<div class="show-more"
+     (click)="onChangeLimitCount()"
+     *ngIf="searchedGames && (limitCount < searchedGames.length)">
+  <a class="green-text-button show-more__link">{{'buttons.show_next' | translate}}</a>
+</div>

@@ -1,0 +1,69 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/styles.scss";
+
+
+.section-header-live {
+  margin-top: 44px;
+  margin-bottom: 20px;
+  @extend .header4;
+  position: relative;
+  color: $text-primary;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: $mobile-layout) {
+    margin-top: 24px;
+  }
+
+  &__see-more {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.section-header {
+  @extend .header4;
+  position: relative;
+  color: $text-primary;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  &__image {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+
+    &_new {
+      @include imgBg('icons/new.svg');
+    }
+    &_bonuses {
+      @include imgBg('icons/bonuses.svg');
+    }
+    &_popular {
+      @include imgBg('icons/popular.svg');
+    }
+    &_tournaments {
+      @include imgBg('icons/tournaments.svg');
+    }
+    &_lottery {
+      @include imgBg('icons/lottery_green.svg');
+    }
+    &_live {
+      @include imgBg('icons/live.svg');
+    }
+  }
+
+  &__see-more {
+    @include media($desktop-layout) {
+      display: none;
+    }
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

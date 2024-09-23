@@ -1,0 +1,95 @@
+<div class="game-card" *ngIf="!isBig">
+
+  <div *ngIf="game.allowed === false" class="game-card__item-disallowed"></div>
+
+  <div class="game-card__provider">
+    <img src="assets/img/providers-white/{{game.brand_name}}.svg" alt="{{game.brand_name}}">
+  </div>
+
+  <img class="game-card__image" [src]="getImagePatch(game.brand_name, game.image)"
+       (error)="errorHandler($event)"
+       alt="{{game.name}}">
+
+  <!--
+  <div class="game-card__tags" *ngIf="tags != null">
+    <div class="game-card__tag" [ngClass]="'game-card__tag_'+tag.toLowerCase()" *ngFor="let tag of tags">{{tag}}</div>
+  </div>
+  -->
+
+  <div class="game-card__content">
+
+    <div class="game-card__top" *ngIf="!pageName">
+      <div class="game-card__title">{{game.title | truncate:['20']}} </div>
+      <div class="game-card__title-mobile game-card__title-mobile_columns">
+        {{game.title | truncate:['9']}}
+      </div>
+    </div>
+
+    <div class="game-card__top" *ngIf="pageName == 'games-live'">
+      <div class="game-card__title" *ngIf="isDesktop()">{{game.title | truncate:['20']}} </div>
+      <div class="game-card__title-mobile game-card__title-mobile_columns" *ngIf="isDesktop()">
+        {{game.title | truncate:['9']}}
+      </div>
+      <div class="game-card__title-mobile game-card__title-mobile_scroll"
+           *ngIf="!isDesktop()">
+        {{game.title | truncate:['9']}}
+      </div>
+    </div>
+
+    <div class="game-card__buttons">
+
+      <a *ngIf="game.demo_available" class="game-card__demo game-card__button"
+         [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': ['demo', game.brand_name, game.name]} }]">
+        {{'buttons.demo' | translate}}
+      </a>
+
+      <a class="game-card__button game-card__play"
+         [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': [game.brand_name, game.name]} }]">
+        {{'buttons.play' | translate}}
+      </a>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="isAuthorized()" class="game-card__favorite"
+       [ngClass]="{'game-card__favorite_on': game.liked}" (click)="toggleLike()">
+  </div>
+
+</div>
+
+<div class="game-card game-card-big" *ngIf="isBig">
+
+  <div *ngIf="game.allowed === false" class="game-card__item-disallowed"></div>
+
+  <div class="game-card-big__provider">
+    <img src="assets/img/providers-white/{{game.brand_name}}.svg" alt="{{game.brand_name}}">
+  </div>
+
+  <img class="game-card__image" [src]="getBigImagePatch(game.brand_name, game.image)"
+       (error)="errorHandlerBig($event)"
+       alt="{{game.name}}">
+
+  <div class="game-card__content">
+
+    <div class="game-card__top">
+      <div class="game-card__title game-card-big__title">{{game.title | truncate:['20']}} </div>
+    </div>
+
+    <div class="game-card__buttons">
+      <a *ngIf="game.demo_available" class="game-card__demo"
+         [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': ['demo', game.brand_name, game.name]} }]">
+        {{'buttons.demo' | translate}}
+      </a>
+
+      <a class="game-card__play"
+         [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': [game.brand_name, game.name]} }]">
+        {{'buttons.play' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="isAuthorized()" class="game-card__favorite"
+       [ngClass]="{'game-card__favorite_on': game.liked}" (click)="toggleLike()">
+  </div>
+</div>

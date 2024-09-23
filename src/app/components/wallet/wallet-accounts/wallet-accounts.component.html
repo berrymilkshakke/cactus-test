@@ -1,0 +1,59 @@
+<div class="wallet-accounts__header">
+
+  <app-subheader-l2 class="wallet-accounts__title" title="{{'other.accounts' | translate}}"></app-subheader-l2>
+
+  <app-info-alert class="wallet-accounts__info" text="{{'other.see_faq' | translate}}" type="faq" routerLink="/faq/deposit">
+  </app-info-alert>
+
+  <div class="wallet-accounts__create-account" *ngIf="currenciesFiltered && currenciesFiltered.length > 0">
+    <a class="wallet-accounts__create-account-button"
+       [ngClass]="platformDetectorService.platform === 'desktop' ? 'button-mini' : 'button-large'"
+       (click)="openSelectCurrency()">{{'buttons.add_new_account' | translate}}</a>
+  </div>
+
+</div>
+
+<div class="wallet-accounts__accounts">
+
+  <div *ngFor="let account of accounts"
+       (click)="setDefaultPlayerAccount(account.currency_code)"
+       [ngClass]="{'wallet-accounts__account_active': account.default}"
+       class="wallet-accounts__account">
+
+    <div *ngIf="account.default" class="wallet-accounts__account-active">{{'payments.active_account' | translate}}</div>
+
+    <div *ngIf="!account.default" class="wallet-accounts__account-inactive">{{'payments.inactive_account' | translate}}</div>
+
+    <div class="wallet-accounts__account-header">{{account.currency_code}}</div>
+    <div class="wallet-accounts__account-tip">{{'other.balance' | translate}}</div>
+    <div class="wallet-accounts__account-balance">
+      {{account.balance_plus_bonus | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+    <div class="wallet-accounts__account-bonus">
+      {{'other.bonus_balance' | translate}}
+      {{account.bonus_part | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+    <hr class="wallet-accounts__account-divider">
+    <div class="wallet-accounts__account-available">
+      {{'other.available_for_withdrawal' | translate}}
+      {{account.balance | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+  </div>
+
+</div>
+
+<div class="wallet-accounts__select-currency" [ngClass]="currencySelectorOpened ? 'opened' : 'closed'">
+  <div class="wallet-accounts__select-header">{{'forms.choose_a_currency' | translate}}</div>
+  <div class="wallet-accounts__select-close" (click)="closeSelectCurrency()"></div>
+
+  <div class="currency-select-radio" *ngIf="currenciesFiltered">
+    <div class="currency-select-radio__currency"
+         *ngFor="let currencyCode of currenciesFiltered"
+         [ngClass]="{'currency-select-radio__currency-selected': currencyCode == selectedCurrencyCode}"
+         (click)="selectCurrency(currencyCode)">
+      {{ 'currencies.' + currencyCode | translate}}
+    </div>
+  </div>
+
+  <a class="wallet-accounts__select-button" (click)="createPlayerAccount(selectedCurrencyCode)">{{'buttons.add_account' | translate}}</a>
+</div>

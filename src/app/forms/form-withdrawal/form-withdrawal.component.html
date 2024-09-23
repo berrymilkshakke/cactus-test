@@ -1,0 +1,236 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="wallet-withdrawal-form">
+
+
+  <div class="wallet-withdrawal-form__inputs">
+
+    <div class="wallet-withdrawal-form__header">{{'forms.choose_account' | translate}}</div>
+
+    <div class="wallet-withdrawal-form__accounts" *ngIf="accounts">
+
+      <div *ngFor="let account of accounts"
+           (click)="onChangeCurrency(account.currency_code)"
+           [ngClass]="{'wallet-withdrawal-form__account_selected': selectedCurrencyCode && selectedCurrencyCode == account.currency_code}"
+           class="wallet-withdrawal-form__account">
+        <div class="wallet-withdrawal-form__account-currency">{{account.currency_code}}</div>
+        <div class="wallet-withdrawal-form__tip">{{'other.available_for_withdrawal' | translate}}</div>
+        <div class="wallet-withdrawal-form__account-amount">
+          {{account.balance | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        </div>
+      </div>
+
+      <div *ngIf="submitted && f.currency.errors" class="error-bl">
+        <div *ngIf="f.currency.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <span *ngFor="let error_value of errors['currency']" class="error-bl">{{ error_value }}</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="wallet-withdrawal-form__inputs">
+
+    <div class="wallet-withdrawal-form__header">{{'forms.choose_withdrawal_method' | translate}}</div>
+
+    <div class="wallet-withdrawal-form__payment-providers">
+
+      <div *ngFor="let paymentMethod of paymentMethodsFiltered">
+        <div (click)="onChangeMethod(paymentMethod)"
+           [ngClass]="{'wallet-withdrawal-form__provider_selected': paymentMethod === selectedPaymentMethod}"
+           class="wallet-withdrawal-form__provider"
+           [ngStyle]="getStyleBack(paymentMethod)">
+        </div>
+        <div class="wallet-withdrawal-form__limit">
+          <span>{{'project.from' | translate}} </span>
+          <span>{{paymentMethod.limit_minimum | currency: paymentMethod.currency_code : 'symbol-narrow' : '1.0-0' : 'ru'}}</span>
+        </div>
+      </div>
+
+      <div *ngIf="submitted && f.paymentMethod.errors" class="error-bl">
+        <div *ngIf="f.paymentMethod.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <span *ngFor="let error_value of errors['paymentMethod']" class="error-bl">{{ error_value }}</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="wallet-withdrawal-form__inputs">
+
+    <div class="wallet-withdrawal-form__header">{{'forms.withdrawal_amount' | translate}}</div>
+
+    <div class="group">
+      <input type="number" formControlName="amount">
+      <label>{{'forms.amount' | translate}}</label>
+
+      <!--
+      <div class="wallet-form__amount-buttons">
+        <div *ngFor="let amount of amounts" (click)="onChangeAmountButtons(amount)" class="wallet-form__amount-button">
+          +{{amount}}
+        </div>
+      </div>
+      -->
+
+      <div *ngIf="submitted && f.amount.errors" class="error-bl">
+        <div *ngIf="f.amount.errors.required">{{'forms.required_to_fill' | translate}}</div>
+        <div *ngIf="f.amount.errors.min">{{'forms.minimum_amount' | translate}}: {{f.amount.errors.min.min}}</div>
+        <div *ngIf="f.amount.errors.max">{{'forms.maximum_amount' | translate}}: {{f.amount.errors.max.max}}</div>
+        <div *ngIf="f.amount.errors.pattern">{{'project.enter_an_integer' | translate}}</div>
+      </div>
+
+      <span *ngFor="let error_value of errors['amount']" class="error-bl">{{ error_value }}</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="wallet-withdrawal-form__inputs"
+       *ngIf="selectedPaymentMethod && (selectedPaymentMethod.payment_service_name == 'fps')">
+
+
+    <div class="wallet-withdrawal-form__header">{{'forms.choose_a_bank' | translate}}</div>
+
+    <div class="group">
+
+      <div ngbDropdown class="form__dropdown">
+
+        <button type="button" class="form__dropdown-toggle form__dropdown-code" ngbDropdownToggle id="dropdownBank">
+          <span class="form__dropdown-label label">{{'forms.choose_a_bank' | translate}}</span>
+          <span class="form__dropdown-arrow"></span>
+          <span class="form__dropdown-value" *ngIf="selectedBank">
+            {{selectedBank.title}}
+          </span>
+        </button>
+
+        <div ngbDropdownMenu aria-labelledby="dropdownBank" class="form__dropdown-list">
+          <perfect-scrollbar class="perfect-scrollbar banks-perfect-scrollbar">
+            <button type="button" *ngFor="let bank of banks"
+                    (click)="onChangeBank(bank)"
+                    class="form__dropdown-item dropdown-item">
+              <span>{{bank.title}}</span>
+            </button>
+          </perfect-scrollbar>
+        </div>
+
+      </div>
+
+      <div *ngIf="submitted && f.bankId.errors" class="error-bl">
+        <div *ngIf="f.bankId.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <span *ngFor="let error_value of errors['bankId']" class="error-bl">{{ error_value }}</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="wallet-withdrawal-form__inputs"
+       *ngIf="accountRequired">
+
+    <div class="wallet-withdrawal-form__header">
+      <span>{{'forms.account' | translate}}</span>
+    </div>
+
+    <div class="wallet-withdrawal-form__account-field group mt-2">
+      <input trim
+             type="text"
+             formControlName="account">
+      <label>{{getAccountPlaceholder(selectedPaymentMethod)}}</label>
+
+      <div *ngIf="submitted && f.account.errors" class="error-bl">
+        <div *ngIf="f.account.errors.required">{{'forms.required_to_fill' | translate}}</div>
+        <div *ngIf="f.account.errors.pattern">
+          <span>{{'forms.wrong_format' | translate}}</span><br>
+          <span *ngIf="accountFieldExample">Ex.: {{accountFieldExample}}</span>
+        </div>
+      </div>
+
+      <div *ngFor="let error_value of errors['account']" class="error-bl">{{ error_value }}</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="wallet-withdrawal-form__inputs"
+       *ngIf="expirationDateRequired">
+
+    <div class="wallet-withdrawal-form__header">
+      <span>{{'placeholders.expiration_date' | translate}}</span>
+    </div>
+
+    <div class="wallet-withdrawal-form__expiration-fields mt-2">
+
+      <div class="group">
+        <input trim
+               type="text"
+               [maxLength]="2"
+               formControlName="expirationDateMonth">
+        <label>{{'forms.month' | translate}}</label>
+
+        <div *ngIf="submitted && f.expirationDateMonth.errors" class="error-bl">
+
+          <div *ngIf="f.expirationDateMonth.errors.required">
+            {{'forms.required_to_fill' | translate}}
+          </div>
+
+          <div *ngIf="f.expirationDateMonth.errors.minlength">
+            {{'forms.too_short' | translate: {value: f.expirationDateMonth.errors.minlength.requiredLength} }}
+          </div>
+
+          <div *ngIf="f.expirationDateMonth.errors.maxlength">
+            {{'forms.too_long' | translate: {value: f.expirationDateMonth.errors.maxlength.requiredLength} }}
+          </div>
+
+        </div>
+
+        <span *ngFor="let error_value of errors['expirationDateMonth']" class="error-bl">{{ error_value }}</span>
+      </div>
+
+      <span class="wallet-withdrawal-form__expiration-delimiter">/</span>
+
+      <div class="group">
+        <input trim
+               type="text"
+               [maxLength]="4"
+               formControlName="expirationDateYear">
+        <label>{{'forms.year' | translate}}</label>
+
+        <div *ngIf="submitted && f.expirationDateYear.errors" class="error-bl">
+
+          <div *ngIf="f.expirationDateYear.errors.required">
+            {{'forms.required_to_fill' | translate}}
+          </div>
+
+          <div *ngIf="f.expirationDateYear.errors.minlength">
+            {{'forms.too_short' | translate: {value: f.expirationDateYear.errors.minlength.requiredLength} }}
+          </div>
+
+          <div *ngIf="f.expirationDateYear.errors.maxlength">
+            {{'forms.too_long' | translate: {value: f.expirationDateYear.errors.maxlength.requiredLength} }}
+          </div>
+
+        </div>
+
+        <span *ngFor="let error_value of errors['expirationDateYear']" class="error-bl">{{ error_value }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="wallet-withdrawal-form__inputs"
+       *ngIf="selectedPaymentMethod && selectedPaymentMethod.description" 
+       [innerHTML]="selectedPaymentMethod.description">
+  </div>
+
+  <div class="form__button-holder">
+    <button type="submit" class="form__continue-button">{{'buttons.withdraw' | translate}}</button>
+  </div>
+
+</form>

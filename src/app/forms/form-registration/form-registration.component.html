@@ -1,0 +1,120 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form-login">
+
+  <div class="group">
+    <input trim
+           name="login"
+           type="text"
+           formControlName="login">
+    <label>{{'forms.email' | translate}}</label>
+
+    <div *ngIf="submitted && f.login.errors" class="error-bl">
+      <div *ngIf="f.login.errors.required">
+        {{'forms.required_to_fill' | translate}}
+      </div>
+      <div *ngIf="f.login.errors.email">
+        {{'forms.email_is_not_correct' | translate}}
+      </div>
+    </div>
+
+    <div *ngFor="let error_value of errors['login']" class="error-bl">{{ error_value }}</div>
+
+  </div>
+
+  <div class="form-login__info">{{'other.email_as_login' | translate}}</div>
+
+  <div class="group">
+    <input trim
+           class="form__password"
+           name="password"
+           type="password"
+           formControlName="password"
+           appPassword
+           appPasswordClass="password-control">
+    <label>{{'forms.password' | translate}}</label>
+
+    <div *ngIf="submitted && f.password.errors" class="error-bl">
+      <div *ngIf="f.password.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      <div *ngIf="f.password.errors.minlength">
+        {{'forms.too_short' | translate: {value: f.password.errors.minlength.requiredLength} }}
+      </div>
+    </div>
+
+    <div *ngFor="let error_value of errors['password']" class="error-bl">{{ error_value }}</div>
+
+  </div>
+
+  <div class="form-login__info">{{'other.minlength' | translate}}</div>
+
+  <div class="group" [hidden]="!showCurrencySelection">
+    <div ngbDropdown class="form__dropdown">
+      <button type="button" class="form__dropdown-toggle" ngbDropdownToggle id="dropdownCurrency">
+        <span class="form__dropdown-label label">{{'other.currency' | translate}}</span>
+        <span class="form__dropdown-arrow"></span>
+        <span class="form__dropdown-value" *ngIf="f.currency.value">
+          {{ 'currencies.' + f.currency.value | translate}}
+        </span>
+      </button>
+      <div ngbDropdownMenu class="form__dropdown-list">
+        <button type="button" *ngFor="let currency of currencies"
+                (click)="onChangeCurrency(currency.code)"
+                class="form__dropdown-item dropdown-item">
+          <span>{{ 'currencies.' + currency.code | translate}}</span>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="submitted && f.currency.errors" class="error-bl">
+      <div *ngIf="f.currency.errors.required">{{'forms.required_to_fill' | translate}}</div>
+    </div>
+
+    <div *ngFor="let error_value of errors['currency']" class="error-bl">{{ error_value }}</div>
+  </div>
+
+  <div class="form__promocode-block" *ngIf="!showPromoCodeField">
+    <button class="form__promocode-button" (click)="switchPromoCodeField()">
+      {{'forms.you_have_promocode' | translate}}
+    </button>
+  </div>
+
+  <div class="group" *ngIf="showPromoCodeField">
+    <input trim
+           name="promoCode"
+           type="text"
+           formControlName="promoCode">
+           
+    <label>{{'forms.promocode' | translate}}</label>
+
+    <div class="error-bl" *ngIf="submitted && f.promoCode.errors">
+      <span *ngIf="f.promoCode.errors.required">{{'forms.required_to_fill' | translate}}</span>
+      <span *ngIf="f.promoCode.errors.minlength">
+        {{'forms.too_short' | translate: {value: f.promoCode.errors.minlength.requiredLength} }}
+      </span>
+    </div>
+
+  </div>
+
+  <section class="form-login__image-checkbox image-checkbox">
+    <input type="checkbox" id="rules" formControlName="rules">
+    <label class="label" for="rules" style="width: 100%">
+      {{'forms.18_years_old' | translate}} <a routerLink="/policies/terms" target="_blank">
+      {{'forms.terms_cons' | translate}}
+    </a>
+    </label>
+
+    <div *ngIf="submitted && f.rules.errors" class="error-bl">
+      <div *ngIf="f.rules.errors.required">{{'forms.required_to_fill' | translate}}</div>
+    </div>
+  </section>
+
+  <section class="form-login__image-checkbox image-checkbox">
+    <input type="checkbox" id="subscription" formControlName="subscription">
+    <label class="label" for="subscription" style="width: 100%">
+      {{'forms.subscribe' | translate}}
+    </label>
+  </section>
+
+  <div class="register-popup-submit-wrap">
+    <button type="submit" class="form-login__login-button button-mini">{{'buttons.register' | translate}}</button>
+  </div>
+
+</form>

@@ -1,0 +1,70 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.faq-item {
+  background: $background-secondary;
+  border-radius: 8px;
+  padding: 16px;
+
+  &__question {
+    position: relative;
+    @extend .subheader1;
+    color: $text-link;
+    padding-right: 36px;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      content: '';
+      background: url("../../../assets/img/icons/arrow_down_circle.svg") no-repeat;
+      right: 0;
+      top: calc(50% - 12px);
+      width: 24px;
+      height: 24px;
+      background-size: 100% 100%;
+    }
+
+    &_expanded {
+      color: $text-primary;
+
+      &::after {
+        background: url("../../../assets/img/icons/arrow_up_circle.svg") no-repeat;
+      }
+    }
+  }
+
+  &__answer {
+    @extend .body2;
+    color: $text-primary;
+    margin-top: 18px;
+  }
+
+  &__feedback {
+    background-color: $background-tertiary;
+    border-radius: 4px;
+    @extend .body2;
+    color: $text-secondary;
+    text-align: center;
+    padding: 6px;
+    margin-top: 32px;
+  }
+
+  &__feedback-link {
+    @extend .body2;
+    text-decoration: none;
+    color: $button-active;
+    margin-left: 18px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+      color: $button-hover;
+    }
+
+    &:active {
+      text-decoration: none;
+      color: $button-active;
+    }
+  }
+}

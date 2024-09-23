@@ -1,0 +1,31 @@
+<ng-container *ngIf="recentWins">
+
+  <div class="recent-wins__carousel-container" *ngIf="recentWins && pageName == 'game'">
+    <ngx-slick-carousel [config]="slideConfig"
+                        class="recent-wins__carousel">
+      <div ngxSlickItem class="recent-wins__winner" *ngFor="let win of recentWins">
+        <app-game-item-simple [game]="win.game" class="recent-wins__game-card"></app-game-item-simple>
+        <div class="recent-wins__name">{{win.login}}</div>
+        <div class="recent-wins__amount" [ngClass]="{'recent-wins__amount_gold': win.win_amount > 1000}">
+          {{win.win_amount | currency: win.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        </div>
+        <div class="recent-wins__game">{{win.game_title | truncate:['9']}}</div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+
+  <div class="recent-wins__carousel-container" *ngIf="recentWins && pageName == 'home'">
+    <ngx-slick-carousel [config]="slideConfig"
+                        class="recent-wins__carousel">
+      <div ngxSlickItem class="recent-wins__winner" *ngFor="let win of recentWins">
+        <app-game-item-simple [game]="win.game" class="recent-wins__game-card"></app-game-item-simple>
+        <div class="recent-wins__name">{{win.login}}</div>
+        <div class="recent-wins__amount" [ngClass]="{'recent-wins__amount_gold': win.win_amount > 1000}">
+          {{win.win_amount | currency: win.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        </div>
+        <div class="recent-wins__game">{{win.game_title | truncate:['9']}}</div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+
+</ng-container>

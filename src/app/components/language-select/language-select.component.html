@@ -1,0 +1,12 @@
+<div ngbDropdown [autoClose]="true" class="language-select__dropdown" #languageDropdown="ngbDropdown">
+  <div ngbDropdownToggle class="language-select__switcher" *ngIf="getCurrentLanguage()">
+    <div class="language-select__{{getCurrentLanguageCode()}}"></div>
+  </div>
+
+  <div ngbDropdownMenu class="language-select__languages">
+    <div class="language-select__language" *ngFor="let language of getInactiveLanguages()" (click)="changeLanguage(language)">
+      <div class="language-select__{{language['code']}}"></div>
+      <div class="language-select__title">{{language['code']}}</div>
+    </div>
+  </div>
+</div>

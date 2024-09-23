@@ -1,0 +1,26 @@
+<div class="balance-details">
+  <div class="balance-details__account" *ngIf="account">
+    <div class="balance-details__label">{{'other.real_balance'|translate}}</div>
+    <div class="balance-details__value">
+      {{account.balance | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+  </div>
+</div>
+
+<div class="balance-details" *ngIf="getActiveBonus() && account">
+  <div class="balance-details__account">
+    <div class="balance-details__label">{{'other.bonus_balance'|translate}}</div>
+    <div class="balance-details__value">
+      {{account.bonus_part | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+  </div>
+  <div class="balance-details__wager">
+    <div class="balance-details__label">{{'other.wager'|translate}}</div>
+    <div class="balance-details__value">
+      {{getActiveBonusProgress()}}%
+    </div>
+  </div>
+  <div class="balance-details__progress">
+    <ngb-progressbar [value]="getActiveBonusProgress()" class="w-100 d-block balance-details__progressbar"></ngb-progressbar>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.info-alert {
+  @extend .caption;
+  display: flex;
+  padding: 8px 16px;
+  text-align: left;
+  align-items: center;
+  color: $accent-info;
+  background: $accent-info-bg;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &__image {
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+
+    &_faq {
+      @include imgBg('icons/faq.svg')
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div>
+
+  <div class="game-search__results" *ngIf="searchString" [ngClass]="{'d-block': gamesList.searchedGames.length > 0}">
+    <app-games-list #gamesList [isShowSearchResult]="true"></app-games-list>
+  </div>
+
+  <div class="game-search__search-form">
+    <div class="game-search__input-container">
+      <input [(ngModel)]="searchString"
+             (ngModelChange)="onChangeSearchString($event)"
+             class="game-search__entry" type="text"
+             placeholder="{{'other.gamesearch' | translate}}"
+             name="query">
+    </div>
+    <div *ngIf="!desktop && showProvidersFilter" class="game-search__submit mobile" (click)="toggleSelector()"></div>
+
+    <div class="search2__select-provider"
+         [ngClass]="selectorOpened ? 'search2__select-provider_opened' : 'search2__select-provider_closed'">
+      <div class="search2__selector-close" (click)="closeSelector()"></div>
+      <div class="search2__select-title">{{'other.select_provider' | translate}}</div>
+      <div class="search2__providers">
+        <div class="search2__provider"
+             *ngFor="let brand of brands"
+             (click)="onChangeBrand(brand.name)"
+             [ngClass]="{'search2__provider_selected': selectedBrands.indexOf(brand.name) !== -1}">
+          {{brand.title}}
+        </div>
+      </div>
+      <div class="search2__provider-buttons">
+        <a class="green-text-button" (click)="clearSelectedBrands()">{{'buttons.clear' | translate}}</a>
+        <a class="button-mini" (click)="closeSelector()">{{'buttons.show' | translate}}</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>

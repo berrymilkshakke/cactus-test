@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form-upload-document">
+
+
+      <div class="form-upload-document__upload" (click)="fileInput.click()">
+
+        {{'documents.select_and_upload_file' | translate}}
+
+        <input #fileInput
+               type="file"
+               class="file-choose d-none"
+               formControlName="document"
+               (change)="handleFileInput($event.target.files)">
+      </div>
+
+      <div *ngIf="submitted && f.document.errors" class="text-danger mt-2">
+        <div *ngIf="f.document.errors.required">{{'forms.no_file_selected' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['document']" class="text-danger">
+        {{ error_value }}
+      </div>
+
+
+</form>

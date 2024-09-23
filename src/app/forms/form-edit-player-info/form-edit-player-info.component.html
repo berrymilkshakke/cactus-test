@@ -1,0 +1,279 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="profile-personal-form">
+
+  <div class="profile-personal-form__inputs" [ngClass]="{'profile-personal-form__modal-inputs': forModal}">
+
+    <div *ngIf="!forModal" class="profile-personal-form__header">
+      {{'other.personalinfo' | translate}}
+    </div>
+
+
+    <div *ngIf="getPlayer() && checkShowField('email')" class="group">
+      <input type="text" formControlName="email" [ngClass]="{'disabled': isEmailConfirmed()}">
+      <label>{{'forms.email' | translate}}</label>
+
+      <div *ngIf="submitted && f.email.errors" class="error-bl">
+        <div *ngIf="f.email.errors.required">{{'forms.required_to_fill' | translate}}</div>
+        <div *ngIf="f.email.errors.email">{{'forms.email_is_not_correct' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['email']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('first_name')" class="group">
+      <input type="text" formControlName="firstName">
+      <label>{{'forms.name' | translate}}</label>
+
+      <div *ngIf="submitted && f.firstName.errors" class="error-bl">
+        <div *ngIf="f.firstName.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['firstName']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('last_name')" class="group">
+      <input type="text" formControlName="lastName">
+      <label>{{'forms.last_name' | translate}}</label>
+
+      <div *ngIf="submitted && f.lastName.errors" class="error-bl">
+        <div *ngIf="f.lastName.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['lastName']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('date_of_birth')" class="group datepicker" id="calendar">
+      <input type="text"
+             ngbDatepicker #d="ngbDatepicker"
+             autocomplete="off"
+             dateFormat="YYYY-MM-DD"
+             formControlName="dateOfBirth"
+             outsideDays="collapsed"
+             navigation="select"
+             [minDate]="{year: 1900, month: 1, day: 1}"
+             [maxDate]="{year: 2015, month: 12, day: 31}"
+             (click)="d.toggle()">
+      <label>{{'forms.birthday' | translate}}</label>
+
+      <div *ngIf="submitted && f.dateOfBirth.errors" class="error-bl">
+        <div *ngIf="f.dateOfBirth.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['dateOfBirth']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('gender')" class="profile-personal-form__gender-group">
+
+      <section class="profile-personal-form__gender-item">
+        <input id="gender_m" type="radio" formControlName="gender" value="m" checked="checked">
+        <label for="gender_m" class="profile-personal-form__gender-label">{{'forms.male' | translate}}</label>
+      </section>
+
+      <section class="profile-personal-form__gender-item">
+        <input id="gender_f" type="radio" formControlName="gender" value="f">
+        <label for="gender_f" class="profile-personal-form__gender-label">{{'forms.female' | translate}}</label>
+      </section>
+
+      <section class="profile-personal-form__gender-item">
+        <input id="gender_x" type="radio" formControlName="gender" value="x">
+        <label for="gender_x" class="profile-personal-form__gender-label">{{'forms.other' | translate}}</label>
+      </section>
+
+      <div *ngIf="submitted && f.gender.errors" class="error-bl">
+        <div *ngIf="f.gender.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['gender']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('phone_number')" class="profile-personal-form__phone-group"
+         [ngClass]="{'profile-personal-form__modal-inputs_full-width':forModal}">
+
+      <div class="flex-block-phone">
+        <div class="group group-phone">
+          <div ngbDropdown class="form__dropdown" placement="bottom">
+
+            <button [ngClass]="{'disabled': f.phoneNumber.status == 'DISABLED'}"
+                    type="button"
+                    class="form__dropdown-toggle form__dropdown-code"
+                    id="dropdownPhoneCode"
+                    ngbDropdownToggle>
+
+              <span class="form__dropdown-label label">{{'forms.code' | translate}}</span>
+              <span class="form__dropdown-arrow"></span>
+
+              <div *ngIf="selectedPhoneCode">
+                <img class="group-phone__image"
+                     src="assets/img/phone-code/{{selectedPhoneCode.country_code.toLowerCase()}}.svg">
+                <span class="form__dropdown-value form-desktop">{{selectedPhoneCode.phone_code}}</span>
+              </div>
+
+            </button>
+
+            <div ngbDropdownMenu
+                 *ngIf="f.phoneNumber.status != 'DISABLED'"
+                 aria-labelledby="dropdownPhoneCode" class="form__dropdown-list">
+
+              <perfect-scrollbar class="profile-personal-form__countries-scrollbar">
+                <button type="button" *ngFor="let phoneCode of getPhoneCodes()"
+                        (click)="onChangePhoneCode(phoneCode)"
+                        class="form__dropdown-item dropdown-item">
+                  <img class="group-phone__image"
+                       src="assets/img/phone-code/{{phoneCode.country_code.toLowerCase()}}.svg">
+                  <span>{{phoneCode.phone_code}}</span>
+                </button>
+              </perfect-scrollbar>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="group">
+          <input type="number" formControlName="phoneNumber"
+                 [ngClass]="{'disabled': f.phoneNumber.status == 'DISABLED'}">
+          <label>{{'forms.number' | translate}}</label>
+
+          <div *ngIf="submitted && f.phoneNumber.errors" class="error-bl">
+            <div *ngIf="f.phoneNumber.errors.required">{{'forms.required_to_fill' | translate}}</div>
+          </div>
+
+          <div *ngFor="let error_value of errors['phoneNumber']" class="error-bl">{{ error_value }}</div>
+        </div>
+      </div>
+
+      <!--
+      <a *ngIf="!showConfirmation"
+         (click)="confirmPhone()"
+         class="green-text-button profile-personal-form__confirm-phone-button">
+        {{'buttons.confirm_phone' | translate}}
+      </a>
+      -->
+
+    </div>
+
+    <!--
+    <div class="profile-personal-form__confirm-phone-block" *ngIf="showConfirmation"
+         [ngClass]="{'profile-personal-form__modal-inputs_full-width':forModal}">
+      <a class="profile-personal-form__confirm-phone-close" (click)="cancelConfirmation()"></a>
+      <div class="profile-personal-form__confirm-phone-text">{{'forms.phone_call' | translate}}</div>
+      <div class="profile-personal-form__confirm-phone-code-entry">
+        <div class="group profile-personal-form__confirm-phone-code-entry-item">
+          <input type="text" formControlName="phone_confirm">
+          <label>{{'other.code_from_sms' | translate}}</label>
+        </div>
+        <a
+          class="profile-personal-form__confirm-phone-code-entry-button profile-personal-form__confirm-phone-code-entry-item">
+          {{'buttons.confirm' | translate}}
+        </a>
+      </div>
+    </div>
+    -->
+
+  </div>
+
+
+  <hr *ngIf="forModal" class="profile-personal-form__divider">
+
+
+  <div class="profile-personal-form__inputs"
+       [ngClass]="{'profile-personal-form__modal-inputs': forModal}">
+
+
+    <div *ngIf="!forModal" class="profile-personal-form__header">
+      {{'forms.registration_address' | translate}}
+    </div>
+
+
+    <div *ngIf="checkShowField('country_code')" class="group">
+
+      <div ngbDropdown class="form__dropdown" placement="bottom">
+
+        <button [ngClass]="{'disabled': f.countryCode.status == 'DISABLED'}"
+                type="button"
+                class="form__dropdown-toggle"
+                id="dropdownCountry"
+                ngbDropdownToggle>
+
+          <span class="form__dropdown-label label">{{'forms.country' | translate}}</span>
+          <span class="form__dropdown-arrow"></span>
+
+          <span class="form__dropdown-value" *ngIf="selectedCountry">
+              {{ 'countries.' + selectedCountry.toLowerCase() | translate }}
+            </span>
+        </button>
+
+        <div ngbDropdownMenu
+             *ngIf="f.countryCode.status != 'DISABLED'"
+             aria-labelledby="dropdownCountry" class="form__dropdown-list">
+
+          <perfect-scrollbar class="profile-personal-form__countries-scrollbar">
+            <button type="button" *ngFor="let country of getCountries()"
+                    (click)="onChangeCountry(country)"
+                    class="form__dropdown-item dropdown-item">
+
+              <span>{{country.code}} - {{ 'countries.' + country.code.toLowerCase() | translate }}</span>
+            </button>
+          </perfect-scrollbar>
+        </div>
+
+      </div>
+
+      <div *ngIf="submitted && f.countryCode.errors" class="error-bl">
+        <div *ngIf="f.countryCode.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['countryCode']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('city')" class="group">
+      <input type="text" formControlName="city">
+      <label>{{'forms.city' | translate}}</label>
+
+      <div *ngIf="submitted && f.city.errors" class="error-bl">
+        <div *ngIf="f.city.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['city']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('postal_code')" class="group">
+      <input type="text" formControlName="postalCode">
+      <label>{{'forms.post' | translate}}</label>
+
+      <div *ngIf="submitted && f.postalCode.errors" class="error-bl">
+        <div *ngIf="f.postalCode.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['postalCode']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+    <div *ngIf="checkShowField('address')" class="group profile-personal-form__inputs_full-width"
+         [ngClass]="{'profile-personal-form__modal-inputs_full-width':forModal}">
+      <input type="text" formControlName="address">
+      <label>{{'forms.address' | translate}}</label>
+
+      <div *ngIf="submitted && f.address.errors" class="error-bl">
+        <div *ngIf="f.address.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      </div>
+
+      <div *ngFor="let error_value of errors['address']" class="error-bl">{{ error_value }}</div>
+    </div>
+
+
+  </div>
+
+
+  <div [ngClass]="{'form__button-holder': !forModal, 'profile-personal-form__modal-buttons': forModal}">
+    <button *ngIf="!forModal" type="submit" class="form__continue-button">{{'buttons.continue' | translate}}</button>
+    <a *ngIf="forModal" (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+    <button *ngIf="forModal" type="submit" class="form__continue-button">{{'buttons.save' | translate}}</button>
+  </div>
+
+</form>

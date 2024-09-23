@@ -1,0 +1,5 @@
+<app-subheader-l2 title="{{'titles.jackpots_finished' | translate}}"></app-subheader-l2>
+
+<div class="jackpots-finished__container">
+<app-jackpot-finished-item *ngFor="let jackpot of jackpots" [jackpot]="jackpot"></app-jackpot-finished-item>
+</div>

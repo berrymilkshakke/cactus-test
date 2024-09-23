@@ -1,0 +1,7 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.subheader1__header {
+  @extend .header1;
+  color: $text-primary;
+}

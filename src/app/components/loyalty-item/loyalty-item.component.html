@@ -1,0 +1,134 @@
+<div class="loyalty-item" *ngIf="level">
+  <div class="loyalty-item__benefit">
+
+    <div class="loyalty-item__image-and-title">
+
+      <div class="loyalty-item__image" [ngClass]="{
+        'loyalty-item__image_grayscale': !isCurrentLevel,
+        'loyalty-item__image_level_1': level.name == 'level_1',
+        'loyalty-item__image_level_2': level.name == 'level_2',
+        'loyalty-item__image_level_3': level.name == 'level_3',
+        'loyalty-item__image_level_4': level.name == 'level_4',
+        'loyalty-item__image_level_5': level.name == 'level_5',
+        'loyalty-item__image_level_6': level.name == 'level_6'
+        }">
+      </div> <!-- 'loyalty-item__image_grayscale': !isCurrentLevel, -->
+
+      <div class="loyalty-item__header">
+        <div class="loyalty-item__title">
+          {{ level.title | translate }}
+        </div>
+
+        <ngb-progressbar *ngIf="nextLevel && level.pointsToNextLevel"
+                         [value]="level.currentGroupProgress"
+                         class="w-100 d-block loyalty-item__progress">
+        </ngb-progressbar>
+
+        <div class="loyalty-item__next" *ngIf="nextLevel && level.pointsToNextLevel">
+          {{'levels.next_level' | translate}} {{level.pointsToNextLevel}}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="loyalty-item__achieved" *ngIf="isCurrentLevel && !showNextLevelBenefits">
+      {{'levels.you_have_got' | translate}}:
+    </div>
+
+    <div class="loyalty-item__achieved" *ngIf="!nextLevel && showNextLevelBenefits">
+      {{'levels.you_have_got' | translate}}:
+    </div>
+
+    <div class="loyalty-item__achieved" *ngIf="!isCurrentLevel && !showNextLevelBenefits">
+      {{'levels.you_will_get' | translate}}:
+    </div>
+
+    <div class="loyalty-item__achieved" *ngIf="nextLevel && showNextLevelBenefits">
+      {{'levels.get_on_next_level' | translate}}:
+    </div>
+
+    <ul class="loyalty-item__achieved-list">
+
+      <ng-container *ngIf="!showNextLevelBenefits || (!nextLevel && showNextLevelBenefits)">
+
+        <li *ngIf="level.noDepositBonus && (level.noDepositBonus[getCurrencyCode()] > 0)">
+          {{ level.noDepositBonus[getCurrencyCode()] | currency: getCurrencyCode():"symbol-narrow":"1.0-0":"ru"}}
+          {{'other.bezdep_bon' | translate}}
+        </li>
+
+        <li *ngIf="level.cashback && (level.cashback > 0)">
+          {{ level.cashback }}%
+          {{'other.cashback' | translate}}
+        </li>
+
+        <li *ngIf="level.depositBonus">
+          +{{level.depositBonus}}%
+          {{'other.bonus_for_dep' | translate}}
+        </li>
+
+        <li *ngIf="level.daysOfBonusExpire">
+          +{{ level.daysOfBonusExpire }}
+          {{'other.days_of_bonus_expire' | translate}}
+        </li>
+
+        <li *ngIf="level.maxWin">
+          {{ level.maxWin }}
+          {{'other.max_winnings' | translate}}
+        </li>
+
+        <li *ngIf="level.birthdayGift && (level.birthdayGift[getCurrencyCode()] > 0)">
+          {{ level.birthdayGift[getCurrencyCode()] | currency: getCurrencyCode():"symbol-narrow":"1.0-0":"ru"}}
+          {{'other.birthday_gift' | translate}}
+        </li>
+
+        <li *ngIf="level.wager">
+          x{{ level.wager }}
+          {{'other.wager' | translate}}
+        </li>
+
+      </ng-container>
+
+
+      <ng-container *ngIf="nextLevel && showNextLevelBenefits">
+
+        <li *ngIf="nextLevel.noDepositBonus && (nextLevel.noDepositBonus[getCurrencyCode()] > 0)">
+          {{ nextLevel.noDepositBonus[getCurrencyCode()] | currency: getCurrencyCode():"symbol-narrow":"1.0-0":"ru"}}
+          {{'other.bezdep_bon' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.cashback && (nextLevel.cashback > 0)">
+          {{ nextLevel.cashback }}%
+          {{'other.cashback' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.depositBonus">
+          +{{nextLevel.depositBonus}}%
+          {{'other.bonus_for_dep' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.daysOfBonusExpire">
+          +{{ nextLevel.daysOfBonusExpire }}
+          {{'other.days_of_bonus_expire' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.maxWin">
+          {{ nextLevel.maxWin }}
+          {{'other.max_winnings' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.birthdayGift && (nextLevel.birthdayGift[getCurrencyCode()] > 0)">
+          {{ nextLevel.birthdayGift[getCurrencyCode()] | currency: getCurrencyCode():"symbol-narrow":"1.0-0":"ru"}}
+          {{'other.birthday_gift' | translate}}
+        </li>
+
+        <li *ngIf="nextLevel.wager">
+          x{{ nextLevel.wager }}
+          {{'other.wager' | translate}}
+        </li>
+
+      </ng-container>
+
+    </ul>
+
+  </div>
+</div>

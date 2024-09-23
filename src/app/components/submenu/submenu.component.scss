@@ -1,0 +1,50 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.submenu {
+  @include noscroll;
+  overflow: scroll;
+  display: flex;
+  margin: 0 0 32px;
+  border-bottom: 1px solid $divider-divider;
+  width: 100%;
+  position: relative;
+
+  &__item {
+    @include media($desktop-layout) {
+      flex-grow: 2;
+    }
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-align: center;
+
+    &:nth-of-type(1) {
+      &.submenu__item_active {
+       left: 0 !important;
+      }
+    }
+
+    &_active {
+      border-bottom: 2px solid $divider-border-active;
+
+      .submenu__link {
+        color: $text-primary;
+      }
+    }
+  }
+
+  &__link {
+    @extend .body2;
+    display: block;
+    color: $text-secondary;
+    white-space: nowrap;
+    margin-left: 16px;
+    margin-right: 16px;
+
+    &:hover {
+      color: $text-primary;
+      text-decoration: none;
+    }
+  }
+}

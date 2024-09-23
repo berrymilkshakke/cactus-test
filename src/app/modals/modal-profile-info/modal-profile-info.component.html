@@ -1,0 +1,11 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header center">
+    <span>{{message}}</span>
+  </div>
+
+  <app-form-edit-player-info [fieldsRequired]="fieldsRequired" [forModal]="true" (successEvent)="closeModal()"></app-form-edit-player-info>
+
+</div>

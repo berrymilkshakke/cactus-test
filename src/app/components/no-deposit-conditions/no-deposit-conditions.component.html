@@ -1,0 +1,16 @@
+<div class="no-deposit-conditions"
+     *ngIf="getPlayer() && !isPlayerDeposited() && (!isProfileFilled() || !isEmailConfirmed())">
+
+  <div class="no-deposit-conditions__title">
+    {{'bonuses.no_deposit_conditions' | translate}}:
+  </div>
+
+  <div *ngIf="!isProfileFilled()" class="no-deposit-conditions__item">
+    - {{'bonuses.fill_out_profile' | translate}}
+  </div>
+
+  <div *ngIf="!isEmailConfirmed()" class="no-deposit-conditions__item">
+    - {{'bonuses.confirm_email' | translate}} ({{'bonuses.follow_link' | translate}})
+  </div>
+
+</div>

@@ -1,0 +1,227 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.profile-personal-form {
+
+  .group-phone__image {
+    width: 16px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .flex-block-phone {
+    display: flex;
+    width: 344px;
+    gap: 16px;
+
+    @media (max-width: $mobile-layout) {
+      width: 100%;
+    }
+  }
+
+  &__header {
+    @extend .header4;
+    color: $text-primary;
+  }
+
+  &__inputs {
+    background-color: $background-secondary;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+
+    &_full-width {
+      width: 100% !important;
+    }
+  }
+
+  &__inputs > .group, &__phone-group > .group {
+    @media (min-width: $mobile-layout) {
+      width: 344px;
+    }
+  }
+
+  &__modal-inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 24px;
+    align-items: center;
+    padding: 0 !important;
+    margin-top: 0;
+    @media (min-width: $mobile-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &_full-width {
+      @media (min-width: $mobile-layout) {
+        grid-column-end: span 2;
+      }
+    }
+  }
+
+  &__modal-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media (min-width: $mobile-layout) {
+      justify-content: flex-end;
+    }
+
+    & .form__continue-button {
+      margin-top: 0;
+      width: 50%;
+      @media (min-width: $mobile-layout) {
+        width: auto;
+      }
+    }
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed $divider-divider;
+    margin-bottom: 0;
+  }
+
+  &__gender-group {
+    width: 100%;
+    @media (min-width: $mobile-layout) {
+      width: 344px;
+    }
+    background-color: $background-tertiary;
+    border-radius: 8px;
+    padding: 4px;
+    margin-top: 24px;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__gender-item {
+    flex-basis: 33%;
+    display: flex;
+
+    input[type="radio"] {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: #fff;
+      margin: 0;
+
+      &:checked + .profile-personal-form__gender-label {
+        background-color: $button-active;
+        color: $text-primary;
+      }
+    }
+  }
+
+  &__gender-label {
+    @extend .button2;
+    line-height: 36px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: block;
+    border-radius: 6px;
+    color: $text-secondary;
+  }
+
+  #calendar input {
+    padding-right: 32px;
+    background: url("../../../assets/img/icons/calendar.svg") no-repeat scroll calc(100% - 16px) 50%;
+  }
+
+  &__phone-group {
+    @media (min-width: $mobile-layout) {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+  }
+
+  &__confirm-phone-button {
+    margin-top: 16px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    @media (min-width: $mobile-layout) {
+      text-align: left;
+    }
+  }
+
+  &__confirm-phone {
+
+    &-block {
+      margin-top: 16px;
+      background-color: $background-tertiary;
+      border-radius: 8px;
+      padding: 12px 16px;
+      position: relative;
+      @media (min-width: $mobile-layout) {
+        width: fit-content;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 1002;
+      line-height: 20px;
+      width: 20px;
+      height: 20px;
+
+      &::after {
+        content: '';
+        background: url("../../../assets/img/icons/cancel.svg") no-repeat 50% 50%;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: bottom;
+      }
+    }
+
+    &-text {
+      @extend .body2;
+      color: $text-primary;
+      margin-right: 24px;
+    }
+
+    &-code-entry {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      .group {
+        margin-top: 0;
+      }
+
+      &-item {
+        margin-top: 0;
+        flex-basis: 50%;
+        @media (min-width: $mobile-layout) {
+          flex-basis: 152px;
+        }
+
+        input {
+          height: 40px;
+        }
+      }
+
+      &-button {
+        @extend .button2;
+        color: $button-active;
+        display: block;
+        text-align: center;
+        @media (min-width: $mobile-layout) {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

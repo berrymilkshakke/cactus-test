@@ -1,0 +1,61 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.modal-login {
+  position: relative;
+  height: 587px;
+  background-color: $background-secondary;
+  border-radius: 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  @include media($desktop-layout) {
+    flex-direction: column;
+    height: unset;
+    padding: 8px;
+  }
+
+  &__banner {
+    display: block;
+    flex-shrink: 0;
+    width: 424px;
+
+    @include media($desktop-layout) {
+      aspect-ratio: 295/104;
+      width: 100%;
+    }
+  }
+
+  &__sign-in {
+    flex-shrink: 0;
+    width: 424px;
+    margin-top: 8px;
+    padding: 32px;
+    text-align: center;
+    @include media($desktop-layout) {
+      padding: 8px;
+      flex-basis: unset;
+      width: 100%;
+    }
+  }
+
+  &__header {
+    @extend .header4;
+    color: $text-primary;
+  }
+
+  &__form-container {
+    text-align: left;
+  }
+
+  &__register {
+    @extend .body2;
+    margin-top: 24px;
+    color: $text-primary;
+
+    a {
+      color: $text-link !important;
+    }
+  }
+}

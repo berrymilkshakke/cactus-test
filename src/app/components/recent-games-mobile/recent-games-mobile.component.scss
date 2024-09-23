@@ -1,0 +1,30 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/styles.scss";
+
+.recent-games {
+  background-color: $background-secondary;
+  border-radius: 8px;
+  padding: 12px 0 16px 16px;
+
+  &__title {
+    @extend .subheader1;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+
+  &__games {
+    @include noscroll;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    gap: 8px;
+  }
+
+  &__game {
+    flex-shrink: 0;
+    border-radius: 4px;
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,8 @@
+<div class="modal-common">
+	<a class="modals-popup-close" (click)="closeModal()"></a>
+	<div class="modal-common__header left">{{'project.choose_a_bonus' | translate}}</div>
+	<app-bonuses-list [categoryName]="'modal'" (successEvent)="closeModal()" style="width: 100%;"></app-bonuses-list>
+	<div class="modal-common__buttons-right" *ngIf="bonus">
+		<a *ngIf="!bonus.canceled" (click)="closeModal()" routerLink="/bonuses/active" class="green-text-button">{{'buttons.cancel' | translate}}</a>
+	</div>
+</div>

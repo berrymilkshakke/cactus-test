@@ -1,0 +1,11 @@
+@import "src/assets/scss/_utils.scss";
+
+.modal-new-money {
+  &__icon {
+    @include imgBg('icons/done.svg');
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+  }
+}

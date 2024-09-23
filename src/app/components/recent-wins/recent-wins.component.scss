@@ -1,0 +1,81 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/styles.scss";
+
+.recent-wins {
+  @include noscroll;
+  width: 100%;
+  display: flex;
+  background-color: $background-secondary;
+  border-radius: 8px;
+  gap: 8px;
+  padding: 8px;
+  justify-content: space-between;
+  overflow: scroll;
+
+  &__carousel-container {
+    width: 100%;
+    background-color: $background-secondary;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  &__carousel {
+    width: calc(100% + 8px);
+    margin-left: -8px;
+    box-sizing: border-box;
+
+    .recent-wins__winner {
+      min-width: auto;
+      margin-left: 8px;
+    }
+
+  }
+
+  &__winner {
+    background-color: $background-primary;
+    border-radius: 4px;
+    padding: 8px;
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 80%;
+  }
+
+  &__game-card {
+    display: block;
+    float: left;
+    width: 64px;
+    height: 64px;
+    margin-right: 12px;
+  }
+
+  &__name {
+    @extend .subheader2;
+    color: $text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__amount {
+    @extend .subheader2;
+    color: $text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &_gold {
+      color: $accent-warning;
+    }
+  }
+
+  &__game {
+    @extend .body2;
+    color: $text-link;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+}

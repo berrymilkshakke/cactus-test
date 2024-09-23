@@ -1,0 +1,94 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/styles";
+
+.jackpot {
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: url("../../../assets/img/jackpots/jackpot_bg.svg") no-repeat center,
+  radial-gradient(100% 1969.14% at 0% 50%, #FDA085 0%, #F6D365 100%);
+  background-size: cover;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+
+  @include media($desktop-layout) {
+    // Мобильная версия
+    background: $background-secondary;
+    overflow: auto;
+    flex-direction: row;
+    width: 100%;
+    text-align: left;
+    justify-content: stretch;
+
+    &::before {
+      content: '';
+      background: $background-primary url("../../../assets/img/icons/jackpot.svg") no-repeat;
+      background-size: 100% 100%;
+      width: 80px;
+      height: 80px;
+      display: block;
+      margin-right: 24px;
+      float: left;
+      border-radius: 4px;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    @extend .subheader2;
+    color: $text-primary;
+    padding: 2px 16px;
+    background-color: $button-active;
+    border-radius: 16px;
+
+    &::before {
+      content: '';
+      background-size: 100%;
+      background: url("../../../assets/img/icons/jackpot_diamond.svg") no-repeat 0 2px;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      display: inline-block;
+    }
+
+    @include media($desktop-layout) {
+      padding: 0;
+      background-color: transparent;
+      border-radius: 0;
+      color: $text-secondary;
+    }
+  }
+
+  &:hover &__title {
+    background-color: $button-hover;
+    @include media($mobile-layout) {
+      background-color: transparent;
+    }
+  }
+
+  &:active &__title {
+    background-color: $button-push;
+    @include media($mobile-layout) {
+      background-color: transparent;
+    }
+  }
+
+  &__text {
+    @extend .header2;
+    margin-top: 6px;
+    color: $brand-secondary;
+
+    @include media($desktop-layout) {
+      color: $text-primary;
+    }
+  }
+}

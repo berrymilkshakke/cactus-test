@@ -1,0 +1,131 @@
+<app-subheader-l2 title="{{'titles.transaction_history' | translate}}"></app-subheader-l2>
+
+
+<div class="form-wallet-history">
+
+  <div class="form-wallet-history__wrap">
+
+    <div class="form-wallet-history__dates">
+
+      <div class="form-wallet-history__date form-wallet-history__date-left">
+        <div class="group datepicker" id="calendar1">
+          <input type="text"
+                 ngbDatepicker #ngbDateFrom="ngbDatepicker"
+                 autocomplete="off"
+                 [(ngModel)]="dateFrom"
+                 outsideDays="collapsed"
+                 [minDate]="{year: 1900, month: 1, day: 1}"
+                 [maxDate]="{year: 2125, month: 12, day: 31}"
+                 (click)="ngbDateFrom.toggle()">
+          <label>{{'placeholders.date_dmy' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="form-wallet-history__hyphen">—</div>
+
+      <div class="form-wallet-history__date form-wallet-history__date-right">
+        <div class="group datepicker" id="calendar2">
+          <input type="text"
+                 ngbDatepicker #ngbDateTo="ngbDatepicker"
+                 autocomplete="off"
+                 [(ngModel)]="dateTo"
+                 outsideDays="collapsed"
+                 [minDate]="{year: 1900, month: 1, day: 1}"
+                 [maxDate]="{year: 2125, month: 12, day: 31}"
+                 (click)="ngbDateTo.toggle()">
+          <label>{{'placeholders.date_dmy' | translate}}</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-wallet-history__button-wrap">
+      <button (click)="showPayments()" class="form-wallet-history__show-button">
+        {{'profile.show' | translate}}
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+<!--
+<div class="wallet-history__filters">
+  <div class="wallet-history__filter wallet-history__filter_selected">
+    <div class="wallet-history__filter-value">{{'categories.all' | translate}}</div>
+  </div>
+  <div class="wallet-history__filter">
+    <div class="wallet-history__filter-value">{{'other.deposit' | translate}}</div>
+  </div>
+  <div class="wallet-history__filter">
+    <p class="wallet-history__filter-value">{{'other.withdrawal' | translate}}</p>
+  </div>
+</div>
+-->
+
+<ng-container *ngIf="payments && payments.length > 0">
+
+  <div class="wallet-history__headers">
+    <div>{{'other.simple_date' | translate}}</div>
+    <div>{{'forms.amount' | translate}}</div>
+    <div>{{'other.type' | translate}}</div>
+    <div>{{'other.payment_system' | translate}}</div>
+  </div>
+
+  <div class="wallet-history__transaction" *ngFor="let payment of payments">
+
+    <div class="wallet-history__transaction-status">
+
+      <div *ngIf="payment.completed" class="wallet-history__transaction-status-text wallet-history__transaction-status_completed">
+        {{ 'other.completed' | translate}}
+      </div>
+
+      <div *ngIf="payment.canceled" class="wallet-history__transaction-status-text wallet-history__transaction-status_canceled">
+        {{ 'other.canceled' | translate}}
+      </div>
+
+      <div *ngIf="payment.failed" class="wallet-history__transaction-status-text wallet-history__transaction-status_failed">
+        {{ 'other.failed' | translate}}
+      </div>
+
+      <div *ngIf="!payment.canceled && !payment.completed && !payment.failed"
+           class="wallet-history__transaction-status-text wallet-history__transaction-status_pending">
+        {{ 'other.pending' | translate}}
+      </div>
+
+      <div *ngIf="(payment.canceled || payment.completed || payment.failed) && (payment.transaction_type_name == 'withdrawal')"
+           (click)="cancelWithdrawal(payment.uuid)" class="wallet-history__transaction-cancel">
+        {{'buttons.cancel' | translate}}
+      </div>
+    </div>
+
+    <div class="wallet-history__transaction-data">
+      <div>
+        <div class="wallet-history__label mobile">{{'other.simple_date' | translate}}</div>
+        <div class="wallet-history__value">
+          {{payment.created_at | toDateObj | date : 'short'  : null  : 'ru'}}
+        </div>
+      </div>
+      <div>
+        <div class="wallet-history__label mobile">{{'forms.amount' | translate}}</div>
+        <div class="wallet-history__value">
+          {{ payment.amount | currency:payment.payment_method_currency_code : 'symbol-narrow' : '1.2-2' : 'ru' }}
+        </div>
+      </div>
+      <div>
+        <div class="wallet-history__label mobile">{{'other.type' | translate}}</div>
+        <div class="wallet-history__value">
+          {{ 'other.' + payment.transaction_type_name | translate}}
+        </div>
+      </div>
+      <div>
+        <div class="wallet-history__label mobile">{{'other.payment_system' | translate}}</div>
+        <div class="wallet-history__value">
+          {{payment.payment_service_title}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>

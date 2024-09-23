@@ -1,0 +1,145 @@
+<button class="chat-button" (click)="openChat()"
+        [hidden]="showChat || (getPlatform() != 'desktop' && isGamePage())">
+  <span class="chat-button__btn-bl">
+    <span class="chat-button__new-messages" *ngIf="getNewMessagesCount() > 0">
+      {{ getNewMessagesCount() | number: '1.0-0' : 'ru'}}
+    </span>
+  </span>
+</button>
+
+<div class="chat-window" [hidden]="!showChat">
+
+  <div class="chat-window__header">
+
+    <button class="chat-window__close-chat" (click)="closeChat()"></button>
+
+    <div class="chat-window__title">{{'chat.online_chat' | translate}}</div>
+
+    <div class="chat-window__user-bl">
+
+      <div class="chat-window__user-avatar"></div>
+
+      <div class="chat-window__user-info">
+        <div class="chat-window__user-name">{{'chat.support_team' | translate}}</div>
+        <div class="chat-window__user-status">online</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="chat-window__body">
+
+    <button class="chat-window__button-questions" (click)="toggleQuestions()">
+      <span *ngIf="!showQuestions">{{'chat.show_questions' | translate}}</span>
+      <span *ngIf="showQuestions">{{'chat.hide_questions' | translate}}</span>
+    </button>
+
+    <perfect-scrollbar class="chat-window__messages">
+
+      <div *ngIf="showQuestions">
+
+        <div class="chat-window__questions-title">
+          {{'chat.select_a_question' | translate}}:
+        </div>
+
+        <button *ngFor="let question of questions" (click)="sendQuestion(question.id, question.text)"
+                class="chat-window__question">
+          {{question.text}}
+        </button>
+
+      </div>
+
+      <div *ngIf="!showQuestions">
+
+        <div *ngFor="let message of messages">
+
+          <div *ngIf="message.request" class="chat-window__out-message">
+            <div>
+
+              <div class="chat-window__out-message-text">
+                <div *ngIf="!message.file">{{message.message}}</div>
+                <div *ngIf="message.file">{{'documents.document_uploaded' | translate}}</div>
+              </div>
+
+              <div class="chat-window__out-message-info">
+                <div class="chat-window__out-message-time">
+                  {{message.created_at | date : 'short'  : null  : 'ru'}}
+                  <!-- {{message.created_at_time}} -->
+                </div>
+                <div class="chat-window__checkmark" *ngIf="message.read"></div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div *ngIf="!message.request" class="chat-window__in-message">
+            <div>
+
+              <div class="chat-window__in-message-text">
+                {{message.message}}
+              </div>
+
+              <div class="chat-window__in-message-info">
+                <div class="chat-window__checkmark" *ngIf="message.read"></div>
+                <div class="chat-window__in-message-time">
+                  {{message.created_at | date : 'short'  : null  : 'ru'}}
+                  <!-- {{message.created_at_time}} -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div *ngIf="(messages.length == 1) && messages[0].request" class="chat-window__in-message">
+            <div>
+              <div class="chat-window__in-message-text">
+                {{'chat.wait_operator_response' | translate}}.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </perfect-scrollbar>
+
+  </div>
+
+  <div class="chat-window__footer">
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+      <textarea formControlName="message"
+                class="chat-window__ta-message"
+                (keydown)="handleKeyDown($event)"
+                placeholder="{{'chat.write_a_message' | translate}} ...">
+      </textarea>
+
+      <div class="chat-window__errors" *ngIf="submitted && f.message.errors">
+
+        <div *ngIf="f.message.errors.minlength">
+          {{'forms.too_short' | translate: {value: f.message.errors.minlength.requiredLength} }}
+        </div>
+
+        <div *ngIf="f.message.errors.maxlength">
+          {{'forms.too_long' | translate: {value: f.message.errors.maxlength.requiredLength} }}
+        </div>
+      </div>
+
+      <button *ngIf="isAuthorized()" type="button" class="chat-window__btn-file" [disabled]="loading" (click)="fileInput.click()">
+        <input #fileInput
+               type="file"
+               class="file-choose d-none"
+               (change)="handleFileInput($event.target.files)">
+      </button>
+
+      <button type="submit" class="chat-window__btn-send" [disabled]="loading"></button>
+
+    </form>
+
+  </div>
+
+</div>

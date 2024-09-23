@@ -1,0 +1,16 @@
+<app-subheader-l2 title="{{'titles.documents_upload' | translate}}"></app-subheader-l2>
+
+<div class="documents">
+
+  <ng-container *ngFor="let category of categories | slice: 0 : 3">
+    <app-document-category [category]="category"></app-document-category>
+  </ng-container>
+
+</div>
+
+<app-subheader-l2 title="{{'documents.uploaded_files' | translate}}"></app-subheader-l2>
+
+<ng-container *ngFor="let document of documents">
+  <app-document-uploaded [document]="document" (deleteEvent)="deleteDocument(document.id)"></app-document-uploaded>
+</ng-container>
+

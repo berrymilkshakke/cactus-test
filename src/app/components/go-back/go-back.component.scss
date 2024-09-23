@@ -1,0 +1,19 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.back {
+  position: relative;
+  @extend .body2;
+  line-height: 24px;
+  padding-left: 36px;
+  color: $text-link;
+
+  &::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: url("../../../assets/img/icons/arrow_back.svg") no-repeat;
+  }
+}

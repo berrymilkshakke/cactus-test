@@ -1,0 +1,165 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+
+.form-wallet-history {
+  &__dates {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__wrap {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    @media (max-width: 530px) {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  &__date > .group {
+    margin-top: 0;
+  }
+
+  &__date-right > .datepicker > .dropdown-menu {
+    @media (max-width: 530px) {
+      left: auto !important;
+      right: 0 !important;
+    }
+  }
+
+  &__hyphen {
+    color: $text-primary;
+    @extend .subheader1;
+  }
+
+  #calendar1 input, #calendar2 input {
+    padding-right: 32px;
+    background: url("/assets/img/icons/calendar.svg") no-repeat scroll calc(100% - 16px) 50%;
+  }
+
+  &__button-wrap {
+    @media (max-width: 530px) {
+      width: 100%;
+      margin-top: 16px;
+    }
+  }
+
+  &__show-button {
+    @extend .button-mini;
+    border: 1px solid $button-active;
+    padding: 12px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    @media (min-width: $mobile-layout) {
+      width: auto;
+    }
+  }
+}
+
+
+.wallet-history {
+  &__filters {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  &__filter {
+    background: $background-secondary;
+    padding: 4px 16px;
+    border-radius: 999px;
+
+    &_selected {
+      background: $button-active;
+    }
+  }
+
+  &__filter-value {
+    color: $text-primary;
+    @extend .body2;
+  }
+
+  &__headers {
+    @extend .caption;
+    display: none;
+    color: $text-secondary;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    @media (min-width: $mobile-layout) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+    }
+  }
+
+  &__transaction {
+    margin-top: 16px;
+    padding: 16px;
+    background: $background-secondary;
+    border-radius: 8px;
+  }
+
+  &__transaction-status {
+    display: flex;
+    justify-content: space-between;
+
+    &-text {
+      @extend .caption;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    &_completed {
+      color: $accent-success;
+      background-color: $accent-success-bg;
+    }
+
+    &_pending {
+      color: $accent-warning;
+      background-color: $accent-warning-bg;
+    }
+
+    &_canceled {
+      color: $accent-warning;
+      background-color: $accent-warning-bg;
+    }
+
+    &_failed {
+      color: $accent-error;
+      background-color: $accent-error-bg;
+    }
+  }
+
+  &__transaction-cancel {
+    color: $text-link;
+    @extend .body2;
+    cursor: pointer;
+  }
+
+  &__transaction-data {
+    margin-top: 16px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    @media (min-width: $mobile-layout) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  &__label {
+    color: $text-secondary;
+    @extend .caption;
+  }
+
+  &__value {
+    color: $text-primary;
+    @extend .body2;
+  }
+}

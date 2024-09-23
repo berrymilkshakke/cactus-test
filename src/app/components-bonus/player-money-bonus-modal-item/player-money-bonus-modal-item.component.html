@@ -1,0 +1,93 @@
+<div class="modal-common__header left">
+  <div *ngIf="bonus.fs_title" [innerHTML]="bonus.fs_title"></div>
+</div>
+
+<div class="modal-common__text">
+  <app-bonus-item-string-value
+    *ngIf="bonus.wager_required_amount"
+    [title]="'bonuses.played'"
+    [value]="[bonus.wager_current_amount | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru', ' / ', bonus.wager_required_amount | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'].join('')"
+    [style]="'data-row-modal'">
+  </app-bonus-item-string-value>
+
+  <ul class="modal-common__list">
+
+    <li *ngIf="bonus.description_in_locale" [innerHTML]="bonus.description_in_locale"></li>
+
+    <li *ngIf="bonus.spend_locked == true && bonus.spend_money == true">
+      {{'bonuses.wagering_from_real_and_bonus' | translate}}
+    </li>
+
+    <li *ngIf="bonus.spend_locked == true && bonus.spend_money == false">
+      {{'bonuses.wagering_from_bonus' | translate}}
+    </li>
+
+    <li *ngIf="bonus.spend_locked == false && bonus.spend_money == true">
+      {{'bonuses.wagering_from_real' | translate}}
+    </li>
+
+    <li *ngIf="bonus.fs_game_title">
+      <span>{{'bonuses.game_title' | translate}} - </span>
+      <span>{{bonus.fs_game_title}}</span>
+    </li>
+
+    <li *ngIf="bonus.bet_amount && bonus.lines_count && bonus.denomination">
+      <span>{{'bonuses.bet_amount' | translate}} - </span>
+      <span>{{bonus.bet_amount * bonus.lines_count * bonus.denomination | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+    </li>
+
+    <li *ngIf="bonus.fs_amount">
+      <span>{{'bonuses.fs_amount' | translate}} - </span>
+      <span>{{bonus.fs_amount}}</span>
+    </li>
+
+    <li *ngIf="bonus.bonus_amount"> 
+      <span>{{'bonuses.bonus_size' | translate}} - </span>
+      <span>{{bonus.bonus_amount | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+    </li>
+
+    <li>{{'bonuses.all_winnings_from_bets' | translate}}</li>
+
+    <li *ngIf="bonus.maximum_win">
+      <span>{{'bonuses.max_win_amount_after_wager' | translate}} </span>
+      <span>{{bonus.maximum_win | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+      <span> {{'bonuses.from_initial_bonus_amount' | translate}}</span>
+    </li>
+
+    <li *ngIf="bonus.maximum_bet">
+      <span>{{'bonuses.max_bet' | translate}} - </span>
+      <span>{{bonus.maximum_bet | currency: bonus.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+    </li>
+
+    <li *ngIf="!bonus.activated && bonus.activation_expires_at">
+      <span>{{'bonuses.activation_expires' | translate}} </span>
+      <span>{{bonus.activation_expires_at  | toDateObj | date : 'short'  : null  : 'ru'}}</span>
+    </li>
+
+    <li *ngIf="bonus.activated && bonus.wagering_expires_at">
+      <span>{{'bonuses.activation_expires' | translate}} </span>
+      <span>{{bonus.wagering_expires_at  | toDateObj | date : 'short'  : null  : 'ru'}}</span>
+    </li>
+  </ul>
+
+  <ng-container *ngIf="!bonus.activated && showButtons">
+    <div class="modal-common__list-title">{{'bonuses.get_bonus' | translate}}</div>
+    <ul class="modal-common__list modal-common__list-mini">
+      <li>{{'bonuses.click_activate' | translate}}</li>
+      <li>{{'bonuses.make_deposit' | translate}}</li>
+    </ul>
+  </ng-container>
+
+  <div class="bonus-item__cancel-or-activate" *ngIf="showButtons">
+    <a *ngIf="bonus.cancel_allowed" class="bonus-item__cancel bonus-item__cancel-mini"
+        (click)="cancelPlayerMoneyBonus(bonus.id)">
+      {{'buttons.cancel' | translate}}
+    </a>
+
+    <a *ngIf="!bonus.activated" class="bonus-item__activate bonus-item__activate-mini ml-1"
+        (click)="activatePlayerMoneyBonus(bonus.id)">
+      {{'buttons.activate' | translate}}
+    </a>
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.currency-select-radio {
+
+  &__currency {
+    position: relative;
+    @extend .body2;
+    color: $text-primary;
+    margin-bottom: 24px;
+    padding-left: 36px;
+
+    &::after {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      @include imgBg('icons/radio.svg');
+      width: 20px;
+      height: 20px;
+    }
+
+    &-selected {
+      &::after {
+        @include imgBg('icons/radio_selected.svg');
+      }
+    }
+  }
+}

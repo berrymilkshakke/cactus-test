@@ -1,0 +1,88 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.loyalty-program {
+  padding: 16px 0;
+
+  &__text {
+    @extend .body2;
+    color: $text-secondary;
+    margin-bottom: 8px;
+  }
+
+  &__link {
+    @extend .body2;
+    position: relative;
+    display: block;
+    margin-top: 16px;
+    color: $text-link;
+
+    &_expand::after {
+      position: absolute;
+      content: '';
+      width: 24px;
+      height: 24px;
+      margin-left: 8px;
+      top: 2px;
+
+      background: url("../../../assets/img/icons/arrow_down.svg") no-repeat;
+      filter: brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(737%) hue-rotate(178deg) brightness(103%) contrast(106%);
+    }
+
+    &_collapse::after {
+      position: absolute;
+      content: '';
+      width: 24px;
+      height: 24px;
+      margin-left: 8px;
+      top: 2px;
+
+      background: url("../../../assets/img/icons/arrow_up.svg") no-repeat;
+      filter: brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(737%) hue-rotate(178deg) brightness(103%) contrast(106%);
+    }
+  }
+
+  &__items-holder {
+    background: $background-secondary;
+    border-radius: 8px;
+    padding: 8px 16px 16px;
+    margin-top: 16px;
+    @media (min-width: $mobile-layout) {
+      background: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0;
+      .loyalty-program__item {
+        width: 30%;
+      }
+    }
+  }
+
+  &__item {
+    background: $background-secondary;
+    border-radius: 8px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $mobile-layout) {
+      padding: 16px;
+    }
+
+    & .loyalty-item {
+      height: 100%;
+    }
+
+    & > app-loyalty-item {
+      display: block;
+      height: 100%;
+    }
+  }
+
+  &__item-header {
+    @extend .header4;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+}

@@ -1,0 +1,33 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.layout-test {
+  color: white;
+
+  &__table {
+    max-width: 500px;
+    color: white !important;
+
+    td {
+      vertical-align: middle;
+    }
+  }
+
+  &__btn {
+    @extend .button-mini;
+    margin-left: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &-img {
+      @include imgBg('icons/deposit.svg');
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+

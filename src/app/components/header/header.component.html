@@ -1,0 +1,175 @@
+<div class="header">
+
+  <button
+    class="header__menu-button"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent1"
+    aria-controls="navbarSupportedContent1"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="openSlider()">
+    <i class="fa fa-bars fa-1x"></i>
+  </button>
+
+  <ng-container #vc></ng-container>
+
+  <a routerLink="/">
+    <div class="header__logo">
+      <img src="assets/img/kaktuz.svg" alt="logo" class="header__logo-image">
+    </div>
+  </a>
+
+  <div class="header__menu" *ngIf="isAuthorized()">
+
+    <a routerLink="/profile" class="header__profile">
+      <div class="header__profile-img"></div>
+      {{'titles.profile_info' | translate}}
+    </a>
+
+    <div ngbDropdown [autoClose]="true" *ngIf="account" class="header__balance">
+
+      <div ngbDropdownToggle class="header__balance-toggle">
+        {{'titles.profile_balances' | translate}}
+        {{account.balance_plus_bonus | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        <div class="header__balance-img"></div>
+      </div>
+
+      <div ngbDropdownMenu class="header__slide-menu-balance-select-list">
+        <app-balance-details class="header__slide-menu-balance-details"></app-balance-details>
+      </div>
+
+    </div>
+
+    <a routerLink="/wallet/deposit" class="header__deposit">
+      <div class="header__deposit-img"></div>
+      {{'buttons.deposit' | translate}}
+    </a>
+
+    <div class="header__exit" (click)="logout()"></div>
+
+  </div>
+  <div class="header__menu" *ngIf="!isAuthorized()">
+    <a routerLink="login" class="header__login">{{'buttons.enter' | translate}}</a>
+    <a routerLink="registration" class="header__register button-mini">{{'buttons.registration' | translate}}</a>
+  </div>
+
+  <div class="header__menu-mobile" *ngIf="isAuthorized()">
+    <div *ngIf="account" class="header__balance">
+      {{account.balance_plus_bonus | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+    <a *ngIf="account" routerLink="/wallet/deposit" class="header__wallet-button"></a>
+    <a routerLink="/profile" class="header__profile">
+      <div class="header__profile-img"></div>
+    </a>
+  </div>
+  <div class="header__menu-mobile" *ngIf="!isAuthorized()">
+    <a routerLink="/registration" class="header__register button-mini">{{'buttons.registration' | translate}}</a>
+  </div>
+
+</div>
+
+<div class="header__slide-menu" [ngClass]="sliderOpened ? 'opened' : 'closed'">
+
+  <div class="header__close-slider" (click)="closeSlider()"></div>
+
+  <div class="header__welcome-bonus" *ngIf="!isAuthorized()">
+    <div class="header__welcome-bonus-image"></div>
+    <div class="header__welcome-bonus-title">{{'bonuses.welcome_bonus' | translate}}</div>
+    <div class="header__welcome-bonus-value" *ngIf="banners && banners.left">
+      {{banners.left.text}}
+    </div>
+
+    <a (click)="closeSlider()" class="header__welcome-bonus-button button-mini" routerLink="/registration">
+      {{'buttons.register' | translate}}
+    </a>
+  </div>
+
+  <div class="header__slide-menu-balance" *ngIf="isAuthorized()">
+
+    <div class="header__slide-menu-balance-profile">{{getLogin()}}</div>
+
+    <div ngbDropdown [autoClose]="true" class="header__slide-menu-balance-select" *ngIf="account">
+
+      <div ngbDropdownToggle class="header__slide-menu-balance-toggle">
+        {{'titles.profile_balances' | translate}}
+        {{account.balance_plus_bonus | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+      </div>
+
+      <div ngbDropdownMenu class="header__slide-menu-balance-select-list">
+        <div class="header__slide-menu-balance-select-balance">
+          {{account.balance_plus_bonus | currency: account.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        </div>
+      </div>
+
+    </div>
+
+    <app-balance-details class="header__slide-menu-balance-details" ></app-balance-details>
+
+    <div (click)="closeSlider()" routerLink="/profile" class="header__slide-menu-balance-profile-link">
+      {{'other.lk' | translate}}
+      <div (click)="logout()" class="header__slide-menu-balance-profile-link-logout"></div>
+    </div>
+
+  </div>
+
+  <app-divider class="header__divider"></app-divider>
+
+  <div class="header__main-menu">
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/games/all">{{'menu.slots' | translate}}</a>
+    </div>
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/tournaments">
+        {{'menu.tournaments' | translate}}
+      </a>
+    </div>
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/lotteries">
+        {{'menu.lotteries' | translate}}
+      </a>
+    </div>
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/games/table_games">
+        {{'menu.table_games' | translate}}
+      </a>
+    </div>
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/policies/vip">
+        {{'menu.loyalty_program' | translate}}
+      </a>
+    </div>
+
+    <div class="header__menuitem">
+      <a (click)="closeSlider()" routerLink="/policies/terms">
+        {{'menu.terms_and_conditions' | translate}}
+      </a>
+    </div>
+
+  </div>
+
+  <app-divider class="header__divider"></app-divider>
+
+  <div class="header__link">
+    <div class="header__link-text">{{'other.for_aff_programm_questions' | translate}}
+      <a class="header__link-details" href="mailto:{{affiliateEmail}}">{{affiliateEmail}}</a>
+    </div>
+  </div>
+
+  <div class="header__link">
+    <div class="header__link-image"></div>
+    <div class="header__link-text">
+      <a class="header__link-details" href="{{getTelegramLink()}}" target="_blank">
+        {{'other.our_telegram' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <app-language-select class="header__language-switcher"></app-language-select>
+
+</div>

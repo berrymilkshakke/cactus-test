@@ -1,0 +1,26 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/styles";
+@import "../../../../assets/scss/utils";
+
+.jackpots-finished {
+
+  &__container {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    @include media($desktop-layout) {
+      gap: 8px;
+    }
+
+    & > app-jackpot-finished-item {
+      display: block;
+      flex-basis: 30%;
+
+      @include media($desktop-layout) {
+        flex-basis: 100%;
+      }
+    }
+  }
+}

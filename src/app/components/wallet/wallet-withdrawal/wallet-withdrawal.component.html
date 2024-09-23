@@ -1,0 +1,12 @@
+
+<app-warning *ngIf="!isVerified()" class="wallet_withdrawal__warning" warningText="{{'other.withdrawal_condition' | translate}}"></app-warning>
+
+<app-subheader-l2 title="{{'titles.withdrawal_from_account' | translate}}"></app-subheader-l2>
+
+<app-info-alert class="wallet_withdrawal__info" text="{{'other.see_faq' | translate}}" type="faq" routerLink="/faq/deposit">
+</app-info-alert>
+
+<app-form-edit-phone-number></app-form-edit-phone-number>
+
+<app-form-withdrawal></app-form-withdrawal>
+

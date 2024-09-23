@@ -1,0 +1,64 @@
+.games-list-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  &__wrap-mobile {
+    max-height: 100vh;
+    overflow: scroll;
+    margin: 0 -10px 16px 0;
+  }
+
+  &-mobile {
+    margin-right: 10px;
+  }
+
+  &__notfound {
+    color: #919EAB;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    margin-top: 16px;
+    white-space: nowrap;
+    margin-top: 0;
+  }
+
+  &__item {
+    display: flex;
+    gap: 12px;
+    width: 31%;
+    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      width: 48%;
+    }
+
+    @media (max-width: 576px) {
+      width: 100%;
+    }
+  }
+  &__image {
+    width: 64px;
+    height: 64px;
+    img {
+      width: 64px;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  &__brand {
+    color: #919EAB;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+}

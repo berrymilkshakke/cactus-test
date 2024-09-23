@@ -1,0 +1,21 @@
+<ngx-loading-bar></ngx-loading-bar>
+
+<app-preloader></app-preloader>
+
+<notifier-container></notifier-container>
+
+<router-outlet name="game"></router-outlet>
+
+<div class="home_page">
+
+  <app-header style="width: 100%;" [hasLogin]="true"></app-header>
+  <router-outlet></router-outlet>
+  <app-footer style="width: 100%;"></app-footer>
+  <app-main-menu-mobile class="menu-mobile"></app-main-menu-mobile>
+  <app-main-menu-desktop class="menu-desktop"></app-main-menu-desktop>
+
+</div>
+
+<app-chat></app-chat>
+
+<app-forbidden></app-forbidden>

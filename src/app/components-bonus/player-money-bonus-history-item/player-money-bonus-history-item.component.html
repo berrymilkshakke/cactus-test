@@ -1,0 +1,29 @@
+<div class="bonus-item"
+      (click)="openModalPlayerMoneyBonus(bonus, showButtons)"> 
+
+  <img class="bonus-item__image" *ngIf="!bonus.fs_game_id" 
+      src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)">
+
+ <img class="bonus-item__image" *ngIf="bonus.fs_game_id && bonus.fs_image" 
+      src="{{getImagePatch(bonus.fs_image)}}" (error)="errorHandler($event)">
+
+ <img class="bonus-item__image" *ngIf="bonus.fs_game_id && !bonus.fs_image" 
+      src="{{getGameImagePatch(bonus.fs_game_id)}}" (error)="errorHandler($event)">
+
+  <div class="bonus-item__content">
+
+    <div class="bonus-item__content-box">
+
+      <div class="bonus-item__header">
+        <ng-container *ngIf="!bonus.fs_title_in_locale">
+          <div *ngIf="!bonus.title_in_locale" [innerHTML]="bonus.title"></div>
+          <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+        </ng-container>
+  
+        <div *ngIf="bonus.fs_title_in_locale" [innerHTML]="bonus.fs_title_in_locale"></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

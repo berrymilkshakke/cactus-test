@@ -1,0 +1,184 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.language-select {
+
+  &__dropdown {
+    background-color: $background-primary;
+    border-radius: 8px;
+    padding: 8px;
+    @include media($desktop-layout) {
+      padding-right: 40px;
+    }
+
+    &.show {
+      .language-select__switcher::after {
+        background: url("../../../assets/img/icons/arrow_up.svg") no-repeat 50% 50%;
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(246deg) brightness(105%) contrast(105%);
+      }
+    }
+  }
+
+  &__switcher {
+    width: fit-content;
+    @include media($desktop-layout) {
+      &::after {
+        display: block !important;
+        content: '';
+        background: url("../../../assets/img/icons/arrow_down.svg") no-repeat 50% 50%;
+        filter: brightness(0) saturate(100%) invert(63%) sepia(11%) saturate(413%) hue-rotate(169deg) brightness(99%) contrast(85%);
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        border: none;
+      }
+    }
+    &::after {
+      display: none;
+    }
+  }
+
+  &__languages {
+    background-color: $background-primary;
+    border-radius: 8px;
+    padding: 8px;
+    z-index: $z-index-l1;
+    min-width: unset;
+    top: 16px !important;
+    left: -8px !important;
+    box-shadow: 0 4px 16px rgba(22, 28, 36, 0.7);
+
+    @include media($desktop-layout) {
+      padding: 4px;
+      top: 8px !important;
+    }
+  }
+
+  &__dropdown {
+    cursor: pointer;
+  }
+
+  &__bl {
+    @include imgBg('icons/flags/bl.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__ca {
+    @include imgBg('icons/flags/ca.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__de {
+    @include imgBg('icons/flags/de.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__en {
+    @include imgBg('icons/flags/en.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__es {
+    @include imgBg('icons/flags/es.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__fr {
+    @include imgBg('icons/flags/fr.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__gb {
+    @include imgBg('icons/flags/gb.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__it {
+    @include imgBg('icons/flags/it.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__kz {
+    @include imgBg('icons/flags/kz.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__pl {
+    @include imgBg('icons/flags/pl.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__pt {
+    @include imgBg('icons/flags/pt.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__ru {
+    @include imgBg('icons/flags/ru.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__tr {
+    @include imgBg('icons/flags/tr.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__ua {
+    @include imgBg('icons/flags/ua.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__uk {
+    @include imgBg('icons/flags/uk.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &__language {
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    cursor: pointer;
+    gap: 8px;
+
+    &:hover {
+      background: $background-tertiary;
+    }
+
+    * {
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+
+    &_selected {
+      background: $background-secondary;
+    }
+  }
+
+  &__title {
+    color: $text-primary;
+    @extend .caption;
+    padding: 4px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="bonus-item" 
+     (click)="openModalFsBonus(bonus, showLink, showCancel, promoCode)">  
+  <img class="bonus-item__image" *ngIf="bonus.image" 
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+  <img class="bonus-item__image" *ngIf="!bonus.image" 
+        src="{{getGameImagePatch()}}" (error)="errorHandler($event)" alt="">
+
+  <div class="bonus-item__content">
+
+    <div class="bonus-item__content-box bonus-item__header">
+      
+      <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+
+      <ng-container *ngIf="!bonus.title_in_locale">
+        <ng-container *ngIf="getBonusOptionValue(bonus, 'fs_amount')"> 
+          {{getBonusOptionValue(bonus, 'fs_amount')}}
+        </ng-container>
+        <ng-container> {{'bonuses.freespin_in_game' | translate}} </ng-container>
+        <ng-container *ngIf="getBonusOptionValue(bonus, 'game')">
+          {{ getGameTitle(getBonusOptionValue(bonus, 'game')) }}
+        </ng-container>
+
+      </ng-container>
+    </div>
+
+  </div>
+</div>

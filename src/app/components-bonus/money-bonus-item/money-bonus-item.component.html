@@ -1,0 +1,30 @@
+<div class="bonus-item" 
+     (click)="openModalMoneyBonus(bonus, showLink, showCancel, promoCode)">
+
+  <img class="bonus-item__image" *ngIf="bonus.image" 
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+
+  <div class="bonus-item__content">
+
+    <div class="bonus-item__content-box bonus-item__header">
+
+      <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+
+      <ng-container *ngIf="!bonus.title_in_locale">
+        <app-bonus-item-currencies-value
+          *ngIf="getBonusOptionValue(bonus, 'amount_money')"
+          [title]="'+'"
+          [values]="getBonusOptionValue(bonus, 'amount_money')"
+          [style]="''">
+        </app-bonus-item-currencies-value>
+        <ng-container *ngIf="getBonusOptionValue(bonus, 'amount_percent')">
+          {{ getBonusOptionValue(bonus, 'amount_percent') + '%' }}
+        </ng-container>
+        <ng-container> {{'bonuses.to_your_deposit' | translate}}</ng-container>
+      </ng-container>
+
+    </div>
+
+  </div>
+</div>
+ 

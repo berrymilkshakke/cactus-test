@@ -1,0 +1,8 @@
+<div class="recent-games-desktop" *ngIf="recentGames && (recentGames.length > 0)">
+  <div class="recent-games-desktop__title">{{'other.you_have_played' | translate}}</div>
+  <div class="recent-games-desktop__games">
+    <ng-container *ngFor="let item of recentGames | slice: 0: 5">
+      <app-game-item-simple [game]="item" class="recent-games-desktop__game"></app-game-item-simple>
+    </ng-container>
+  </div>
+</div>

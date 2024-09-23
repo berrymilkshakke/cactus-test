@@ -1,0 +1,26 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+
+.form-promo-code {
+  display: flex;
+
+  & > .group {
+    margin-top: 0;
+  }
+
+  &__button {
+    background: none;
+    border: none;
+    @extend .green-text-button;
+    color: $button-active;
+    display: block;
+    text-align: center;
+    padding-left: 32px;
+    padding-right: 32px;
+    @media (min-width: $mobile-layout) {
+      text-align: left;
+    }
+  }
+}

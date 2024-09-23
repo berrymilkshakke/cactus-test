@@ -1,0 +1,124 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header search left">{{'menu.search' | translate}}</div>
+
+  <div class="modal-common__tabs">
+
+    <div class="modal-common__tab tab-games"
+         (click)="selectTab('games')"
+         [ngClass]="{'active': tab == 'games'}">
+      {{'titles.games' | translate}}
+    </div>
+
+    <div class="modal-common__tab tab-providers"
+         (click)="selectTab('providers')"
+         [ngClass]="{'active': tab == 'providers'}">
+      {{'menu.all_providers' | translate}}
+    </div>
+
+  </div>
+
+  <div class="modal-common__tab-content games"
+       *ngIf="tab == 'games'"
+       [ngClass]="{'active': tab == 'games'}">
+
+    <div class="modal-search__search-form">
+      <div class="modal-search__input-container">
+        <input [(ngModel)]="searchStringGames"
+               (ngModelChange)="onChangeSearchStringGames()"
+               class="modal-search__entry"
+               type="text"
+               placeholder="{{'project.search_by_game_name' | translate}}">
+      </div>
+    </div>
+
+    <div class="mt-4" *ngIf="searchStringGames && isDesktop()" >
+      <app-games-list-search [categoryName]="'all'"></app-games-list-search>
+    </div>
+
+    <div class="modal-search__mobile" *ngIf="searchStringGames && !isDesktop()">
+      <perfect-scrollbar class="scrollbar">
+        <div class="modal-search__brands modal-search__brands-mobile">
+          <app-games-list-search [categoryName]="'all'"></app-games-list-search>
+        </div>
+       </perfect-scrollbar>
+    </div>
+
+
+  </div>
+
+  <div class="modal-common__tab-content providers"
+       *ngIf="tab == 'providers'"
+       [ngClass]="{'active': tab == 'providers'}">
+
+    <div class="modal-search__search-form">
+      <div class="modal-search__input-container">
+        <input [(ngModel)]="searchStringBrands" (ngModelChange)="onChangeSearchBrands($event)"
+               class="modal-search__entry"
+               type="text"
+               placeholder="{{'project.search_provider' | translate}}">
+      </div>
+    </div>
+
+    <div class="modal-search__brands" *ngIf="searchStringBrands && isDesktop()">
+      <div class="modal-search__brand-wrap" *ngFor="let brand of searchedBrands">
+        <a class="modal-search__brand"
+           (click)="onChangeBrand(brand.name)"
+           [routerLink]="['/games', categoryName, brand.name]"
+           routerLinkActive="active" #rla="routerLinkActive">
+          <img *ngIf="!rla.isActive" src="assets/img/providers/{{brand.name}}.svg" alt="">
+          <img *ngIf="rla.isActive" src="assets/img/providers/{{brand.name}}-g.svg" alt="">
+        </a>
+      </div>
+    </div>
+
+    <div class="modal-search__mobile" *ngIf="searchStringBrands && !isDesktop()">
+      <perfect-scrollbar class="scrollbar">
+        <div class="modal-search__brands modal-search__brands-mobile">
+          <div class="modal-search__brand-wrap" *ngFor="let brand of searchedBrands">
+            <a class="modal-search__brand"
+               (click)="onChangeBrand(brand.name)"
+               [routerLink]="['/games', categoryName, brand.name]"
+               routerLinkActive="active" #rla="routerLinkActive">
+              <img *ngIf="!rla.isActive" src="assets/img/providers/{{brand.name}}.svg" alt="">
+              <img *ngIf="rla.isActive" src="assets/img/providers/{{brand.name}}-g.svg" alt="">
+            </a>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+
+    <div class="modal-search__brands" *ngIf="!searchStringBrands && isDesktop()">
+      <div class="modal-search__brand-wrap" *ngFor="let brand of brands">
+        <a class="modal-search__brand"
+           (click)="onChangeBrand(brand.name)"
+           [routerLink]="['/games', categoryName, brand.name]"
+           routerLinkActive="active" #rla="routerLinkActive">
+          <img *ngIf="!rla.isActive" src="assets/img/providers/{{brand.name}}.svg" alt="">
+          <img *ngIf="rla.isActive" src="assets/img/providers/{{brand.name}}-g.svg" alt="">
+        </a>
+      </div>
+
+    </div>
+
+    <div class="modal-search__mobile" *ngIf="!searchStringBrands && !isDesktop()">
+      <perfect-scrollbar class="scrollbar">
+        <div class="modal-search__brands modal-search__brands-mobile">
+          <div class="modal-search__brand-wrap" *ngFor="let brand of brands">
+            <a class="modal-search__brand"
+               (click)="onChangeBrand(brand.name)"
+               [routerLink]="['/games', categoryName, brand.name]"
+               routerLinkActive="active" #rla="routerLinkActive">
+              <img *ngIf="!rla.isActive" src="assets/img/providers/{{brand.name}}.svg" alt="">
+              <img *ngIf="rla.isActive" src="assets/img/providers/{{brand.name}}-g.svg" alt="">
+            </a>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,172 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.wallet-accounts {
+
+  &__header {
+    position: relative;
+  }
+
+  &__create-account {
+    margin-top: 16px;
+    @media (min-width: $mobile-layout) {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-top: 0;
+    }
+    text-align: right;
+  }
+
+  &__create-account-button {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    @media (min-width: $mobile-layout) {
+      width: auto;
+    }
+  }
+
+  &__info {
+    display: block;
+    margin-top: 16px;
+    @media (min-width: $mobile-layout) {
+      margin-top: 26px;
+    }
+  }
+
+  &__accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    @media (min-width: $mobile-layout) {
+      margin-top: 24px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
+
+  &__account {
+    position: relative;
+    background-color: $background-secondary;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+
+    @media (min-width: $mobile-layout) {
+      flex-basis: calc((100% - 16px) / 3);
+    }
+
+    &_active {
+      border: 2px solid $divider-border-active;
+    }
+
+    &-active {
+      @extend .caption;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 4px 8px;
+      background: $accent-success-bg;
+      color: $accent-success;
+      border-radius: 4px;
+    }
+
+    &-inactive {
+      @extend .caption;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 4px 8px;
+      background: $accent-error-bg;
+      color: $accent-error;
+      border-radius: 4px;
+    }
+  }
+
+  &__account-header {
+    @extend .subheader1;
+    color: $text-primary;
+  }
+
+  &__account-tip {
+    margin-top: 8px;
+    @extend .caption;
+    color: $text-secondary;
+  }
+
+  &__account-balance {
+    @extend .header4;
+    color: $text-primary;
+  }
+
+  &__account-bonus {
+    margin-top: 8px;
+    @extend .caption;
+    color: $text-secondary;
+  }
+
+  &__account-divider {
+    height: 1px;
+    border-bottom: 1px dashed $divider-divider;
+  }
+
+  &__account-available {
+    position: relative;
+    @extend .body2;
+    color: $text-primary;
+    padding-left: 56px;
+    min-height: 40px;
+    line-height: 40px;
+
+    &::before {
+      position: absolute;
+      content: '';
+      background: url("../../../../assets/img/icons/withdrawal.svg") no-repeat;
+      left: 0;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__select-currency {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    z-index: $z-index-l4;
+    background-color: $background-tertiary;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 16px 16px 24px 16px;
+    transition: bottom .4s ease-out;
+  }
+
+  &__select-currency.opened {
+    bottom: 0;
+  }
+
+  &__select-header {
+    @extend .header4;
+    color: $text-primary;
+    margin-bottom: 24px;
+  }
+
+  &__select-close {
+    position: absolute;
+    content: '';
+    @include imgBg('icons/close_gray.svg');
+    right: 16px;
+    top: 16px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__select-button {
+    @extend .button-large;
+  }
+}

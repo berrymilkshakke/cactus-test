@@ -1,0 +1,63 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.modal-maxbet {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &__bonus-info {
+    @extend .header4;
+    background-color: $background-tertiary;
+    color: $text-primary;
+    padding: 16px;
+    margin-top: 24px;
+    border-radius: 8px;
+  }
+
+  &__table {
+    margin-top: 16px;
+    @extend .body2;
+    width: 100%;
+
+    tr:not(:first-child) {
+      td {
+        padding-top: 8px;
+      }
+    }
+  }
+
+  &__table-label {
+    color: $text-secondary;
+    width: 50%;
+  }
+
+  &__bonus-status-activated {
+    @extend .caption;
+    color: $accent-success;
+    background-color: $accent-success-bg;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+
+  &__bonus-status-not_activated {
+    @extend .caption;
+    color: $accent-warning;
+    background-color: $accent-warning-bg;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+
+  &__bonus-status-cancelled {
+    @extend .caption;
+    color: $accent-error;
+    background-color: $accent-error-bg;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+}

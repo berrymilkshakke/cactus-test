@@ -1,0 +1,55 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/styles";
+@import "../../../assets/scss/utils";
+
+
+.data-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+
+  &__key {
+    @extend .body2;
+    color: $text-secondary;
+  }
+
+  &__value {
+
+  }
+}
+
+.data-row-title {
+  margin-top: 12px;
+  display: block;
+
+  &__key {
+    display: block;
+    @extend .body2;
+    color: $text-secondary;
+  }
+}
+
+.data-row-modal {
+  margin-top: 8px;
+  display: block;
+
+  &__key {
+    display: block;
+    color: $text-secondary;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  &__value {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: $brand-primary;
+    margin-top: 4px;
+  }
+}
+
+.data-inline-modal {
+  display: inline-block;
+}

@@ -1,0 +1,39 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.new-games-list-carousel {
+  margin-left: -8px;
+
+  &__game {
+    display: block;
+    aspect-ratio: 2/3;
+    margin-left: 8px;
+    max-width: 199px !important;
+  }
+
+}
+
+.new-games-list {
+  @include noscroll;
+  display: none;
+
+  @media (max-width: $mobile-layout) {
+    grid-auto-columns: calc((100% - 1*8px) / 2);
+    grid-template-columns: none;
+    display: grid;
+    grid-column-gap: 8px;
+    grid-auto-flow: column;
+    overflow: scroll;
+  }
+
+  > * {
+    display: block;
+    aspect-ratio: 2/3;
+    max-width: 420px;
+  }
+
+  & > * {
+    margin-bottom: 4px;
+  }
+}

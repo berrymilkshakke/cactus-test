@@ -1,0 +1,15 @@
+<div class="banner-login__desktop"
+     *ngIf="getPlatformName() != 'mobile' && banners && banners.login"
+     [ngStyle]="getStyleBack(banners.login.desktop.image)">
+  <div class="banner-login__desktop-text-small">{{banners.login.desktop.text_1}}</div>
+  <div class="banner-login__desktop-text-big">{{banners.login.desktop.text_2}}</div>
+  <div class="banner-login__desktop-text-big">{{banners.login.desktop.text_3}}</div>
+</div>
+
+<div class="banner-login__mobile"
+     *ngIf="getPlatformName() == 'mobile' && banners && banners.login"
+     [ngStyle]="getStyleBack(banners.login.mobile.image)">
+  <div class="banner-login__mobile-text-small">{{banners.login.mobile.text_1}}</div>
+  <div class="banner-login__mobile-text-big">{{banners.login.mobile.text_2}}</div>
+  <div class="banner-login__mobile-text-big">{{banners.login.mobile.text_3}}</div>
+</div>

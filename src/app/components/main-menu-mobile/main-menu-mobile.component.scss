@@ -1,0 +1,106 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.main-menu-mobile {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+  z-index: $z-index-l1;
+
+  @media all and (display-mode: standalone) {
+    padding-bottom: 20px;
+  }
+
+  &__bar {
+    height: 56px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: $background-secondary;
+    z-index: $z-index-l1 - 1;
+    @media all and (display-mode: standalone) {
+      padding-bottom: 76px;
+    }
+  }
+
+  &__item {
+    z-index: $z-index-l1;
+    flex-shrink: 1;
+    flex-basis: 20%;
+
+    &_big {
+      .main-menu-mobile__image {
+        box-shadow: 0 4px 8px rgba($button-active, 0.3);
+      }
+
+      .main-menu-mobile__active {
+        .main-menu-mobile__image {
+          filter: none;
+        }
+      }
+    }
+  }
+
+  &__link {
+    @extend .caption2;
+    color: $text-secondary;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+  }
+
+  &__big-link {
+    padding: 14px;
+    background-color: $button-active;
+    border-radius: 999px;
+  }
+
+  &__image {
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    &_slots {
+      @include imgBg('icons/slots.svg');
+    }
+
+    &_favourites {
+      @include imgBg('icons/favourite_outline.svg');
+    }
+
+    &_login {
+      @include imgBg('icons/user_white.svg');
+    }
+
+    &_wallet {
+      @include imgBg('icons/deposit.svg');
+    }
+
+    &_bonuses {
+      @include imgBg('icons/bonus_outline.svg');
+    }
+
+    &_support {
+      @include imgBg('icons/support_outline.svg');
+    }
+  }
+
+  &__active {
+    color: $text-primary !important;
+    text-decoration: none !important;
+
+    .main-menu-mobile__image {
+      filter: brightness(0) saturate(100%) invert(100%) sepia(98%) saturate(8%) hue-rotate(154deg) brightness(102%) contrast(106%);
+    }
+  }
+}

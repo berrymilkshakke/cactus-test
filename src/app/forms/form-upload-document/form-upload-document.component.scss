@@ -1,0 +1,16 @@
+@import "src/assets/scss/styles";
+
+
+.form-upload-document {
+
+  &__upload {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    display: inline-block;
+    @extend .button-mini;
+    width: 100%;
+    text-align: center;
+    flex-grow: 0;
+    cursor: pointer;
+  }
+}

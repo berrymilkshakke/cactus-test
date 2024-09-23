@@ -1,0 +1,27 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/styles.scss";
+
+.recent-games-desktop {
+  background-color: $background-secondary;
+  border-radius: 8px;
+  padding: 12px 16px 16px 16px;
+
+  &__title {
+    @extend .subheader1;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+
+  &__games {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__game {
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+  }
+}

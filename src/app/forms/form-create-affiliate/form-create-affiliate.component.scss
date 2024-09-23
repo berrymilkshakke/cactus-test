@@ -1,0 +1,30 @@
+@import "src/assets/scss/_utils.scss";
+
+.traffic-source {
+  max-width: 750px;
+  height: 70px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #D5D5D5;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  resize: none;
+  min-width: 504px;
+
+  @media (max-width: $mobile-layout) {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+.btn {
+  @include btnSquard;
+  width: 100%;
+  max-width: 232px;
+  margin: 0;
+}
+
+.group {
+  max-width: 200px;
+}

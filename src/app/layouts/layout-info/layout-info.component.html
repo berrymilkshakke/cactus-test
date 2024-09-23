@@ -1,0 +1,7 @@
+<router-outlet name="game"></router-outlet>
+
+<div class="page_content">
+    <app-subheader-l1 title="{{'menu.faq' | translate}}"></app-subheader-l1>
+    <app-submenu [items]="menu" class="page_content__submenu"></app-submenu>
+    <router-outlet></router-outlet>
+  </div>

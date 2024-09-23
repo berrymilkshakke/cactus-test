@@ -1,0 +1,57 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.banner-login {
+
+  &__desktop {
+    border-radius: 8px 0 0 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 4px;
+    height: 100%;
+
+    &-text-small {
+      @extend .header4;
+      color: $text-primary;
+      padding: 6px 12px;
+      background: rgba(22, 28, 36, 0.7);
+      border-radius: 8px;
+    }
+
+    &-text-big {
+      @extend .header0;
+      color: $text-primary;
+      padding: 12px;
+      background: rgba(22, 28, 36, 0.7);
+      border-radius: 8px;
+    }
+  }
+
+  &__mobile {
+    border-radius: 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 16px;
+    display: flex;
+    height: 100%;
+
+    &-text-small {
+      @extend .subheader2;
+      color: $text-primary;
+    }
+
+    &-text-big {
+      @extend .header4;
+      color: $text-primary;
+    }
+  }
+}

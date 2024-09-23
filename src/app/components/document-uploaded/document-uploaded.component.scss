@@ -1,0 +1,85 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/styles";
+
+
+.document {
+  margin: 16px 0;
+  padding: 16px 52px 16px 16px;
+  background-color: $background-secondary;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  @media (min-width: $mobile-layout) {
+    flex-direction: row;
+  }
+
+  &__filename-container {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__filename {
+    @extend .body2;
+    color: $text-primary;
+
+    &-image {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__status-container {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__status {
+    @extend .body2;
+
+    &-image {
+      width: 16px;
+      height: 16px;
+
+      &_declined {
+        @include imgBg('icons/statuses/declined.svg');
+      }
+
+      &_ok {
+        @include imgBg('icons/statuses/ok.svg');
+      }
+
+      &_review {
+        @include imgBg('icons/statuses/review.svg');
+      }
+    }
+
+    &_error {
+      color: $accent-error;
+    }
+
+    &_warning {
+      color: $accent-warning;
+    }
+
+    &_success {
+      color: $accent-success;
+    }
+  }
+
+  &__delete {
+    @include imgBg('icons/trash.svg');
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}

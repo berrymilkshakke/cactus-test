@@ -1,0 +1,108 @@
+<div class="modal-common__header left"> 
+  <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+
+  <ng-container *ngIf="!bonus.title_in_locale">
+    <ng-container *ngIf="getBonusOptionValue(bonus, 'fs_amount')"> 
+      {{getBonusOptionValue(bonus, 'fs_amount')}}
+    </ng-container>
+    <ng-container> {{'bonuses.freespin_in_game' | translate}} </ng-container>
+    <ng-container *ngIf="getBonusOptionValue(bonus, 'game')">
+      {{ getGameTitle(getBonusOptionValue(bonus, 'game')) }}
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="modal-common__text">
+  <app-bonus-item-currencies-value
+    *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+    [title]="'payments.minimum_deposit_amount'"
+    [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+    [style]="'data-row-modal'">
+  </app-bonus-item-currencies-value>
+
+  <ul class="modal-common__list">
+    
+    <li *ngIf="bonus.description_in_locale" [innerHTML]="bonus.description_in_locale"></li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'game')">
+      <span>{{'bonuses.game_title' | translate}} - </span>
+      <span>{{ getGameTitle(getBonusOptionValue(bonus, 'game')) }}</span>
+    </li>
+
+    <li *ngIf="getPlayerCurrencyCode() && getBonusOptionValue(bonus, 'bet_amount') && getBonusOptionValue(bonus, 'lines_count') && getBonusOptionValue(bonus, 'denomination')">
+      <span>{{'bonuses.bet_amount' | translate}} - </span>
+      <span>{{calculateBetAmount(getPlayerCurrencyCode()) | currency: getPlayerCurrencyCode() : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'fs_amount')">
+      <span>{{'bonuses.fs_amount' | translate}} - </span>
+      <span>{{getBonusOptionValue(bonus, 'fs_amount')}}</span>
+    </li>
+
+    <li *ngIf="getOptionMoneyBonus(bonus, 'spend_locked') == 'true' && getOptionMoneyBonus(bonus, 'spend_money') == 'true'">
+      {{'bonuses.wagering_from_real_and_bonus' | translate}}
+    </li>
+
+    <li *ngIf="getOptionMoneyBonus(bonus, 'spend_locked') == 'true' && getOptionMoneyBonus(bonus, 'spend_money') == 'false'">
+      {{'bonuses.wagering_from_bonus' | translate}}
+    </li>
+
+    <li *ngIf="getOptionMoneyBonus(bonus, 'spend_locked') == 'false' && getOptionMoneyBonus(bonus, 'spend_money') == 'true'">
+      {{'bonuses.wagering_from_real' | translate}}
+    </li>
+    
+    <li>{{'bonuses.all_winnings_from_bets' | translate}}</li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'maximum_win_x_deposits')">
+      <span>{{'bonuses.max_win_amount_after_wager' | translate}} </span>
+      <span>x{{getBonusOptionValue(bonus, 'maximum_win_x_deposits')}}</span>
+      <span> {{'bonuses.from_initial_bonus_amount' | translate}}</span>
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'maximum_win')  && getPlayerCurrencyCode()">
+      <span>{{'bonuses.max_win_amount_after_wager' | translate}} </span>
+      <span>{{getMaximumWin(getPlayerCurrencyCode()) | currency: getPlayerCurrencyCode() : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+      <span> {{'bonuses.from_initial_bonus_amount' | translate}}</span>
+    </li>
+
+    <li *ngIf="getOptionMoneyBonus(bonus, 'wager')">
+      <span>{{'other.wager' | translate}} </span>
+      <span>{{'x' + getOptionMoneyBonus(bonus, 'wager')}}</span>
+    </li>
+
+    <li *ngIf="getOptionMoneyBonus(bonus, 'wagering_duration')">
+      {{'bonuses.time_play_back' | translate: {'time': getWageringDurationDays(bonus, 'wagering_duration')} }}
+    </li>
+  </ul>
+
+  <ng-container *ngIf="isBonusAllowed && showLink && showButtons">
+    <div class="modal-common__list-title">{{'bonuses.get_bonus' | translate}}</div>
+    <ul class="modal-common__list modal-common__list-mini">
+      <li>{{'bonuses.click_activate' | translate}}</li>
+      <li>{{'bonuses.make_deposit' | translate}}</li>
+    </ul>
+  </ng-container> 
+
+  <div class="bonus-item__cancel-or-activate" *ngIf="!allowDirectActivation && showButtons">
+    <ng-container *ngIf="showCancel || !showLink && (getSelectedBonus() && getSelectedBonusId() == bonus.id)">
+      <a class="bonus-item__cancel bonus-item__cancel-mini" (click)="cancelBonus()">
+        {{'buttons.cancel' | translate}}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isBonusAllowed && !showCancel && !showLink && (!getSelectedBonus() || getSelectedBonusId() != bonus.id)">
+      <a class="bonus-item__activate bonus-item__activate-mini" (click)="selectBonus(bonus.id)">
+        {{'buttons.select' | translate}}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isBonusAllowed && showLink">
+      <a class="bonus-item__activate bonus-item__activate-mini"
+          (click)="closeModal()"
+          routerLink="/wallet/deposit"
+          [queryParams]="{ fsBonusId: bonus.id}">
+        {{'buttons.activate' | translate}}
+      </a>
+    </ng-container>
+  </div>
+</div>

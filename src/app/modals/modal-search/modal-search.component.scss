@@ -1,0 +1,132 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.modal-search {
+  position: relative;
+
+  &__mobile {
+    max-height: calc(var(--vh, 1vh) * 100 - 214px);
+    overflow: scroll;
+    margin: 16px -10px 16px 0;
+
+    .modal-search__brands {
+      margin-top: 0;
+
+      &-mobile {
+        overflow: hidden !important;
+      }
+    }
+  }
+
+  &__list-mobile {
+    height: calc(100vh - 200px);
+  }
+
+  &__search-header {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin: 24px 0 16px;
+
+    @media (max-width: 576px) {
+      font-size: 16px;
+    }
+  }
+
+  &__brands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    &.modal-search__brands-mobile {
+      margin-right: 10px;
+    }
+  }
+
+  &__brand-wrap {
+    width: 177px;
+    height: 56px;
+    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      width: 49%;
+    }
+
+    @media (max-width: 576px) {
+      width: 100%;
+    }
+  }
+
+  &__brand {
+    background-color: #161C24;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 56px;
+  }
+
+  &__header {
+    @extend .header1;
+    color: $text-primary;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-size: 48px;
+  }
+
+  &__search-form {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__input-container {
+    background-color: #212B36;
+    border: 1px solid #45505C;
+    // background-color: $background-tertiary;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-grow: 3;
+    font-size: 14px;
+
+    &::before {
+      content: '';
+      background: url("../../../assets/img/icons/search_big.svg") no-repeat;
+      background-size: 100% 100%;
+      width: 13px;
+      height: 13px;
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 6px;
+    }
+  }
+
+  &__entry {
+    color: #919EAB;
+    background-color: #212B36;
+    border: 0;
+    width: 100%;
+
+    &:focus {
+      color: $text-primary;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+  }
+
+  &__results {
+    margin-top: 8px;
+    border-radius: 8px;
+    background-color: $background-tertiary;
+    padding: 16px;
+    z-index: 0;
+  }
+}

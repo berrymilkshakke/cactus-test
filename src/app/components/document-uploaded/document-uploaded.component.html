@@ -1,0 +1,39 @@
+<div class="document" *ngIf="document">
+
+  <div class="document__filename-container">
+    <div class="document__filename-image"
+         [ngClass]="{
+           'document_type_image_personal': document.category_name == 'identity',
+           'document_type_image_payments': document.category_name == 'payment',
+           'document_type_image_address': document.category_name == 'address'
+         }">
+
+    </div>
+    <span class="document__filename">{{document.name}}</span>
+  </div>
+
+  <div class="document__status-container">
+
+    <div class="document__status-image"
+         [ngClass]="{
+           'document__status-image_review' : !document.confirmed && !document.rejected,
+           'document__status-image_declined' : document.rejected,
+           'document__status-image_ok' : document.confirmed
+         }">
+
+    </div>
+
+    <span class="document__status document__status_warning" *ngIf="!document.confirmed && !document.rejected">
+      {{'documents.document_pending' | translate}}.
+    </span>
+    <span class="document__status document__status_error" *ngIf="document.rejected">
+      {{'documents.file_declined' | translate}}. {{document.rejection_reason}}
+    </span>
+    <span class="document__status document__status_success" *ngIf="document.confirmed">
+      {{'documents.file_uploaded' | translate}}.
+    </span>
+  </div>
+
+  <div class="document__delete" (click)="deleteDocument(document.id)"></div>
+
+</div>

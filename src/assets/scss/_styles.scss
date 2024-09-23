@@ -1,0 +1,281 @@
+@import "src/assets/scss/_variables.scss";
+
+
+.header0 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: 0.01em;
+}
+
+.header1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 0.01em;
+}
+
+.header2 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0.01em;
+}
+
+.header3 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.01em;
+}
+
+.header4 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+}
+
+.subheader1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+}
+
+.subheader2 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+}
+
+.body1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+}
+
+.body2 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+
+.button1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.button2 {
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+
+.caption {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.caption2 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.01em;}
+
+@mixin button() {
+  color: $text-primary;
+  background: $button-active;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    color: $text-primary;
+    background: $button-hover;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: $text-primary;
+    background: $button-push;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  &_disabled {
+    color: $text-primary;
+    background: $button-disabled;
+    box-shadow: none;
+    text-decoration: none;
+  }
+}
+
+.button-mini {
+  @extend .button2;
+  @include button;
+  padding: 8px 16px;
+  box-shadow: 0 8px 16px rgba($button-active, 0.25);
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba($button-hover, 0.25);
+  }
+
+  @media (max-width: 380px) {
+    padding: 5px 8px !important;
+  }
+
+  @media (max-width: $mobile-layout) {
+    &.banners__text-register {
+      margin-top: 4px !important;
+    }
+  }
+}
+
+.button-mini-green {
+  @extend .button2;
+  @include button;
+  padding: 8px 16px;
+  color: $button-active-text-secondary;
+  background: $button-active-secondary;
+
+  &:hover {
+    color: $button-active-text-secondary;
+    background: $button-hover-secondary;
+  }
+
+  &:active {
+    color: $button-active-text-secondary;
+    background: $button-active-secondary;
+  }
+
+  &_disabled {
+    color: $text-secondary;
+    background: $button-disabled-secondary;
+  }
+
+  @media (max-width: 380px) {
+    padding: 5px 8px !important;
+  }
+}
+
+.button-large {
+  @extend .button1;
+  @include button;
+  padding: 12px 24px;
+  box-shadow: 0 8px 16px rgba($button-active, 0.25);
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba($button-hover, 0.25);
+  }
+}
+
+.green-text-button {
+  @extend .button2;
+  color: $button-active;
+  padding: 8px 16px;
+  text-decoration: none;
+
+  &:hover {
+    color: $button-hover;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: $button-push;
+    text-decoration: none;
+  }
+
+  &_disabled {
+    color: $button-disabled;
+    text-decoration: none;
+  }
+}
+
+.datepicker > ngb-datepicker {
+  background-color: $background-secondary;
+  border: 1px solid $divider-border;
+  box-shadow: 0 4px 16px rgba(22, 28, 36, 0.7);
+  margin-top: 8px;
+  border-radius: 8px;
+  z-index: $z-index-l2;
+
+  .ngb-dp-header {
+    background-color: transparent;
+  }
+
+  .ngb-dp-month {
+    padding: 16px;
+  }
+
+  .ngb-dp-navigation-select > select {
+    color: $text-primary;
+    background-color: $background-secondary;
+    border-color: $divider-border;
+  }
+
+  .ngb-dp-month-name {
+    @extend .header4;
+    color: $text-primary;
+    background-color: transparent;
+    text-align: left;
+  }
+
+  .ngb-dp-weekdays {
+    margin-top: 16px;
+    background-color: transparent;
+
+    .ngb-dp-weekday {
+      @extend .caption;
+      color: $text-secondary;
+    }
+  }
+
+  .ngb-dp-day > .btn-light {
+    @extend .body2;
+    color: $text-primary;
+    padding: 4px;
+    border-radius: 4px;
+    text-align: center;
+
+    &.focused {
+      background-color: $button-active;
+    }
+  }
+}

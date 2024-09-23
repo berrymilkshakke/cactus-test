@@ -1,0 +1,103 @@
+<div *ngIf="categoryName == 'favorites' && favoriteGames && favoriteGames.length == 0"
+     class="games-list__empty-favorites">
+  {{'other.empty_games_list' | translate}}
+</div>
+
+<div class="games-list" *ngIf="games && !searchString" [ngClass]="{
+  'games-list_four-rows': !showMoreButton && !isSimple,
+  'games-list_four-columns': isSimple && games.length < 4,
+  'games-list_six-columns': pageName == 'game'
+  }">
+
+  <ng-container *ngIf="categoryName != 'favorites'">
+
+    <ng-container *ngIf="!isSimple">
+      <app-game-item *ngFor="let game of games | slice:0: limitCount"
+                     [game]="game"
+                     [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}">
+      </app-game-item>
+    </ng-container>
+
+    <ng-container *ngIf="isSimple">
+      <app-game-item-simple *ngFor="let game of games | slice:0: limitCount"
+                            [game]="game"
+                            [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}">
+      </app-game-item-simple>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="categoryName == 'favorites' && favoriteGames">
+
+    <ng-container *ngIf="!isSimple">
+      <app-game-item *ngFor="let game of favoriteGames | slice:0: limitCount" [game]="game"></app-game-item>
+    </ng-container>
+
+  </ng-container>
+
+</div>
+
+<div *ngIf="searchedGames && searchString && !isShowSearchResult"
+     [ngClass]="{
+      'games-list_four-rows': !showMoreButton && !isSimple,
+      'games-list_four-columns': isSimple || games.length < 4
+     }"
+     class="games-list game-list-search">
+
+  <ng-container *ngIf="!isSimple">
+    <app-game-item *ngFor="let game of games | slice:0: limitCount"
+                   [game]="game"
+                   [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}">
+    </app-game-item>
+  </ng-container>
+
+  <ng-container *ngIf="isSimple">
+    <app-game-item-simple *ngFor="let game of games | slice:0: limitCount"
+                          [game]="game"
+                          [ngClass]="{'d-none': isAuthorized() &&
+                                           !game.allowed &&
+                                            isActiveBonus() &&
+                                            isShowAllowedGames()}">
+    </app-game-item-simple>
+  </ng-container>
+
+</div>
+
+<div *ngIf="searchedGames && searchString && isShowSearchResult"
+     [ngClass]="{
+      'games-list_four-rows': !showMoreButton && !isSimple,
+      'games-list_four-columns': isSimple || searchedGames.length < 4
+     }"
+     class="games-list game-list-search">
+
+  <ng-container *ngIf="!isSimple">
+    <app-game-item *ngFor="let game of searchedGames | slice:0: limitCount" [game]="game"></app-game-item>
+  </ng-container>
+
+  <ng-container *ngIf="isSimple">
+    <app-game-item-simple *ngFor="let game of searchedGames | slice:0: limitCount" [game]="game"></app-game-item-simple>
+  </ng-container>
+
+  <div class="games-list__not-found" *ngIf="searchedGames.length == 0">{{'project.games_not_found' | translate}}</div>
+</div>
+
+<div *ngIf="showMoreButton && !searchString && games && (limitCount < games.length) && categoryName != 'favorites'"
+     (click)="onChangeLimitCount()"
+     class="show-more">
+  <a class="green-text-button show-more__link">{{'buttons.show_next' | translate}}</a>
+</div>
+
+<div *ngIf="searchString && searchedGames && (limitCount < searchedGames.length) && categoryName != 'favorites'"
+     (click)="onChangeLimitCount()"
+     class="show-more">
+  <a class="green-text-button show-more__link">{{'buttons.show_next' | translate}}</a>
+</div>

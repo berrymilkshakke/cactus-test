@@ -1,0 +1,47 @@
+<div class="main-menu-mobile">
+  <div class="main-menu-mobile__bar"></div>
+  <div class="main-menu-mobile__item">
+    <a class="main-menu-mobile__link" routerLink="/games/all" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__image main-menu-mobile__image_slots"></div>
+      {{'menu.games' | translate}}
+    </a>
+  </div>
+  <div class="main-menu-mobile__item">
+    <a class="main-menu-mobile__link" [routerLink]="isAuthorized() ? '/games/favorites' : 'login'" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__image main-menu-mobile__image_favourites"></div>
+      {{'menu.favorite' | translate}}
+    </a>
+  </div>
+
+  <div class="main-menu-mobile__item main-menu-mobile__item_big" *ngIf="isAuthorized()">
+    <a class="main-menu-mobile__link" routerLink="/wallet/deposit" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__big-link">
+        <div class="main-menu-mobile__image main-menu-mobile__image_wallet"></div>
+      </div>
+      {{'titles.wallet' | translate}}
+    </a>
+  </div>
+
+  <div class="main-menu-mobile__item main-menu-mobile__item_big" *ngIf="!isAuthorized()">
+    <a class="main-menu-mobile__link" routerLink="login" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__big-link">
+        <div class="main-menu-mobile__image main-menu-mobile__image_login"></div>
+      </div>
+      {{'menu.login' | translate}}
+    </a>
+  </div>
+
+  <div class="main-menu-mobile__item">
+    <a class="main-menu-mobile__link" routerLink="/bonuses" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__image main-menu-mobile__image_bonuses"></div>
+      {{'menu.bonuses' | translate}}
+    </a>
+  </div>
+
+  <div class="main-menu-mobile__item">
+    <a class="main-menu-mobile__link" (click)="openChat()" routerLinkActive="main-menu-mobile__active">
+      <div class="main-menu-mobile__image main-menu-mobile__image_support"></div>
+      {{'other.support' | translate}}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<ng-container *ngIf="!type && !pageName">
+  <div class="section-header">{{title}}
+    <a *ngIf="seeMoreUrl" routerLink="{{seeMoreUrl}}" class="green-text-button section-header__see-more">{{'buttons.show_next' | translate}}</a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="type && !pageName">
+  <div class="section-header">
+    <div class="section-header__image" [ngClass]="'section-header__image_'+type"></div>{{title}}
+    <a *ngIf="seeMoreUrl" routerLink="{{seeMoreUrl}}" class="green-text-button section-header__see-more">{{'buttons.show_next' | translate}}</a>
+  </div>
+</ng-container>
+
+<div *ngIf="pageName == 'games-live'">
+  <div class="section-header-live">{{title}}
+    <a *ngIf="seeMoreUrl"
+        routerLink="{{seeMoreUrl}}"
+        class="green-text-button section-header-live__see-more">
+      {{'menu.games' | translate}}
+    </a>
+  </div>
+</div>
+
+

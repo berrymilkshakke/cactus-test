@@ -1,0 +1,134 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_styles.scss";
+
+.banners {
+  position: relative;
+
+  &__banner {
+    @include media($desktop-layout) {
+      flex-basis: 90%;
+      aspect-ratio: 335/200;
+    }
+    position: relative;
+    border-radius: 8px;
+    aspect-ratio: 1296/360;
+  }
+
+  &__image {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__text {
+    position: absolute;
+    top: 90px;
+    left: 56px;
+    height: calc(100% - 92px);
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 4px;
+
+    @media (max-width: 1200px) {
+      top: calc(50% - 98px);
+    }
+
+    @media (max-width: 992px) {
+      left: 24px;
+    }
+
+    @include media($desktop-layout) {
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      height: calc(100% - 36px);
+    }
+  }
+
+  &__text-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    padding: 4px 8px;
+    background-color: rgba($background-primary, 0.7);
+    border-radius: 8px;
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+
+    @include media($desktop-layout) {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  &__text-subtitle {
+    font-family: 'Nunito Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 40px;
+    letter-spacing: 0.01em;
+    margin-top: 4px;
+    padding: 2px 8px;
+    background-color: rgba($background-primary, 0.7);
+    border-radius: 8px;
+
+    @media (max-width: 1200px) {
+      font-size: 40px;
+    }
+
+    @include media($desktop-layout) {
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 32px;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 22px;
+      line-height: 26x;
+    }
+  }
+
+  &__text-register {
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .banners__carousel {
+    margin-bottom: 0;
+
+    & .slick-dots {
+      bottom: 0;
+      @include media($desktop-layout) {
+        bottom: -10px;
+      }
+    }
+
+    & .slick-dots li {
+      width: 32px;
+    }
+
+    & .slick-dots button::before {
+      color: white;
+      content: '';
+      background: url('../../../assets/img/icons/current_slide.svg');
+      width: 32px;
+      height: 3px;
+    }
+  }
+
+  &__recent-games {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+  }
+}

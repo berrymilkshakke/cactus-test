@@ -1,0 +1,40 @@
+<div class="jackpot-finished-item">
+  <div class="jackpot-finished-item__header">
+    <div class="jackpot-finished-item__title">
+      {{jackpot.title_in_locale}}
+      {{jackpot.current_amount | currency: jackpot.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+      <span class="text-lowercase"> {{'other.in_game' | translate}}</span>
+      {{jackpot.game_title}}
+    </div>
+    <div class="jackpot-finished-item__image" [ngStyle]="getStyleBack(jackpot.image)"></div>
+  </div>
+  <div class="jackpot-finished-item__divider"></div>
+  <table class="jackpot-finished-item__table">
+    <tr>
+      <td>
+        <div class="jackpot-finished-item__label">{{'other.player' | translate}}</div>
+      </td>
+      <td>
+        <div class="jackpot-finished-item__value">{{jackpot.player_email}}</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="jackpot-finished-item__label">{{'bonuses.game_title' | translate}}</div>
+      </td>
+      <td>
+        <div class="jackpot-finished-item__value">{{jackpot.game_title}}</div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="jackpot-finished-item__label">{{'bonuses.bet_amount' | translate}}</div>
+      </td>
+      <td>
+        <div class="jackpot-finished-item__value">
+          {{jackpot.bet_amount | currency: jackpot.bet_currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

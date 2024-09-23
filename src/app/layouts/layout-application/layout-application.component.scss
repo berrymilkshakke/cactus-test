@@ -1,0 +1,43 @@
+.application {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-top: 24px;
+
+	&__block {
+		border-radius: 8px;
+		padding: 24px;
+		background: #212B36;
+	}
+
+	&__header {
+		display: flex;
+		gap: 16px;
+		align-items: center;
+		font-size: 28px;
+		font-weight: 400;
+		line-height: 32px;
+		margin-bottom: 24px;
+		color: #FFFF;
+		&-img {
+			max-width: 100%;
+		}
+	}
+
+	&__list {
+		padding-left: 16px;
+		margin: 0;
+		color: #919EAB;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		margin-bottom: 24px;
+	}
+
+	&__image {
+		text-align: center;
+		img {
+			max-width: 100%;
+		}
+	}
+}

@@ -1,0 +1,50 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.balance-details {
+  @extend .caption;
+  display: flex;
+  flex-wrap: wrap;
+
+  + .balance-details {
+    margin-top: 8px;
+  }
+
+  &__account {
+    flex-basis: 50%;
+    text-align: left;
+  }
+
+  &__wager {
+    flex-basis: 50%;
+    text-align: right;
+  }
+
+  &__progress {
+    flex-basis: 100%;
+  }
+
+  &__progressbar {
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    .progress {
+      height: 2px;
+      background-color: $background-tertiary;
+
+      .progress-bar {
+        background-color: $accent-error;
+      }
+    }
+  }
+
+  &__label {
+    color: $text-secondary;
+    white-space: nowrap;
+  }
+
+  &__value {
+    color: $text-primary;
+    white-space: nowrap;
+  }
+}

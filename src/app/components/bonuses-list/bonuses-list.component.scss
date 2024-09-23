@@ -1,0 +1,50 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.bonuses-list {
+  @include noscroll;
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  @include media($desktop-layout) {
+    height: auto;
+  }
+
+  @include media($mobile-layout) {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  &_modal {
+    flex-direction: column;
+  }
+
+  &__margin-fix {
+    display: none;
+    @include media($desktop-layout) {
+      display: block;
+    }
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 8px;
+    height: 16px;
+  }
+}
+
+.bonuses-list > :not(.bonuses-list__margin-fix) {
+  display: block;
+  @include media($desktop-layout) {
+    flex-basis: 90%;
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
+}
+
+.bonuses-list > :not(.bonuses-list__margin-fix):first-child {
+  @include media($mobile-layout) {
+    margin-left: 16px;
+  }
+}

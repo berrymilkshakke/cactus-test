@@ -1,0 +1,107 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.loyalty-item {
+
+  &__benefit {
+    background: $background-tertiary;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 8px;
+    flex-grow: 1;
+    @media (min-width: $mobile-layout) {
+      margin-top: 0;
+    }
+    height: 100%;
+  }
+
+  &__image-and-title {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__title {
+    @extend .subheader1;
+    color: $text-primary;
+  }
+
+  &__progress {
+    margin-top: auto;
+
+    .progress {
+      height: 4px;
+      background: $background-secondary;
+
+      .progress-bar {
+        background: $button-active;
+      }
+    }
+  }
+
+  &__next {
+    @extend .caption2;
+    color: $text-secondary;
+  }
+
+  &__achieved {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    @extend .body2;
+    color: $text-primary;
+  }
+
+  &__achieved-list {
+    @extend .body2;
+    color: $text-primary;
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-left: 0;
+    text-transform: lowercase;
+
+    li {
+      text-transform: lowercase;
+    }
+  }
+
+  &__image {
+    flex-shrink: 0;
+    width: 42px;
+    height: 61px;
+
+    &_grayscale {
+      mix-blend-mode: luminosity;
+    }
+
+    &_level_1 {
+      @include imgBg('loyalty/medal1.svg');
+    }
+
+    &_level_2 {
+      @include imgBg('loyalty/medal2.svg');
+    }
+
+    &_level_3 {
+      @include imgBg('loyalty/medal3.svg');
+    }
+
+    &_level_4 {
+      @include imgBg('loyalty/medal4.svg');
+    }
+
+    &_level_5 {
+      @include imgBg('loyalty/medal5.svg');
+    }
+
+    &_level_6 {
+      @include imgBg('loyalty/medal6.svg');
+    }
+  }
+}

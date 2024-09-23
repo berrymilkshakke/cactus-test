@@ -1,0 +1,5 @@
+<span [class]="style">
+  <span class="{{style}}__key"> {{title | translate}} </span>
+  <span *ngIf="!stringLength" class="{{style}}__value"> {{value}} </span>
+  <span *ngIf="stringLength" class="{{style}}__value"> {{value | truncate:[stringLength]}} </span>
+</span>

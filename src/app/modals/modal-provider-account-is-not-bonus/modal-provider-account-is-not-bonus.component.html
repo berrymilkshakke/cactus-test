@@ -1,0 +1,21 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header-with-icon">
+    <div class="modal-common__warning-icon"></div>
+    <div class="modal-common__header">
+      {{'modal.attention' | translate}}!
+    </div>
+  </div>
+
+  <div class="modal-common__text">{{'modal.real_money_end' | translate}}.</div>
+
+  <div class="modal-common__buttons-right">
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+    <a class="button-large" (click)="continueTheGame()">
+      {{'modal.continue' | translate}}
+    </a>
+  </div>
+
+</div>

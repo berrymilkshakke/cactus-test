@@ -1,0 +1,338 @@
+<router-outlet name="game"></router-outlet>
+
+<div class="page_content layout-test">
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <h1>Modals</h1>
+
+      <table class="layout-test__table table table-bordered mt-2">
+        <tbody>
+
+        <tr>
+          <td>
+            No deposit bonuses
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalNoDepositBonuses()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Registration
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalRegistration()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Login
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalLogin()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Forgot Password
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalForgotPassword()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Change Password
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalChangePassword()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Payment (iframe)
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPayment()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Payment Redirect
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPaymentRedirect()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Payment Point To Point
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPaymentPointToPoint()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Payment Fps
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPaymentFps()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Message
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalMessage()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Warning
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalWarning()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Exceeded Maximum Bet
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalExceededMaximumBet()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Play Fs
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPlayFs()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Player Money Bonus Info
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalPlayerMoneyBonus()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            New Money Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalNewMoneyBonus()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            New Money Bonus with unlock
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalNewMoneyBonusWithUnlock()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            New Fs Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalNewFsBonus()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Provider Account Is Not Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalProviderAccountIsNotBonus()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Provider Account Is Not Money
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalProviderAccountIsNotMoney()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Profile Info
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalProfileInfo()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Create Campaign
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalCreateCampaign()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Select Currency
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalCreateAccount()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Search
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalSearch()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Add to desktop
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalAddToDesktop()">Open</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Content
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="openModalContent()">Open</button>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+
+      <h1>Notifications</h1>
+
+      <table class="layout-test__table table table-bordered mt-2">
+        <tbody>
+
+        <tr>
+          <td>
+            Confirmation Email Sent
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="confirmationEmailSent()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Confirm Success
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="confirmSuccess()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Condition No Deposit Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="conditionNoDepositBonus()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            You Have A New Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="youHaveANewBonus()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            You Have A New Activated Bonus
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="youHaveANewActivatedBonus()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Bonus Wagered
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="bonusWagered()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            New Level
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="newLevel()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Deposit Completed
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="depositCompleted()">Show</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Error
+          </td>
+          <td>
+            <button class="layout-test__btn" (click)="error()">Show</button>
+          </td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

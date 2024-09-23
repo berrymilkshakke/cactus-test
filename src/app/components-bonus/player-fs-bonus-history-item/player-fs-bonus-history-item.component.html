@@ -1,0 +1,22 @@
+<div class="bonus-item"
+     (click)="openModalPlayerFsBonus(bonus, showButtons)"> 
+
+  <img *ngIf="bonus.image" class="bonus-item__image" 
+        src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)">
+
+  <img *ngIf="bonus.game_id && !bonus.image" class="bonus-item__image"
+       src="{{getGameImagePatch(bonus.game_id)}}" (error)="errorHandler($event)">
+
+  <div class="bonus-item__content">
+    
+    <div class="bonus-item__content-box">
+
+      <div class="bonus-item__header">
+        <div *ngIf="!bonus.title_in_locale" [innerHTML]="bonus.title"></div>
+        <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+      </div>
+
+    </div>
+
+  </div>
+</div> 

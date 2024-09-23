@@ -1,0 +1,102 @@
+<div class="game" #parentBlock (window:resize)="onResize($event)">
+
+  <div class="game__page" [ngClass]="{'open': screenFull}">
+
+    <div class="game__game" [ngClass]="{'ratio-16x10': isHd, 'ratio-4x3': !isHd}">
+
+      <div class="game__container">
+
+        <button class="game__close-mobile" (click)="closeGame()"></button>
+
+        <div class="game__header" *ngIf="gameData">
+
+          <div class="game__header-flex">
+            <div class="game__fav-on" *ngIf="gameData.liked" (click)="toggleLike(gameData.id, gameData.liked)"></div>
+            <div class="game__fav-off" *ngIf="!gameData.liked" (click)="toggleLike(gameData.id, gameData.liked)"></div>
+            <div class="game__title">{{gameData.title}}</div>
+          </div>
+
+          <div class="game__header-flex">
+            <div class="game__fullscreen-desktop" (click)="toggleScreenFull()"></div>
+            <div class="game__close-desktop" (click)="closeGame()"></div>
+          </div>
+
+        </div>
+
+        <div class="game__header game__header-closer" *ngIf="!gameData">
+          <div class="game__close-desktop" (click)="closeGame()"></div>
+        </div>
+
+        <div class="game__iframe">
+          <iframe *ngIf="!isHtml && gameUrl" [src]="gameUrl"
+                  sandbox="allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation
+                  allow-orientation-lock allow-popups allow-popups-to-escape-sandbox allow-presentation"
+                  allowfullscreen="allowfullscreen">
+          </iframe>
+        </div>
+
+        <div class="game__mobile-menu">
+          <div class="game__mobile-menu-slots" routerLink="/games/all"></div>
+          <div class="game__mobile-menu-favourites" routerLink="/games/favorites"></div>
+          <div class="game__mobile-menu-wallet" routerLink="/wallet/deposit"></div>
+          <div class="game__mobile-menu-bonuses" routerLink="/bonuses"></div>
+          <div class="game__mobile-menu-support" (click)="openChat()"></div>
+        </div>
+
+      </div>
+
+      <div class="game__last_winners">
+        <app-recent-wins [pageName]="'game'"></app-recent-wins>
+      </div>
+
+    </div>
+
+    <div class="game__sidebar" *ngIf="isAuthorized()"> <!-- desktop -->
+      <perfect-scrollbar class="scrollbar">
+        <div class="game__sidebar-wrap">
+          <div class="game__menu">
+            <div class="game__menuitem" [ngClass]="{'game__menuitem_current':!showFavorites}"
+                 (click)="showFavorites=false">{{'other.status_player' | translate}}
+            </div>
+            <div class="game__menuitem" [ngClass]="{'game__menuitem_current':showFavorites}"
+                 (click)="showFavorites=true">{{'other.favourite' | translate}}
+            </div>
+          </div>
+
+          <div *ngIf="!showFavorites">
+            <div class="game__sidebar-header">
+              <div class="game__sidebar-title">{{'components.current_status' | translate}}</div>
+              <a class="game__sidebar-link" routerLink="/profile/loyalty">{{'other.learnmore' | translate}}</a>
+            </div>
+
+            <app-loyalty-item *ngIf="currentLevel"
+                              [level]="currentLevel"
+                              [nextLevel]="nextLevel"
+                              [isCurrentLevel]="true"
+                              [showNextLevelBenefits]="true">
+            </app-loyalty-item>
+
+            <a routerLink="/wallet/deposit" class="game__button">{{'other.deposit_to_account' | translate}}</a>
+
+            <!--
+            <div class="game__lottery_info">{{'lotteries.ticket_price' | translate: {'value': '200 рублей'} }}</div>
+            -->
+          </div>
+
+          <div *ngIf="showFavorites">
+
+            <div class="game__sidebar-header">
+              <div class="game__sidebar-title">{{'other.favorite_games' | translate}}</div>
+              <a class="game__sidebar-link" routerLink="/games/favorites">{{'buttons.show_next' | translate}}</a>
+            </div>
+
+            <div class="game__favorite-games">
+              <app-games-list-static [categoryName]="'favorites'" [isSimple]="true"></app-games-list-static>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+
+</div>

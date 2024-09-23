@@ -1,0 +1,5 @@
+<div class="forbidden" *ngIf="(getPlayer() && !isPlayerCountryAllowed()) || (getGuest() && !isGuestCountryAllowed())">
+  <div class="forbidden__text">
+    Players from your country are not allowed to visit this casino.
+  </div>
+</div>

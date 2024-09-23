@@ -1,0 +1,86 @@
+<div class="games-menu">
+
+  <div class="games-menu__categories">
+
+    <div *ngIf="isAuthorized()">
+      <div class="games-menu__item games-menu__item-favorite"
+           routerLinkActive="active"
+           [ngClass]="{'hide-active': searchString != ''}">
+        <a class="games-menu__link games-menu__link_favorites"
+           [routerLink]="['/games', 'favorites']">
+          <div class="games-menu__link_favorites-block"></div>
+        </a>
+      </div>
+    </div>
+
+    <div *ngIf="!isAuthorized()">
+      <div class="games-menu__item games-menu__item-favorite"
+           routerLinkActive="active"
+           [ngClass]="{'hide-active': searchString != ''}">
+        <a class="games-menu__link games-menu__link_favorites"
+           (click)="openLoginModal()">
+          <div class="games-menu__link_favorites-block"></div>
+        </a>
+      </div>
+    </div>
+
+    <div *ngFor="let category of categories">
+      <div *ngIf="category.show"
+           class="games-menu__item"
+           routerLinkActive="active"
+           [ngClass]="{
+           'hide-active': searchString != '',
+           'd-none':
+              (category.name == 'live' && isShowAllowedGames()) ||
+              (category.name == 'table_games' && isShowAllowedGames()) ||
+              (category.name == 'turbo' && isShowAllowedGames())
+           }">
+        <a class="games-menu__link"
+           [routerLink]="['/games', category.name]"
+           [ngClass]="'games-menu__link_'+ category.name">
+          {{ 'categories.' + category.name | translate }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="games-menu__search-switch">
+
+    <div class="games-menu__item games-menu__search games-menu__search-desktop" *ngIf="showSearch && isDesktop()">
+      <a class="games-menu__link games-menu__link_search" (click)="openSearchModal()">{{'menu.search' | translate}}</a>
+    </div>
+
+    <div class="search2__bonus-home" *ngIf="isAuthorized() && isActiveBonus() && pageName == 'home'">
+      <div class="bonuses-switch">
+        <ng-switchery
+          class="ng-switchery"
+          color="switchery-success"
+          [(ngModel)]="isShowAllowedGamesModel"
+          (ngModelChange)="switchShowAllowedGames()">
+        </ng-switchery>
+      </div>
+      <span>{{'popovers.bonus_wagering' | translate}}</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="games-menu__item games-menu__search games-menu__search-mobile"
+     *ngIf="showSearch"
+     (click)="openSearchModal()">
+  <a class="games-menu__search-link-mobile">{{'menu.search' | translate}}</a>
+</div>
+
+<div class="search2__bonus-home mobile" *ngIf="isAuthorized() && isActiveBonus() && pageName == 'home'">
+  <div class="bonuses-switch">
+    <ng-switchery
+      class="ng-switchery"
+      color="switchery-success"
+      [(ngModel)]="isShowAllowedGamesModel"
+      (ngModelChange)="switchShowAllowedGames()">
+    </ng-switchery>
+  </div>
+  <span>{{'popovers.bonus_wagering' | translate}}</span>
+</div>

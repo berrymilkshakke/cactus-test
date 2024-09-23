@@ -1,0 +1,215 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.game-list__fav-games {
+  width: calc((100% / 4) - 4px);
+  margin-right: 4px;
+
+  @media (max-width: $mobile-layout) {
+    width: calc(50% - 4px) !important;
+  }
+}
+
+.games-list {
+  @include media($desktop-layout) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(9, 1fr);
+  }
+
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(160px, 1fr));
+  grid-auto-flow: dense;
+  grid-column-gap: 4px;
+
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(6, minmax(160px, 1fr));
+  }
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+  }
+
+  &__game-favorite {
+    max-width: 107px !important;
+  }
+
+  &.game-list-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &.games-list_live {
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(6, minmax(160px, 1fr));
+    grid-auto-rows: 0;
+    overflow: hidden;
+    @media (max-width: $mobile-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+    .game-card__demo, .game-card__play {
+      padding: 8px 10px !important;
+    }
+  }
+
+  &.game-list_one-rows_scroll {
+    @include noscroll;
+    grid-auto-flow: column !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    grid-auto-rows: 1fr 1fr;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: repeat(auto-fit, minmax(calc(14.3% - 4px), 1fr)) !important;
+
+    @media (max-width: 1255px) {
+      grid-template-columns: repeat(auto-fit, minmax(calc(16.67% - 4px), 1fr)) !important;
+    }
+
+    @media (max-width: 1091px) {
+      grid-template-columns: repeat(auto-fit, minmax(calc(20% - 4px), 1fr)) !important;
+    }
+
+    @media (max-width: 960px) {
+      grid-template-columns: repeat(100, minmax(50%, 1fr)) !important;
+    }
+  }
+
+  &.game-list_scroll {
+    @include noscroll;
+    margin-right: -16px;
+    display: grid;
+    grid-column-gap: 8px !important;
+    grid-auto-flow: column !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    grid-template-rows: repeat(auto-fit, minmax(107px, 1fr)) !important;
+    grid-auto-rows: 1fr 1fr;
+    grid-template-columns: repeat(10, minmax(107px, 1fr)) !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    .game-card__content {
+      padding: 35px 10px 10px;
+    }
+
+    .game-card__title-mobile {
+      font-size: 14px !important;
+      line-height: 20px !important;
+    }
+
+    .game-card__buttons {
+      gap: 0;
+    }
+
+    .game-card__button {
+      padding: 2px 4px !important;
+      font-size: 11px !important;
+    }
+  }
+
+  &__not-found {
+    color: #919EAB;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    margin-top: 16px;
+    white-space: nowrap !important;
+    &.not-found-popup {
+      margin-top: 0 !important;
+    }
+  }
+
+  &_rows-simple {
+    grid-template-columns: repeat(6, 1fr);
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(9, 1fr);
+    }
+  }
+
+  &_four-rows {
+    grid-template-rows: repeat(4, 1fr);
+    grid-auto-rows: 0;
+    overflow: hidden;
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &_one-rows {
+    grid-template-columns: repeat(7, minmax(160px, 1fr));
+    grid-template-rows: repeat(1, 1fr);
+    grid-auto-rows: 0;
+    overflow: hidden;
+
+    @media (max-width: 1400px) {
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+    }
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(5, minmax(160px, 1fr));
+    }
+
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &_one-rows-popular {
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(7, minmax(160px, 1fr));
+    grid-auto-rows: 0;
+    overflow: hidden;
+
+    @media (max-width: 1400px) {
+      grid-template-columns: repeat(6, minmax(160px, 1fr));
+    }
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(5, minmax(160px, 1fr));
+    }
+
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &_four-columns {
+    grid-template-columns: repeat(4, 1fr);
+    @include media($desktop-layout) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &_search-popup {
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+    }
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: unset;
+    grid-column-gap: 16px;
+    grid-row-gap: 12px;
+  }
+
+  & > * {
+    margin-bottom: 4px;
+    aspect-ratio: 1/1;
+  }
+
+  &__double-space {
+    grid-area: span 1 / span 2;
+    aspect-ratio: 1/2;
+  }
+
+  &__empty-favorites {
+    @extend .header4;
+    color: $text-secondary;
+    margin-top: 32px;
+  }
+}

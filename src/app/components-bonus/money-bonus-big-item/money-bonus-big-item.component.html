@@ -1,0 +1,70 @@
+<div class="bonus-item-big">
+
+  <img class="bonus-item-big__image" src="{{getImagePatch(bonus.image_b)}}" (error)="errorHandler($event)" alt="">
+
+  <div class="bonus-item-big__info">
+
+    <div class="bonus-item-big__title">
+      <div *ngIf="!bonus.title_in_locale" [innerHTML]="bonus.title"></div>
+      <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+    </div>
+
+    <div class="bonus-item-big__description">
+
+      <app-bonus-item-currencies-value
+        *ngIf="getBonusOptionValue(bonus, 'amount_money')"
+        [title]="'+'"
+        [values]="getBonusOptionValue(bonus, 'amount_money')"
+        [style]="''">
+      </app-bonus-item-currencies-value>
+
+      <ng-container *ngIf="getBonusOptionValue(bonus, 'amount_percent')">
+        {{ getBonusOptionValue(bonus, 'amount_percent') + '%' }}
+      </ng-container>
+
+      <ng-container> {{'bonuses.to_your_deposit' | translate}}</ng-container>
+
+    </div>
+
+    <!-- (do not delete, for the future)
+    <div class="bonus-item-big__text">
+
+      <app-bonus-item-currencies-value
+        *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+        [title]="'forms.min_deposit'"
+        [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+        [style]="'data-row-title'">
+      </app-bonus-item-currencies-value>
+
+    </div>
+    -->
+
+  </div>
+
+  <ng-container *ngIf="!isAuthorized()">
+
+    <ng-container>
+      <div class="bonus-item-big__button button-mini"
+           (click)="openModalRegistration()">
+        {{'buttons.registration' | translate}}
+      </div>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="isAuthorized()">
+
+    <ng-container *ngIf="isBonusAllowed && showLink">
+      <a class="bonus-item-big__button button-mini"
+         routerLink="/wallet/deposit"
+         [queryParams]="{moneyBonusId: bonus.id}">
+        <!-- {{'buttons.get' | translate}} -->
+        {{'buttons.activate' | translate}}
+      </a>
+    </ng-container>
+
+  </ng-container>
+
+
+
+</div>

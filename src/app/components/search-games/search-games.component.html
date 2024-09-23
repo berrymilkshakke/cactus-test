@@ -1,0 +1,85 @@
+<div class="search2">
+  <div class="search2__form">
+
+    <div class="search2__form-wrap">
+
+      <div class="search2__input-container">
+      <input [(ngModel)]="searchString"
+             (ngModelChange)="onChangeSearchString($event)"
+             [ngModelOptions]="{standalone: true}"
+             class="search2__search-entry"
+             type="text"
+             placeholder="{{'menu.search' | translate}}">
+        <div class="search2__clear_button" *ngIf="searchString" (click)="clearSearchString()"></div>
+      </div>
+
+      <div class="search2__providers-btn" (click)="openSearchModal()">
+        <img src="assets/img/icons/providers.svg" alt="">
+        <span class="search2__providers-desktop">
+          {{'menu.all_providers' | translate}}
+        </span>
+        <span class="search2__providers-length" *ngIf="selectedBrands.length > 0">
+          {{selectedBrands.length}}
+        </span>
+      </div>
+
+    </div>
+
+    <div class="search2__bonus" *ngIf="isAuthorized() && isActiveBonus()">
+      <span>{{'popovers.bonus_wagering' | translate}}</span>
+      <div class="form-deposit__bonuses-switch">
+        <ng-switchery
+          class="ng-switchery"
+          color="switchery-success"
+          [(ngModel)]="isShowAllowedGames"
+          (ngModelChange)="switchShowAllowedGames()">
+        </ng-switchery>
+      </div>
+    </div>
+
+    <!-- <div class="search2__search-filter-mobile mobile" (click)="toggleSelector()"></div> -->
+
+    <!-- <div class="search2__select-provider"
+         [ngClass]="selectorOpened ? 'search2__select-provider_opened' : 'search2__select-provider_closed'">
+      <div class="search2__selector-close" (click)="closeSelector()"></div>
+      <div class="search2__select-title">{{'other.select_provider' | translate}}</div>
+      <div class="search2__providers">
+        <div class="search2__provider"
+             *ngFor="let brand of brands"
+             (click)="onChangeBrand(brand.name)"
+             [ngClass]="{'search2__provider_selected': selectedBrands.indexOf(brand.name) !== -1}">
+          {{brand.title}}
+        </div>
+      </div>
+      <div class="search2__provider-buttons">
+        <a class="green-text-button" (click)="clearSelectedBrands()">{{'buttons.clear' | translate}}</a>
+        <a class="button-mini" (click)="closeSelector()">{{'buttons.show' | translate}}</a>
+      </div>
+    </div> -->
+
+    <!-- <div ngbDropdown [autoClose]="'outside'" class="dropdown-component__dropdown search2__dropdown desktop" placement="bottom">
+
+      <div ngbDropdownToggle class="dropdown-component__dropdown-toggle search2__dropdown-toggle">
+        <span *ngIf="selectedBrands.length == 0">
+          {{'other.provider' | translate}}
+        </span>
+        <span *ngIf="selectedBrands.length > 0">
+          {{'other.selected' | translate}}: {{selectedBrands.length}}
+        </span>
+      </div>
+
+      <div ngbDropdownMenu>
+        <perfect-scrollbar>
+          <button type="button" *ngFor="let brand of brands"
+                  (click)="onChangeBrand(brand.name)"
+                  class="dropdown-item"
+                  [ngClass]="{'dropdown-component__dropdown-selected': selectedBrands.indexOf(brand.name) !== -1}">
+            <span>{{brand.title}}</span>
+          </button>
+        </perfect-scrollbar>
+      </div>
+
+    </div> -->
+
+  </div>
+</div>

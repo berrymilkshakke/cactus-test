@@ -1,0 +1,124 @@
+<div class="phone-form">
+
+  <form [formGroup]="formGroup" autocomplete="off">
+
+    <div class="wallet-withdrawal-form__inputs">
+
+      <div class="wallet-withdrawal-form__header">{{'profile.confirm_your_phone' | translate}}</div>
+
+      <div class="profile__phone_verification_container">
+
+        <div class="flex-block-phone">
+          <div class="group wallet-withdrawal-group group-phone">
+             <div ngbDropdown class="form__dropdown" placement="bottom">
+
+              <button [ngClass]="{'disabled': f.phoneCodeId.status == 'DISABLED'}"
+                      type="button"
+                      class="form__dropdown-toggle form__dropdown-code"
+                      id="dropdownPhoneCode"
+                      ngbDropdownToggle>
+
+                <span class="form__dropdown-label label">{{'forms.code' | translate}}</span>
+                <span class="form__dropdown-arrow"></span>
+
+                <div *ngIf="selectedPhoneCode">
+                  <img class="group-phone__image" src="assets/img/phone-code/{{selectedPhoneCode.country_code.toLowerCase()}}.svg">
+                  <span class="form__dropdown-value form-desktop">{{selectedPhoneCode.phone_code}}</span>
+                </div>
+
+              </button>
+
+              <div ngbDropdownMenu aria-labelledby="dropdownPhoneCode" class="form__dropdown-list">
+
+                <perfect-scrollbar class="profile-personal-form__countries-scrollbar">
+                  <button type="button" *ngFor="let phoneCode of getPhoneCodes()"
+                          (click)="onChangePhoneCode(phoneCode)"
+                          class="form__dropdown-item dropdown-item">
+                    <img class="group-phone__image" src="assets/img/phone-code/{{phoneCode.country_code.toLowerCase()}}.svg">
+                    <span>{{phoneCode.phone_code}}</span>
+                  </button>
+                </perfect-scrollbar>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="group wallet-withdrawal-group">
+              <input type="number"
+                     formControlName="phoneNumber">
+              <label class="wallet-withdrawal__label">{{'forms.number' | translate}}</label>
+              <button *ngIf="numberConfirmed" class="profile__success_icon"></button>
+
+            <div *ngIf="submitted && f.phoneNumber.errors" class="error-bl">
+              <div *ngIf="f.phoneNumber.errors.required">{{'forms.required_to_fill' | translate}}</div>
+            </div>
+
+            <div *ngFor="let error_value of errors['phoneNumber']" class="error-bl">
+              {{ error_value }}
+            </div>
+
+          </div>
+        </div>
+
+        <!-- <p *ngIf="numberConfirmed">
+          {{'forms.number_verified' | translate}}
+        </p> -->
+
+        <button class="profile__btn green-text-button"
+                *ngIf="!numberSaved"
+                [disabled]="loading"
+                (click)="saveNumber()">
+          {{'buttons.save_number' | translate}}
+        </button>
+
+        <button class="profile__btn green-text-button"
+                *ngIf="numberSaved && numberAllowed && !numberConfirmed && !confirmationInitialized"
+                [disabled]="loading"
+                (click)="initConfirmationNumber()">
+          {{'buttons.confirm_phone' | translate}}
+        </button>
+
+        <ng-container *ngIf="confirmationInitialized">
+
+          <div class="profile__phone_verification_container">
+
+            <div class="group wallet-withdrawal-group width216" style="max-width: 160px">
+                <input type="number"
+                       formControlName="code">
+                <label>{{'forms.code' | translate}}</label>
+
+              <div *ngFor="let error_value of errors['code']" class="error-bl">
+                {{ error_value }}
+              </div>
+
+            </div>
+
+            <button class="profile__btn green-text-button"
+                    *ngIf="confirmationInitialized"
+                    [disabled]="loading"
+                    (click)="confirmNumber()">
+              {{'buttons.send' | translate}}
+            </button>
+
+          </div>
+
+        </ng-container>
+
+      </div>
+
+      <div class="profile__call" *ngIf="confirmationInitialized">
+        {{'forms.phone_call' | translate}}
+      </div>
+
+    </div>
+
+  </form>
+
+
+</div>
+
+
+
+
+
+

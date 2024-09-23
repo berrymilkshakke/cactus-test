@@ -1,0 +1,40 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+.games-list-home {
+  grid-template-columns: repeat(7, minmax(160px, 1fr));
+  padding: 0;
+  gap: 4px;
+
+  & > * {
+    aspect-ratio: 1/1;
+  }
+
+  &.games-list-home-mobile {
+    display: none;
+    @media (max-width: $mobile-layout) {
+      display: grid;
+    }
+  }
+
+  &.games-list-home-desktop {
+    display: grid;
+    @media (max-width: $mobile-layout) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(6, minmax(160px, 1fr));
+  }
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+  }
+
+  @media (max-width: $mobile-layout) {
+    grid-template-columns: 1fr 1fr;
+  }
+}

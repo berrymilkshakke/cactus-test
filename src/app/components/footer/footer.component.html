@@ -1,0 +1,91 @@
+<div class="footer">
+  <div class="footer__logo"></div>
+  <div class="footer__top">
+    <div class="footer__links">
+      <div class="footer__links-game">
+        <div class="footer__title">{{'buttons.game' | translate}}</div>
+        <div class="footer__list">
+          <div class="footer__list-part">
+            <a class="footer__list-item" routerLink="/games/all">{{'menu.slots' | translate}}</a>
+            <a class="footer__list-item" routerLink="/jackpots">{{'jackpots.jackpots' | translate}}</a>
+            <a class="footer__list-item" routerLink="/tournaments">{{'menu.tournaments' | translate}}</a>
+            <a class="footer__list-item" routerLink="/lotteries">{{'menu.lotteries' | translate}}</a>
+          </div>
+          <div class="footer__list-part">
+            <a class="footer__list-item" routerLink="/games/shop">{{'menu.feature_buy' | translate}}</a>
+            <a class="footer__list-item" routerLink="/games/megaways">{{'menu.megaways' | translate}}</a>
+            <a class="footer__list-item" routerLink="/games/table_games">{{'menu.table_games' | translate}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__links-info">
+        <div class="footer__title">{{'menu.info' | translate}}</div>
+        <div class="footer__list">
+          <div class="footer__list-part">
+            <a class="footer__list-item" routerLink="/application">{{'project.install_app' | translate}}</a>
+            <a class="footer__list-item" routerLink="/faq">{{'menu.faq' | translate}}</a>
+            <a class="footer__list-item" routerLink="policies/deposit">{{'menu.deposit_and_withdrawal' | translate}}</a>
+            <a class="footer__list-item" routerLink="policies/bonuses">{{'menu.bonuses_and_actions' | translate}}</a>
+            <a class="footer__list-item" routerLink="policies/vip">{{'menu.vip_program' | translate}}</a>
+          </div>
+          <div class="footer__list-part">
+            <a class="footer__list-item" routerLink="/policies/cookies">{{'menu.cookies_usage' | translate}}</a>
+            <a class="footer__list-item" routerLink="/policies/terms">{{'menu.terms_and_conditions' | translate}}</a>
+            <a class="footer__list-item" routerLink="/policies/gaming">{{'menu.responsible-gaming' | translate}}</a>
+            <a class="footer__list-item" routerLink="/policies/aml">{{'menu.anti_laundering' | translate}}</a>
+            <a class="footer__list-item" routerLink="/policies/privacy-policy">{{'titles.privacy_policy' | translate}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-divider style="width: 100%" class="footer__divider-mobile mobile"></app-divider>
+  <div class="footer__bottom">
+    <div class="footer__link">
+      <div class="footer__link-image footer__link-image_support"></div>
+      <div class="footer__link-text">
+        {{'other.support' | translate}} <a class="footer__link-details" href="mailto:{{supportEmail}}">
+        {{supportEmail}}
+      </a>
+      </div>
+    </div>
+    <div class="footer__link">
+      <div class="footer__link-image footer__link-image_partners"></div>
+      <div class="footer__link-text">
+        <a href="{{affiliateLink}}" target="_blank">{{'other.pp' | translate}}</a>
+        <span>&nbsp;</span>
+        <a class="footer__link-details" href="mailto:{{affiliateEmail}}">
+          {{affiliateEmail}}
+        </a>
+      </div>
+    </div>
+    <div class="footer__link">
+      <div class="footer__link-image footer__link-image_promocodes"></div>
+      <div class="footer__link-text">
+        <a class="footer__link-details" href="{{getTelegramLink()}}" target="_blank">
+          {{'other.our_telegram' | translate}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-divider style="width: 100%" class="footer__divider-desktop desktop"></app-divider>
+<div class="footer__info">
+  <div class="footer__info-top">
+    <div class="footer__legal" *ngIf="isShowLicense">
+      <!-- <iframe src="https://licensing.gaming-curacao.com/validator/?lh=d5db85f6716f2ee7e29bb27a96837564&template=tseal" width=150 height=50 style="border:none;"></iframe> -->
+      <span *ngIf="companyDescription" [innerHTML]="companyDescription"></span>
+    </div>
+    <div class="footer__logotypes">
+      <div class="footer__logotype-images">
+        <div class="footer__logotype-noda"></div>
+        <div class="footer__logotype-gioco_responsabile"></div>
+        <div class="footer__logotype-mc_securecode"></div>
+        <div class="footer__logotype-pci"></div>
+        <div class="footer__logotype-visa_verified_white"></div>
+        <div class="footer__logotype-tls"></div>
+      </div>
+      <div class="footer__18"></div>
+    </div>
+  </div>
+</div>

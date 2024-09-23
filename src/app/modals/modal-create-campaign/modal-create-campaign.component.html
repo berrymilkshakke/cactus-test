@@ -1,0 +1,11 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header center">
+    <span>{{'buttons.create_campaign' | translate}}</span>
+  </div>
+
+  <app-form-create-campaign (successEvent)="closeModal()"></app-form-create-campaign>
+
+</div>

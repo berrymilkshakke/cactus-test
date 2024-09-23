@@ -1,0 +1,79 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-maxbet__header">
+    <div class="modal-common__header">
+      {{'modal.attention' | translate}}!
+    </div>
+  </div>
+
+  <div class="modal-common__text">
+    {{'bonuses.exceed_max_bet' | translate}}.
+  </div>
+
+  <div class="modal-common__info">
+    <span>{{'bonuses.your_bet' | translate}}:
+    <b>{{ betAmount | currency: betCurrency : 'symbol-narrow' : '1.2-2' : 'ru'}}</b>
+    </span>
+  </div>
+
+  <div class="modal-maxbet__bonus-info" *ngIf="bonus">
+    <div>{{'bonuses.terms_active_bonus' | translate}}:</div>
+    <table class="modal-maxbet__table">
+      <tr>
+        <td class="modal-maxbet__table-label">{{'modal.name' | translate}}:</td>
+        <td>{{bonus.title}}</td>
+      </tr>
+      <tr>
+        <td class="modal-maxbet__table-label">{{'modal.created' | translate}}:</td>
+        <td>
+          {{bonus.created_at | date : 'short'  : null  : 'ru'}}
+        </td>
+      </tr>
+      <tr>
+        <td class="modal-maxbet__table-label">{{'profile.size' | translate}}:</td>
+        <td>{{bonus.bonus_amount | currency: betCurrency : 'symbol-narrow' : '1.2-2' : 'ru'}}</td>
+      </tr>
+      <tr>
+        <td class="modal-maxbet__table-label">{{'modal.wagering_progress' | translate}}:</td>
+        <td>
+          {{bonus.wager_current_amount | currency: betCurrency : 'symbol-narrow' : '1.2-2' : 'ru'}}
+          /
+          {{bonus.wager_required_amount | currency: betCurrency : 'symbol-narrow' : '1.2-2' : 'ru'}}</td>
+      </tr>
+      <tr>
+        <td class="modal-maxbet__table-label">{{'bonuses.max_bet' | translate}}:</td>
+        <td><b>{{bonus.maximum_bet | currency: betCurrency : 'symbol-narrow' : '1.2-2' : 'ru'}}</b>
+        </td>
+      </tr>
+      <tr *ngIf="bonus.wagering_expires_at">
+        <td class="modal-maxbet__table-label">{{'bonuses.wagering_expires_at' | translate}}:</td>
+        <td>
+          {{bonus.wagering_expires_at | date : 'short'  : null  : 'ru'}}
+        </td>
+      </tr>
+      <tr>
+        <td class="modal-maxbet__table-label">{{'other.status' | translate}}:</td>
+        <td>
+          <div *ngIf="!bonus.canceled">
+            <span *ngIf="bonus.activated" class="modal-maxbet__bonus-status-activated">{{'bonuses.activated' | translate}}</span>
+            <span *ngIf="!bonus.activated" class="modal-maxbet__bonus-status-not_activated">{{'bonuses.not_activated' | translate}}</span>
+          </div>
+          <div *ngIf="bonus.canceled">
+            <span class="modal-maxbet__bonus-status-cancelled">{{'other.canceled' | translate}}</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+
+  <div class="modal-common__buttons-right" *ngIf="bonus">
+    <a *ngIf="!bonus.canceled" (click)="closeModal()" routerLink="/bonuses/active" class="green-text-button">{{'buttons.cancel' | translate}}</a>
+    <a (click)="closeModal()" class="button-large">{{'buttons.close' | translate}}</a>
+  </div>
+
+
+</div>

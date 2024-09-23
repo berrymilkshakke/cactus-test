@@ -1,0 +1,306 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+
+@mixin item-with-image($url, $size: 16px, $top: 7px, $left: 0) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  content: '';
+  background: url($url) no-repeat;
+  background-size: 100% 100%;
+  width: $size;
+  height: $size;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.games-menu {
+  padding-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  @media (max-width: $mobile-layout) {
+    flex-wrap: wrap;
+  }
+
+  &__categories {
+    @include noscroll;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    @media (max-width: $mobile-layout) {
+      margin-left: -16px;
+      margin-right: -16px;
+      overflow-x: scroll;
+      overflow-y: visible;
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__search-switch {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+
+    @media (max-width: $mobile-layout) {
+      display: none;
+    }
+  }
+
+  &__item {
+    margin-right: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background-color: $background-secondary;
+    border-radius: 999px;
+    text-align: center;
+    white-space: nowrap;
+
+    &-favorite {
+      @media (max-width: $mobile-layout) {
+        margin-left: 16px;
+      }
+    }
+
+    &.games-menu__search {
+      margin-right: 8px;
+      min-width: 202px;
+    }
+
+    &.active {
+      background-color: $button-active;
+    }
+
+    &.hide-active {
+      background-color: $background-secondary !important;
+    }
+
+    &.active > .games-menu__link::before {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &__search {
+
+    &.games-menu__search-mobile {
+      width: 100% !important;
+      padding: 7px 40px 7px 16px;
+      margin: 16px 0;
+      width: 100%;
+      background-color: $background-secondary;
+      border-radius: 8px;
+      display: none;
+      align-items: center;
+      flex-grow: 3;
+      border: 1px solid $divider-border;
+
+      &::before {
+        content: '';
+        background: url("/assets/img/icons/search.svg") no-repeat;
+        background-size: 100% 100%;
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        margin-right: 12px;
+      }
+
+      @media (max-width: $mobile-layout) {
+        display: flex;
+      }
+    }
+
+    &-link-mobile {
+      position: relative;
+      font-family: 'Nunito Sans', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      display: block;
+      color: #919EAB;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: none;
+        color: #919EAB;
+      }
+    }
+
+    &.games-menu__search-desktop {
+      @media (max-width: $mobile-layout) {
+        display: none;
+      }
+    }
+
+  }
+
+  &__providers {
+    @include media($desktop-layout) {
+      display: none;
+    }
+  }
+
+  &__margin-fix {
+    display: none;
+    @include media($desktop-layout) {
+      display: block;
+    }
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 8px;
+    height: 16px;
+  }
+
+  &__link {
+    position: relative;
+    @extend .body2;
+    text-decoration: none;
+    display: block;
+    padding: 6px 12px 6px 0;
+    color: $text-primary;
+    cursor: pointer;
+    margin-left: 12px;
+
+    &:hover {
+      text-decoration: none;
+      color: $text-primary;
+    }
+
+    &_favorites {
+      padding-left: 16px;
+      &-block {
+        height: 20px;
+      }
+      &::before {
+        @include item-with-image($url: "../../../assets/img/games-menu/heart.svg");
+      }
+    }
+
+    &_new {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/games-menu/new.svg");
+      }
+    }
+
+    &_live {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/live.svg");
+      }
+    }
+
+    &_popular {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/games-menu/popular.svg");
+      }
+    }
+
+    &_shop {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/games-menu/feature_buy.svg", $size: 24px, $top: 4px, $left: -4px);
+      }
+    }
+
+    &_megaways {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/games-menu/megaways.svg", $size: 24px, $top: 4px, $left: -4px);
+      }
+    }
+
+    &_search {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/search.svg");
+      }
+    }
+
+    &_slots {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/slot.svg");
+      }
+    }
+
+    &_all {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/slot.svg");
+      }
+    }
+
+    &_turbo {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/turbo.svg");
+      }
+    }
+
+    &_table_games {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/table_games.svg");
+      }
+    }
+
+    &_jackpot {
+      padding-left: 24px;
+
+      &::before {
+        @include item-with-image($url: "../../../assets/img/icons/jackpot-menu.svg");
+      }
+    }
+
+  }
+
+  &__dropdown {
+    padding-right: 32px;
+  }
+
+  &__dropdown > .dropdown-menu {
+    height: 190px;
+  }
+
+  &__dropdown-toggle.dropdown-toggle {
+    @extend .body2;
+    cursor: pointer;
+    color: $text-primary;
+  }
+
+  &__dropdown-toggle:before {
+    top: 4px !important;
+  }
+
+  &__dropdown.show > &__dropdown-toggle.dropdown-toggle {
+    color: $text-primary;
+    border-color: $divider-border-active;
+    &:before {
+      background: url('/assets/img/icons/arrow_up.svg') no-repeat;
+      filter: brightness(0) saturate(100%) invert(64%) sepia(15%) saturate(284%) hue-rotate(169deg) brightness(94%) contrast(90%);
+    }
+  }
+}

@@ -1,0 +1,145 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.phone-form {
+  display: flex;
+
+  .group-phone__image {
+    width: 16px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .flex-block-phone {
+    display: flex;
+    width: 344px;
+    gap: 16px;
+
+    @media (max-width: $mobile-layout) {
+      width: 100%;
+    }
+  }
+
+  form {
+    width: 100%;
+
+    .profile__phone_verification_container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+
+      @media (max-width: $mobile-layout) {
+        flex-direction: column !important;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .profile__btn {
+      font-size: 14px;
+      border: none;
+      background: transparent;
+      @extend .button2;
+      color: $button-active;
+      padding: 8px 16px;
+      text-decoration: none;
+
+      &:hover {
+        color: $button-hover;
+        text-decoration: none;
+      }
+
+      &:active {
+        color: $button-push;
+        text-decoration: none;
+      }
+
+      &_disabled {
+        color: $button-disabled;
+        text-decoration: none;
+      }
+
+      @media (max-width: $mobile-layout) {
+        margin-top: 5px !important;
+      }
+
+    }
+
+    .profile__call {
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.01em;
+      color: #919EAB;
+      margin-top: 8px;
+
+      @media (max-width: $mobile-layout) {
+        padding-bottom: 24px;
+      }
+    }
+
+  }
+
+  .wallet-withdrawal-form__inputs {
+    @media (max-width: $mobile-layout) {
+      padding-bottom: 3px !important;
+    }
+  }
+
+  .profile__success_icon {
+    background-image: url("/assets/img/check-mark.svg");
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin: 0;
+    position: absolute;
+    right: 12px;
+    top: 16px;
+    border: none;
+    background-size: 24px;
+    padding: 0;
+  }
+
+  .data-block {
+    label.input {
+      margin: 0;
+    }
+  }
+
+  .width216 {
+    max-width: 216px;
+    @include breakpoint(500px) {
+      max-width: inherit;
+      margin-right: 0;
+    }
+  }
+
+  .mob-bottom {
+    @include breakpoint(500px) {
+      margin-bottom: 24px;
+
+    }
+  }
+
+  .profile__btn {
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #151225;
+    border: none;
+    background: transparent;
+    height: 56px;
+    // padding-bottom: 24px;
+
+  }
+
+}

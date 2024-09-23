@@ -1,0 +1,99 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/styles";
+
+.jackpot-active-item {
+  &__title {
+    color: $text-primary;
+    @extend .header2;
+  }
+
+  &__amount_container {
+    background: $background-secondary;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+  }
+
+  &__picture {
+    width: 100%;
+    aspect-ratio: 968/320;
+    // background: url("/assets/img/jackpot_bg.jpg") no-repeat center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include media($desktop-layout) {
+      aspect-ratio: 311/224;
+    }
+  }
+
+  &__amount {
+    font-family: 'Alumni Sans', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 88px;
+    line-height: 88px;
+    letter-spacing: 0.01em;
+    background: linear-gradient(180deg, #FDC85D 0%, #F88204 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-stroke: 4px #FFFBE4;
+    margin-top: 80px;
+
+    @include media($desktop-layout) {
+      font-size: 48px;
+      line-height: 48px;
+      margin-top: 50px;
+      -webkit-text-stroke: 2px #FFFBE4;
+    }
+  }
+
+  &__description {
+    color: $text-primary;
+    font-family: "Nunito Sans", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+
+    & li {
+      margin-bottom: 10px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    & h1 {
+      @extend .header3;
+      margin-bottom: 24px;
+    }
+
+    & h2 {
+      @extend .header4;
+      margin-bottom: 16px;
+    }
+
+    & a {
+      color: $text-primary;
+      text-decoration: underline;
+    }
+
+    & div.paragraph {
+      padding: 16px;
+      border-radius: 8px;
+      background-color: $background-secondary;
+      @extend .body2;
+      margin-bottom: 8px;
+      line-height: 24px;
+    }
+
+  }
+}

@@ -1,0 +1,11 @@
+<div class="jackpot-active-item__title">
+  {{jackpot.title_in_locale}}
+</div>
+<div class="jackpot-active-item__amount_container">
+  <div class="jackpot-active-item__picture" [ngStyle]="getStyleBack(jackpot.image_b)">
+    <div class="jackpot-active-item__amount">
+      {{jackpot.current_amount | currency: jackpot.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+  </div>
+</div>
+<div class="jackpot-active-item__description" [innerHTML]="jackpot.description"></div>

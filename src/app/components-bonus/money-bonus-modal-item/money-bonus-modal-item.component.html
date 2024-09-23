@@ -1,0 +1,98 @@
+<div class="modal-common__header left">
+  <div *ngIf="bonus.title_in_locale" [innerHTML]="bonus.title_in_locale"></div>
+
+  <ng-container *ngIf="!bonus.title_in_locale">
+    <app-bonus-item-currencies-value
+      *ngIf="getBonusOptionValue(bonus, 'amount_money')"
+      [title]="'+'"
+      [values]="getBonusOptionValue(bonus, 'amount_money')"
+      [style]="''">
+    </app-bonus-item-currencies-value>
+    <ng-container *ngIf="getBonusOptionValue(bonus, 'amount_percent')">
+      {{ getBonusOptionValue(bonus, 'amount_percent') + '%' }}
+    </ng-container>
+    <ng-container> {{'bonuses.to_your_deposit' | translate}}</ng-container>
+  </ng-container>
+</div>
+
+<div class="modal-common__text">
+  <app-bonus-item-currencies-value
+    *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+    [title]="'payments.minimum_deposit_amount'"
+    [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+    [style]="'data-row-modal'">
+  </app-bonus-item-currencies-value>
+
+  <ul class="modal-common__list">
+    
+    <li *ngIf="bonus.description_in_locale" [innerHTML]="bonus.description_in_locale"></li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'spend_locked') == 'true' && getBonusOptionValue(bonus, 'spend_money') == 'true'">
+      {{'bonuses.wagering_from_real_and_bonus' | translate}}
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'spend_locked') == 'true' && getBonusOptionValue(bonus, 'spend_money') == 'false'">
+      {{'bonuses.wagering_from_bonus' | translate}}
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'spend_locked') == 'false' && getBonusOptionValue(bonus, 'spend_money') == 'true'">
+      {{'bonuses.wagering_from_real' | translate}}
+    </li>
+    
+    <li>{{'bonuses.all_winnings_from_bets' | translate}}</li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'maximum_win_x_deposits')">
+      <span>{{'bonuses.max_win_amount_after_wager' | translate}} </span>
+      <span>x{{getBonusOptionValue(bonus, 'maximum_win_x_deposits')}}</span>
+      <span> {{'bonuses.from_initial_bonus_amount' | translate}}</span>
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'maximum_win') && getPlayerCurrencyCode()">
+      <span>{{'bonuses.max_win_amount_after_wager' | translate}} </span>
+      <span>{{getMaximumWin(getPlayerCurrencyCode()) | currency: getPlayerCurrencyCode() : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+      <span> {{'bonuses.from_initial_bonus_amount' | translate}}</span>
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'wager')">
+      <span>{{'other.wager' | translate}} </span>
+      <span>{{'x' + getBonusOptionValue(bonus, 'wager')}}</span>
+    </li>
+
+    <li *ngIf="getBonusOptionValue(bonus, 'wagering_duration')">
+      {{'bonuses.time_play_back' | translate: {'time': getWageringDurationDays(bonus, 'wagering_duration')} }}
+    </li>
+  </ul>
+
+  <ng-container *ngIf="isBonusAllowed && showLink && showButtons">
+    <div class="modal-common__list-title">{{'bonuses.get_bonus' | translate}}</div>
+    <ul class="modal-common__list modal-common__list-mini">
+      <li>{{'bonuses.click_activate' | translate}}</li>
+      <li>{{'bonuses.make_deposit' | translate}}</li>
+    </ul>
+  </ng-container>
+
+  <div class="bonus-item__cancel-or-activate" *ngIf="showButtons">
+    <ng-container *ngIf="showCancel || !showLink && (getSelectedBonus() && getSelectedBonusId() == bonus.id)">
+      <a class="bonus-item__cancel bonus-item__cancel-mini" (click)="cancelBonus()">
+        {{'buttons.cancel' | translate}}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isBonusAllowed && !showCancel && !showLink && (!getSelectedBonus() || getSelectedBonusId() != bonus.id)">
+      <a class="bonus-item__activate bonus-item__activate-mini" (click)="selectBonus(bonus.id)">
+        {{'buttons.select' | translate}}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isBonusAllowed && showLink">
+      <a class="bonus-item__activate bonus-item__activate-mini"
+          (click)="closeModal()"
+          routerLink="/wallet/deposit"
+          [queryParams]="{ moneyBonusId: bonus.id}">
+        {{'buttons.activate' | translate}}
+      </a>
+    </ng-container>
+  </div>
+
+</div>
+ 

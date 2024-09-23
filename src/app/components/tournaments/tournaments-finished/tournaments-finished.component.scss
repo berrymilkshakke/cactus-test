@@ -1,0 +1,24 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.tournament-cards {
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  @media (min-width: $mobile-layout) {
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    &__card {
+      flex-basis: 30%;
+      background: transparent;
+      height: auto;
+
+      > * {
+        height: 100%;
+      }
+    }
+  }
+}

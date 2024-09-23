@@ -1,0 +1,12 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <app-fs-bonus-modal-item [bonus]="bonus" 
+                           [showLink]="showLink" 
+                           [showCancel]="showCancel"
+                           [promoCode]="promoCode"
+                           (bonusCanceledEvent)="cancelPromoCode(promoCode.id)">
+  </app-fs-bonus-modal-item>
+
+</div>

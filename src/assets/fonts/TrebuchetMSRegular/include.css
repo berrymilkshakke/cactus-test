@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'TrebuchetMSRegular';
+    src: url('trebuc-webfont.eot');
+    src: url('trebuc-webfont.eot?#iefix') format('embedded-opentype'),
+         url('trebuc-webfont.woff') format('woff'),
+         url('trebuc-webfont.ttf') format('truetype'),
+         url('trebuc-webfont.svg#TrebuchetMSRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

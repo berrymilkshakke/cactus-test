@@ -1,0 +1,71 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+app-banner-card {
+  position: relative;
+
+  .double-banner {
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 50%;
+    }
+
+    &__wrapper {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    &__image {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      grid-row-start: 1;
+      grid-column-start: 1;
+    }
+
+    &__content {
+      display: flex;
+      flex-flow: column;
+      align-items: flex-start;
+      background-color: rgba($background-primary, 0.9);
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      grid-row-start: 1;
+      grid-column-start: 1;
+    }
+
+    &__title {
+      @extend .header4;
+      margin: 16px 16px 8px;
+      color: $text-primary;
+    }
+
+    &__text {
+      flex: 1;
+      @extend .subheader2;
+      margin: 0 16px 10px;
+      color: $text-primary;
+    }
+
+    &__link {
+      @extend .button2;
+      margin-left: 16px;
+      margin-bottom: 16px;
+      display: inline;
+      background-color: $button-active;
+      border-radius: 8px;
+      color: $text-primary;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+  }
+}

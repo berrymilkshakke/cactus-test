@@ -1,0 +1,5 @@
+<div class="game-item-simple">
+  <a [routerLink]="[getUrlWithoutParameters(), { outlets: {'game': [game.brand_name, game.name]} }]" class="game-item-simple__link">
+    <img [src]="getImagePatch(game.brand_name, game.image)" (error)="errorHandler($event)" class="game-item-simple__image" alt="">
+  </a>
+</div>

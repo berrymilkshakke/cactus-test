@@ -1,0 +1,7 @@
+@import "src/assets/scss/variables.scss";
+
+.divider {
+  height: 1px;
+  margin: 0;
+  border-bottom: 1px dashed $divider-divider;
+}

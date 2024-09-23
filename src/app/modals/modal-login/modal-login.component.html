@@ -1,0 +1,19 @@
+<div class="modal-login">
+
+  <app-banner-login class="modal-login__banner"></app-banner-login>
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-login__sign-in">
+    <div class="modal-login__header">{{'menu.login' | translate}}</div>
+    <div class="modal-login__form-container">
+      <app-form-login (successEvent)="closeModal()"></app-form-login>
+    </div>
+    <div class="modal-login__register">
+      {{'other.you_have_no_account' | translate}}
+      <a routerLink="/registration">
+        {{'buttons.register' | translate}}
+      </a>
+    </div>
+  </div>
+</div>

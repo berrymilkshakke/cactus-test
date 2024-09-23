@@ -1,0 +1,7 @@
+<div class="submenu" id="submenu">
+  <div class="submenu__item"
+       *ngFor="let item of items"
+       routerLinkActive="submenu__item_active">
+    <a class="submenu__link" [routerLink]="[item.link]">{{item.title | translate}}</a>
+  </div>
+</div>

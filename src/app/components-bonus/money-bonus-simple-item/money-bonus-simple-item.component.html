@@ -1,0 +1,62 @@
+<div class="bonus-item-simple"
+     [ngClass]="{'bonus-item-simple_selected': getSelectedBonus() && getSelectedBonusId() == bonus.id}"
+     (click)="selectBonus(bonus.id)">
+
+  <img class="bonus-item-simple__image" src="{{getImagePatch(bonus.image)}}" (error)="errorHandler($event)" alt="">
+
+  <div class="bonus-item-simple__header">
+
+  <div class="bonus-item-simple__title">
+
+    <app-bonus-item-currencies-value
+      *ngIf="getBonusOptionValue(bonus, 'amount_money')"
+      [title]="'+'"
+      [values]="getBonusOptionValue(bonus, 'amount_money')"
+      [style]="''">
+    </app-bonus-item-currencies-value>
+
+    <ng-container *ngIf="getBonusOptionValue(bonus, 'amount_percent')">
+      {{ getBonusOptionValue(bonus, 'amount_percent') + '%' }}
+    </ng-container>
+
+    <ng-container> {{'bonuses.to_your_deposit' | translate}}</ng-container>
+
+  </div>
+
+  <div class="bonus-item-simple__info">
+
+    <app-bonus-item-currencies-value
+      *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+      [title]="'forms.min_deposit'"
+      [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+      [style]="'data-row-inline'">
+    </app-bonus-item-currencies-value>
+  </div>
+
+  </div>
+
+  <div class="bonus-item-simple__data">
+
+    <app-bonus-item-string-value
+      *ngIf="getBonusConditionValue(bonus, 'amount')"
+      [title]="'profile.amount'"
+      [value]="getBonusConditionValue(bonus, 'amount')"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+
+    <app-bonus-item-currencies-value
+      *ngIf="getBonusConditionValue(bonus, 'bet')"
+      [title]="'bonuses.bet_amount'"
+      [values]="getBonusConditionValue(bonus, 'bet')"
+      [style]="'data-row'">
+    </app-bonus-item-currencies-value>
+
+    <app-bonus-item-string-value
+      *ngIf="getBonusConditionValue(bonus, 'wager')"
+      [title]="'other.wager'"
+      [value]="getBonusConditionValue(bonus, 'wager')"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+  </div>
+
+</div>

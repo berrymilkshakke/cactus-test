@@ -1,0 +1,26 @@
+@import "src/assets/scss/_utils.scss";
+
+
+.home_page{
+  padding: 64px 0 24px;
+
+  .menu-mobile {
+    display: none;
+    @media (max-width: 960px) {
+      display: block;
+    }
+  }
+
+  .menu-desktop {
+    display: block;
+    @media (max-width: 961px) {
+      display: none;
+    }
+  }
+
+  @include breakpoint(560px) {
+    padding: 64px 0 72px;
+  }
+}
+
+

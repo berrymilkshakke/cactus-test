@@ -1,0 +1,14 @@
+<app-subheader-l2 title="{{'titles.profile_bonuses_available' | translate}}"></app-subheader-l2>
+
+<div class="bonuses__bonuses-list">
+
+  <app-money-bonus-item *ngFor="let moneyBonus of moneyBonuses"
+                        [bonus]="moneyBonus">
+  </app-money-bonus-item>
+
+  <app-fs-bonus-item *ngFor="let fsBonus of fsBonuses"
+                     [bonus]="fsBonus">
+  </app-fs-bonus-item>
+
+</div>
+

@@ -1,0 +1,10 @@
+<div *ngIf="seconds > 0">
+  <div *ngIf="getElapsedTime(seconds) as elapsed">
+    <span *ngIf="elapsed.days > 0">{{elapsed.days}} {{'forms.timer_data' | translate}}. </span>
+    <span>{{elapsed.hours | number: '1.0-0'}}</span>
+    <span>:</span>
+    <span>{{elapsed.minutes | number: '2.0-0'}}</span>
+    <span>:</span>
+    <span>{{elapsed.seconds | number: '2.0-0'}}</span>
+  </div>
+</div>

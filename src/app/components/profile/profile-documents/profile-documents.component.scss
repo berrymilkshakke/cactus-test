@@ -1,0 +1,17 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.documents {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0 48px;
+
+  @media (min-width: $mobile-layout) {
+    flex-direction: row;
+    * {
+      height: auto;
+      flex: 1;
+    }
+  }
+}

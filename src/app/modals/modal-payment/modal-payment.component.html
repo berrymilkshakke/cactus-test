@@ -1,0 +1,11 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-payment-iframe">
+
+    <iframe scrolling="no" *ngIf="safeUrl" [src]="safeUrl" class="iframe-block"></iframe>
+
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form-login">
+
+  <div class="group">
+    <input trim
+           name="login"
+           type="text"
+           formControlName="login">
+    <label>{{'forms.login' | translate}}</label>
+
+    <div *ngIf="submitted && f.login.errors" class="error-bl">
+      <div *ngIf="f.login.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      <div *ngIf="f.login.errors.email">{{'forms.email_is_not_correct' | translate}}</div>
+    </div>
+
+    <div *ngFor="let error_value of errors['email']" class="error-bl">{{ error_value }}</div>
+  </div>
+
+  <div class="group">
+    <input trim
+           class="form__password"
+           name="password"
+           type="password"
+           formControlName="password"
+           appPassword
+           appPasswordClass="password-control">
+    <label>{{'forms.password' | translate}}</label>
+
+    <div *ngIf="submitted && f.password.errors" class="error-bl">
+      <div *ngIf="f.password.errors.required">{{'forms.required_to_fill' | translate}}</div>
+      <div *ngIf="f.password.errors.minlength">
+        {{'forms.too_short' | translate: {value: f.password.errors.minlength.requiredLength} }}
+      </div>
+    </div>
+
+    <div *ngFor="let error_value of errors['password']" class="error-bl">{{ error_value }}</div>
+  </div>
+
+  <div class="form-login__remember-forget">
+    <!--
+    <section class="image-checkbox">
+      <input type="checkbox" id="remember">
+      <label class="label" for="remember" style="width: 100%">
+        <p>{{'other.remember' | translate}}</p>
+      </label>
+    </section>
+    -->
+    <a class="forgot-password" routerLink="/forgot-password">{{'other.forgot_password' | translate}}</a>
+  </div>
+
+  <div class="register-popup-submit-wrap">
+    <button type="submit" class="form-login__login-button button-mini">{{'buttons.enter' | translate}}</button>
+  </div>
+
+</form>

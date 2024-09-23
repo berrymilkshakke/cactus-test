@@ -1,0 +1,109 @@
+@import "src/assets/scss/_utils.scss";
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+
+.content-component {
+  @extend .body2;
+  color: $text-primary;
+
+  h1 {
+    @extend .header2;
+    color: $text-primary;
+  }
+
+  h2 {
+    @extend .header4;
+    color: $text-primary;
+  }
+
+  p {
+    @extend .body2;
+    color: $text-primary;
+  }
+
+  a {
+    color: $text-link;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  table {
+    background-color: $background-secondary;
+    border-radius: 8px;
+    min-width: 500px;
+    margin-top: 16px;
+    @include media($desktop-layout) {
+      min-width: unset;
+    }
+
+    tr:first-child {
+      th, td {
+        padding-top: 16px;
+      }
+    }
+    tr:last-child {
+      th, td {
+        padding-bottom: 16px;
+      }
+    }
+
+    th:first-child, td:first-child {
+      padding-left: 16px;
+    }
+    th:last-child, td:last-child {
+      padding-right: 16px;
+    }
+  }
+
+  td, th {
+    padding: 4px;
+  }
+
+  th {
+    @extend .body2;
+    color: $text-secondary;
+  }
+
+  td {
+    @extend .body1;
+    color: $text-primary
+  }
+
+  &__table {
+    @include noscroll;
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+
+  &__table-payments-methods {
+    position: relative;
+    background-color: $background-secondary;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 64px 16px 16px;
+    margin-bottom: 8px;
+    @include media($desktop-layout) {
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 16px;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+
+  &__label {
+    @extend .caption;
+    color: $text-secondary;
+  }
+
+  &__value {
+    @extend .body2;
+    color: $text-primary;
+  }
+}

@@ -1,0 +1,32 @@
+<div class="profile-document">
+
+  <div class="profile-document__header">
+    <div class="profile-document__image" [ngClass]="{
+       'document_type_image_personal': category.name == 'identity',
+       'document_type_image_payments': category.name == 'payment',
+       'document_type_image_address': category.name == 'address'
+    }">
+    </div>
+    <div>{{ 'documents.' + category.name | translate }}</div>
+  </div>
+
+  <div class="profile-document__text">
+
+    <ng-container *ngIf="category.name == 'identity'">
+      {{'documents.identity_description' | translate}}
+    </ng-container>
+
+    <ng-container *ngIf="category.name == 'payment'">
+      {{'documents.payments_description' | translate}}
+    </ng-container>
+
+    <ng-container *ngIf="category.name == 'address'">
+      {{'documents.address_description' | translate}}
+    </ng-container>
+
+  </div>
+
+  <app-form-upload-document [categoryId]="category.id"></app-form-upload-document>
+
+  <div class="profile-document__types">jpeg, jpg, png, pdf</div>
+</div>

@@ -1,0 +1,53 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/styles";
+
+.jackpot-finished-item {
+  background-color: $background-secondary;
+  border-radius: 8px;
+  padding: 16px;
+
+  &__header {
+    display: flex;
+  }
+
+  &__title {
+    @extend .header4;
+    color: $text-primary;
+    flex-grow: 1;
+  }
+
+  &__image {
+    width: 104px;
+    height: 104px;
+    // background: url("/assets/img/bonuses/24-hour-grand-prix.png") no-repeat;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  &__divider {
+    border: 1px dashed #3C4752;
+    height: 0;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    clear: both;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__label {
+    color: $text-secondary;
+    @extend .body2;
+    margin-bottom: 8px;
+  }
+
+  &__value {
+    color: $text-primary;
+    @extend .body2;
+    text-align: right;
+  }
+}

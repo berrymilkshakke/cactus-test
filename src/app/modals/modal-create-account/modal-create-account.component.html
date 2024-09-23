@@ -1,0 +1,37 @@
+<div class="modal-select-currency">
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-select-currency__header">{{'other.choose_account_currency' | translate}}</div>
+
+  <div class="modal-select-currency__mobile" *ngIf="currenciesFiltered && !isDesktop()">
+
+    <perfect-scrollbar class="scrollbar">
+
+      <div class="currency-select-radio">
+        <div class="currency-select-radio__currency"
+             *ngFor="let currencyCode of currenciesFiltered"
+             [ngClass]="{'currency-select-radio__currency-selected': currencyCode == selectedCurrencyCode}"
+             (click)="selectCurrency(currencyCode)">
+          {{ 'currencies.' + currencyCode | translate}}
+        </div>
+      </div>
+
+    </perfect-scrollbar>
+
+  </div>
+
+  <div class="currency-select-radio" *ngIf="currenciesFiltered && isDesktop()">
+    <div class="currency-select-radio__currency"
+         *ngFor="let currencyCode of currenciesFiltered"
+         [ngClass]="{'currency-select-radio__currency-selected': currencyCode == selectedCurrencyCode}"
+         (click)="selectCurrency(currencyCode)">
+      {{ 'currencies.' + currencyCode | translate}}
+    </div>
+  </div>
+
+  <div class="modal-select-currency__close" *ngIf="selectedCurrencyCode">
+    <a class="modal-select-currency__close-button" (click)="createPlayerAccount(selectedCurrencyCode)">
+      {{'buttons.add_account' | translate}}
+    </a>
+  </div>
+</div>

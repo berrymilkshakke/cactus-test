@@ -1,0 +1,24 @@
+@import "src/assets/scss/_variables.scss";
+
+
+.forbidden {
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: $z-index-l6;
+
+  &__text {
+    color: #1D2940;
+    text-align: center;
+    max-width: 500px;
+    margin: 10% auto 0 auto;
+    font-size: 20px;
+    padding: 0 20px;
+    font-weight: 500;
+  }
+}

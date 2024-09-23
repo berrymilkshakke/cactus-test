@@ -1,0 +1,36 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="block subheader mb-4">
+
+  <div class="groupq">
+
+    <textarea
+      formControlName="trafficSource"
+      class="traffic-source"
+      placeholder="{{'forms.traffic_source' | translate}} ...">
+    </textarea>
+
+    <div class="error-bl" *ngIf="submitted && f.trafficSource.errors">
+
+      <span *ngIf="f.trafficSource.errors.required">
+        {{'forms.required_to_fill' | translate}}
+      </span>
+
+      <span *ngIf="f.trafficSource.errors.minlength">
+        {{'forms.too_short' | translate: {value: f.trafficSource.errors.minlength.requiredLength} }}
+      </span>
+
+      <span *ngIf="f.trafficSource.errors.maxlength">
+        {{'forms.too_long' | translate: {value: f.trafficSource.errors.maxlength.requiredLength} }}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="mt-3">
+    <button type="submit" class="btn" [disabled]="loading">
+      {{'z.agree' | translate}}
+    </button>
+  </div>
+
+</form>

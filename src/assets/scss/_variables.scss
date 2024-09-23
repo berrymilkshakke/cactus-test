@@ -1,0 +1,81 @@
+
+$sm-layout: 480px;
+$mobile-layout: 959px;
+$mobile-layout-max: 1024px;
+
+
+// 480
+// 768
+// 800
+// 1024
+// 1160
+
+$desktop-layout: 960px;
+
+
+@mixin media($media) {
+  @media only screen and (max-width: $media) {
+    @content;
+  }
+}
+
+$z-index-l1: 1000; // header etc.
+$z-index-l2: 1050; //
+$z-index-l3: 1100; // modal game
+$z-index-l4: 1200; // close modal game
+$z-index-l5: 1300; // modals
+$z-index-l6: 1400; // menu-middle
+
+
+$x: 4px;
+
+/* Typography */
+
+$font-family-main: "Roboto", Arial, Helvetica, sans-serif;
+
+/* Colors */
+
+$some-color: #aaa;
+
+$brand-primary: #00AB55;
+$brand-secondary: #161C24;
+$brand-white: #FFFFFF;
+
+$background-primary: #161C24;
+$background-secondary: #212B36;
+$background-tertiary: #333D48;
+$background-hover: #29343F;
+
+$text-primary: #FFFFFF;
+$text-secondary: #919EAB;
+$text-link: #74CAFF;
+$text-visited-link: #3C7FA7;
+
+$divider-divider: #3C4752;
+$divider-border: #45505C;
+$divider-border-hover: #FFFFFF;
+$divider-border-active: #00AB55;
+
+$icon-primary: #FFFFFF;
+$icon-secondary: #919EAB;
+
+$button-active: #00AB55;
+$button-hover: #00C361;
+$button-push: #007B55;
+$button-disabled: #95D4A9;
+
+$button-active-text-secondary: #00C361;
+
+$button-active-secondary: #0D3427;
+$button-hover-secondary: #0F4E36;
+$button-push-secondary: #0F4E36;
+$button-disabled-secondary: #F000;
+
+$accent-success: #54D62C;
+$accent-success-bg: rgba($accent-success, 0.1);
+$accent-error: #FF4842;
+$accent-error-bg: rgba($accent-error, 0.1);
+$accent-warning: #FFC107;
+$accent-warning-bg: rgba($accent-warning, 0.1);
+$accent-info: #1890FF;
+$accent-info-bg: rgba($accent-info, 0.1);

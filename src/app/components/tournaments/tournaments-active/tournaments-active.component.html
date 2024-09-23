@@ -1,0 +1,7 @@
+<app-subheader-l2 title="{{'titles.tournaments_active' | translate}}"></app-subheader-l2>
+<div class="tournament-cards">
+  <div *ngFor="let item of tournaments"
+       class="tournament-cards__card">
+    <app-tournament-item [tournament]="item" [pageName]="'tournaments'"></app-tournament-item>
+  </div>
+</div>

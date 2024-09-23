@@ -1,0 +1,7 @@
+<app-subheader-l2 title="{{'titles.lotteries_active' | translate}}"></app-subheader-l2>
+<div class="lottery-cards">
+  <div *ngFor="let item of lotteries"
+       class="lottery-cards__card">
+    <app-lottery-item [lottery]="item" [pageName]="'lotteries'"></app-lottery-item>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="modal-common modal-common-payment">
+	<a class="modals-popup-close" (click)="closeModal()"></a>
+	<div class="modal-common__title left">{{'modal.payment_for_order' | translate}}</div>
+
+	<div class="modal-common__subtitle left">
+		<span>{{'notifications.transfer' | translate}} </span>
+		<span>
+			{{amount | currency: currencyCode : 'symbol-narrow' : '1.2-2' : 'ru'}}
+		</span>
+		<span> {{'notifications.using_sbp' | translate}}</span>
+	</div>
+
+	<div class="modal-common__information">
+		<div class="modal-common__container d-flex">
+			<div class="modal-common__img left">
+				<img src="assets/img/payment-logo/{{bank}}.svg" (error)="errorHandler($event)" alt="">
+			</div>
+		</div>
+		<div class="modal-common__card mt-3">{{'modal.phone_number' | translate}}</div>
+			<div class="modal-common__card-number mt-2">
+				<span>{{phoneNumber}}</span>
+			<div class="modal-common__copy ml-3" (click)="copyToClipboard(phoneNumber)"></div>
+		</div>
+
+		<div *ngIf="recipient" class="modal-common__recipient mt-3">{{'modal.recipient' | translate}}</div>
+		<div *ngIf="recipient" class="modal-common__recipient-name mt-2">
+			<span>{{recipient}}</span>
+		</div>
+
+		<div class="modal-common__wrapper mt-3">
+			<div class="modal-common__wrapper-col">
+				<div class="modal-common__bank">{{'modal.bank' | translate}}</div>
+				<div class="modal-common__bank-title mt-2">
+					<span>{{ 'banks.' + bank | translate }}</span>
+				</div>
+			</div>
+			<div class="modal-common__wrapper-col">
+				<div class="modal-common__amount">{{'forms.amount' | translate}}</div>
+				<div class="modal-common__amount-summ mt-2">
+					<span>
+						{{amount | currency: currencyCode : 'symbol-narrow' : '1.2-2' : 'ru'}}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-common__footer">
+		<div class="modal-common__footer-info">
+			<div class="modal-common__time">
+				{{'modal.payment_time' | translate}}:
+				<span class="ml-1">
+		          <app-bonus-item-timer
+		            [seconds]="900" class="modal-common__timer">
+		          </app-bonus-item-timer>
+        		</span>
+			</div>
+			<!-- <div class="modal-common__id">
+				{{'project.application_id' | translate}}: <span>2bfbb5a1-a334-4b5d-bd6b-dd700cd4a394</span>
+			</div> -->
+		</div>
+		<a class="modal-common__button button-large"
+		   (click)="confirmPayment()">{{'buttons.i_paid' | translate}}</a>
+	</div>
+
+	<div class="modal-common__instruction-wrap">
+		<div class="modal-common__instruction" [ngClass]="{'open-instruction': openInstruction}" (click)="toggle()">
+			<span>{{'modal.instructions_how_to_pay' | translate}}</span>
+			<div *ngIf="!openInstruction" class="modal-common__instruction-img"></div>
+			<div *ngIf="openInstruction" class="modal-common__instruction-img_open"></div>
+		</div>
+		<ol class="modal-common__instruction-text" *ngIf="openInstruction">
+			<li>{{'notifications.indicate_the_exact_amount' | translate}}</li>
+    		<li class="modal-common__notifications">
+		      <span>{{'notifications.to_credit_your_deposit' | translate}} </span>
+		      <span>{{amount | currency: currencyCode : 'symbol-narrow' : '1.2-2' : 'ru'}}</span>
+		      <span> {{'notifications.we_will_not_be_able' | translate}}</span>
+    		</li>
+		</ol>
+	</div>
+
+</div>

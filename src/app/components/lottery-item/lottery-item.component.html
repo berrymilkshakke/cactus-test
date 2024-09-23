@@ -1,0 +1,65 @@
+<div class="lottery-item" *ngIf="lottery">
+
+  <div class="lottery-item__active" *ngIf="!lottery.ended">{{'lotteries.is_active' | translate}}</div>
+
+  <div class="lottery-item__finished" *ngIf="lottery.ended">{{'lotteries.ended' | translate}}</div>
+
+  <div class="lottery-item__picture">
+
+    <img *ngIf="pageName == 'home'"
+         class="lottery-item__image"
+         [ngClass]="{'lottery-item__finished-image': lottery.ended}"
+         src="{{getImagePatch(lottery.image)}}"
+         (error)="errorHandler($event)">
+
+    <img *ngIf="pageName == 'lotteries'"
+         class="lottery-item__image"
+         [ngClass]="{'lottery-item__finished-image': lottery.ended}"
+         src="{{getImagePatch(lottery.image_b)}}"
+         (error)="errorHandler($event)">
+
+  </div>
+
+  <div class="lottery-item__title" *ngIf="lottery.title_in_locale">{{lottery.title_in_locale}}</div>
+  <div class="lottery-item__title" *ngIf="!lottery.title_in_locale">{{lottery.title}}</div>
+
+  <ng-container *ngIf="!lottery.ended">
+    <div class="lottery-item__deadline">{{'lotteries.time_to_completion' | translate}}
+
+      <app-countdown-timer class="countdown-timer" [seconds]="lottery.end_at_s"></app-countdown-timer>
+
+    </div>
+
+    <div class="lottery-item__prize-title">{{'lotteries.prize_fund' | translate}}</div>
+
+    <div class="lottery-item__prize-value">
+
+      <span *ngIf="lottery.prize_fund">
+        {{lottery.prize_fund}}
+      </span>
+
+      <span *ngIf="lottery.money_prize_fund">
+        {{lottery.money_prize_fund[lottery.currency_code] | currency: lottery.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+      </span>
+
+      <span *ngIf="lottery.money_prize_fund && lottery.fs_prize_fund">+</span>
+
+      <span *ngIf="lottery.fs_prize_fund">
+        {{lottery.fs_prize_fund}} FS
+      </span>
+
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="lottery.ended">
+    <div class="lottery-item__prize-title">{{'lotteries.finish_date' | translate}}</div>
+    <div class="lottery-item__prize-value">
+      {{lottery.end_at | date : 'short'  : null  : 'ru'}}
+    </div>
+  </ng-container>
+
+  <div class="lottery-item__details">
+    <a class="green-text-button" routerLink="/lotteries/{{lottery.id}}">{{'buttons.read_more' | translate}}</a>
+  </div>
+
+</div>

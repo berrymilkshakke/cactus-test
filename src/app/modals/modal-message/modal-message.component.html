@@ -1,0 +1,16 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header left">
+    <span>{{'profile.message' | translate}}</span>
+  </div>
+
+  <div class="modal-common__text">{{message | translate}}</div>
+
+  <div class="modal-common__buttons-right">
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+  </div>
+
+</div>
+

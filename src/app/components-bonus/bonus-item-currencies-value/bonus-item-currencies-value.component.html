@@ -1,0 +1,16 @@
+<span [class]="style">
+  <span class="{{style}}__key">{{title | translate}} </span>
+  <span class="{{style}}__value">
+    <span *ngFor="let v of values | keyvalue; let isLast = last;">
+
+      <span *ngIf="getPlayerCurrencyCode() && getPlayerCurrencyCode() == v.key">
+        {{v.value | currency: v.key : 'symbol-narrow' : '1.0-0' : 'ru'}}
+      </span>
+
+      <span *ngIf="!getPlayerCurrencyCode() && defaultCurrencyCode == v.key">
+        {{v.value | currency: v.key : 'symbol-narrow' : '1.0-0' : 'ru'}}
+      </span>
+
+    </span>
+  </span>
+</span>

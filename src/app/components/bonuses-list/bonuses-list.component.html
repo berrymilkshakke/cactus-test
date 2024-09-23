@@ -1,0 +1,84 @@
+<div class="bonuses-list" *ngIf="!categoryName && (moneyBonuses || fsBonuses)"> 
+
+  <ng-container *ngIf="moneyBonuses && fsBonuses">
+
+    <ng-container *ngFor="let fsBonus of fsBonuses | slice: 0 : 2">
+      <app-fs-bonus-big-item [bonus]="fsBonus" (bonusActivatedEvent)="emitSuccessEvent()"></app-fs-bonus-big-item>
+    </ng-container>
+  
+    <ng-container *ngFor="let moneyBonus of moneyBonuses | slice: 0 : 1">
+      <app-money-bonus-big-item [bonus]="moneyBonus"></app-money-bonus-big-item>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container *ngIf="!moneyBonuses && fsBonuses">
+    <ng-container *ngFor="let fsBonus of fsBonuses | slice: 0 : 3">
+      <app-fs-bonus-big-item [bonus]="fsBonus" (bonusActivatedEvent)="emitSuccessEvent()"></app-fs-bonus-big-item>
+    </ng-container>
+  </ng-container>
+
+  <!--
+  <div *ngIf="isAuthorized() && (checkPlayerInGroup('1_deposits') || checkPlayerInGroup('2_deposits'))">
+    <div class="bonus-item-big">
+      <div class="bonus-item-big__image-container">
+        <img class="bonus-item-big__image" src="assets/img/bonuses/bonusmarket.webp" alt="">
+      </div>
+
+      <div class="bonus-item-big__info">
+
+        <div class="bonus-item-big__title">
+          {{'bonuses.available_after_3_dep' | translate}}
+        </div>
+
+        <div class="bonus-item-big__description">
+          <span class="bonus-item-big__description-text">
+          {{'bonuses.bonus_market' | translate}}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  -->
+
+  <div class="bonuses-list__margin-fix"></div>
+</div>
+
+<div class="bonuses-list bonuses-list_modal" *ngIf="categoryName == 'modal' && (moneyBonuses || fsBonuses)">
+
+  <ng-container *ngFor="let moneyBonus of moneyBonuses | slice: 0 : 1">
+    <app-money-bonus-big-item [bonus]="moneyBonus"></app-money-bonus-big-item>
+  </ng-container>
+
+  <ng-container *ngFor="let fsBonus of fsBonuses | slice: 0 : 2">
+    <app-fs-bonus-big-item [bonus]="fsBonus" (bonusActivatedEvent)="emitSuccessEvent()"></app-fs-bonus-big-item>
+  </ng-container>
+
+  <!--
+  <div *ngIf="isAuthorized() && (checkPlayerInGroup('1_deposits') || checkPlayerInGroup('2_deposits'))">
+    <div class="bonus-item-big">
+      <div class="bonus-item-big__image-container">
+        <img class="bonus-item-big__image" src="assets/img/bonuses/bonusmarket.webp" alt="">
+      </div>
+
+      <div class="bonus-item-big__info">
+
+        <div class="bonus-item-big__title">
+          {{'bonuses.available_after_3_dep' | translate}}
+        </div>
+
+        <div class="bonus-item-big__description">
+          <span class="bonus-item-big__description-text">
+          {{'bonuses.bonus_market' | translate}}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  -->
+
+</div>

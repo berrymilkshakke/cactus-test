@@ -1,0 +1,100 @@
+@import "src/assets/scss/_variables.scss";
+
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  width: 100%;
+  background: #161D24;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1450;
+
+  &__logo {
+    &-img {
+      max-width: 100%;
+      width: 288px;
+      height: 64px;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+  }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  background: #02AB55;
+  margin: 5px;
+  animation-name: loader;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.dot:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.dot:nth-child(5) {
+  animation-delay: 1s;
+}
+
+@keyframes loader {
+  from {
+    width: 2px;
+    height: 2px;
+    border-radius: calc(2px / 2);
+  }
+  to {
+    width: 25px;
+    height: 25px;
+    border-radius: calc(25px / 2);
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}

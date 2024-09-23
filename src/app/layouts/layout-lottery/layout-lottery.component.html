@@ -1,0 +1,231 @@
+<router-outlet name="game"></router-outlet>
+
+<div class="lottery" *ngIf="lottery">
+
+  <app-go-back class="lottery__back" routerLink="/lotteries/active"
+               title="{{'lotteries.all_lotteries' | translate}}">
+  </app-go-back>
+
+  <app-subheader-l1 class="lottery__header" *ngIf="lottery.title_in_locale"
+                    title="{{lottery.title_in_locale}}">
+  </app-subheader-l1>
+
+  <app-subheader-l1 class="lottery__header" *ngIf="!lottery.title_in_locale"
+                    title="{{lottery.title}}">
+  </app-subheader-l1>
+
+  <div class="lottery__top-part">
+
+    <div class="lottery__block lottery__block_with-image">
+      <div [ngClass]="lottery.ended ? 'lottery__tag-completed':'lottery__tag-active'">
+        {{(lottery.ended ? 'lotteries.completed' : 'lotteries.is_active') | translate}}
+      </div>
+      <img class="lottery__tournament-image"
+           [ngClass]="{'lottery__tournament-image_gray': lottery.ended}"
+           src="{{getImagePatch(lottery.image_b)}}"
+           (error)="errorHandler($event)">
+    </div>
+
+    <div class="lottery__block lottery__block_with-icon" *ngIf="!lottery.ended">
+      <div class="lottery__icon-ticket"></div>
+      <div class="lottery__value" *ngIf="lottery.tickets_count > 0">
+        {{'lotteries.you_have' | translate: {value: lottery.tickets_count} }}
+      </div>
+      <div class="lottery__value" *ngIf="!lottery.tickets_count">
+        {{'lotteries.you_have_no_tickets' | translate}}
+      </div>
+      <div class="lottery__label">
+        {{'lotteries.ticket_price' | translate: {value: lottery.price.price | currency: lottery.price.currency_code : 'symbol-narrow' : '1.0-0' : 'ru'} }}
+      </div>
+      <a routerLink="/wallet/deposit" class="lottery__buy-tickets">{{'buttons.get_tickets' | translate}}</a>
+    </div>
+
+    <!--
+    <div class="lottery__block lottery__block_with-icon" *ngIf="lottery.ended">
+      <div class="lottery__icon-ticket"></div>
+      <div class="lottery__congratulate-header">{{'lotteries.congratulation' | translate}}</div>
+      <div class="lottery__congratulate-info">
+        {{'lotteries.you_are_winner' | translate: {value: 'Секреты Рождества'} }}
+      </div>
+      <div class="lottery__lottery-win">
+        <img src="{{lottery.win}}" class="lottery__lottery-win-image">
+        <div class="lottery__lottery-win-data">
+          <div class="lottery__lottery-win-title">{{lottery.win}}</div>
+          <div class="lottery__lottery-win-info">{{lottery.win}}</div>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <div class="lottery__block lottery__block_with-icon">
+      <div class="lottery__icon-calendar"></div>
+      <div class="lottery__label" *ngIf="lottery.ended">{{'lotteries.completed' | translate}}</div>
+      <div class="lottery__label" *ngIf="!lottery.ended">{{'lotteries.lottery_will_end' | translate}}</div>
+      <div class="lottery__value">
+        {{lottery.end_at | date : 'short'  : null  : 'ru'}}
+      </div>
+      <div class="lottery__label" *ngIf="!lottery.ended">
+        <ng-container *ngIf="!lottery.ended">{{'lotteries.until_the_end' | translate}} </ng-container>
+        <app-countdown-timer *ngIf="!lottery.ended" class="countdown-timer"
+                             [seconds]="lottery.end_at_s">
+        </app-countdown-timer>
+      </div>
+      <a *ngIf="!lottery.ended" class="lottery__link" routerLink="/lotteries/finished">
+        {{'titles.lotteries_finished' | translate}}
+      </a>
+    </div>
+
+    <div class="lottery__block lottery__block_with-icon">
+      <div class="lottery__icon-ranking"></div>
+      <div class="lottery__label">{{'lotteries.prize_fund' | translate}}</div>
+      <div class="lottery__value">
+        <ng-container *ngIf="lottery.prize_fund">
+          {{lottery.prize_fund}}
+        </ng-container>
+
+        <ng-container *ngIf="lottery.money_prize_fund">
+          {{lottery.money_prize_fund[lottery.currency_code] | currency: lottery.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+        </ng-container>
+
+        <ng-container *ngIf="lottery.money_prize_fund && lottery.fs_prize_fund">+</ng-container>
+
+        <ng-container *ngIf="lottery.fs_prize_fund">
+          {{lottery.fs_prize_fund}} FS
+        </ng-container>
+      </div>
+      <div class="lottery__label">
+        {{'lotteries.divided_into' | translate: {value: lottery.prizes_count} }}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="lottery__bottom-part">
+
+    <div class="lottery__block lottery__block_winners" *ngIf="!lottery.awarded">
+
+      <div class="lottery__block-header" *ngIf="lottery.ended">{{'lotteries.lottery_result' | translate}}</div>
+
+      <div class="lottery__fields">
+        <div class="lottery__field-win">{{'lotteries.prize' | translate}}</div>
+      </div>
+
+      <div class="lottery__winner"
+           *ngFor="let prize of lottery.prizes | slice: 0 : limitCount; let index = index"
+      > <!-- [ngClass]="{'lottery__winner-current': index == 3 && lottery.ended}" -->
+
+        <!--
+        <div *ngIf="index == 3 && lottery.ended" class="lottery__winner-current-place">
+          {{'tournaments.your_position_short' | translate}}
+        </div>
+        -->
+
+        <div *ngIf="index < 3" class="lottery__place-image"
+             [ngClass]="'lottery__place-image-'+(index + 1)"></div>
+
+        <div *ngIf="index > 2" class="lottery__place-number">{{index + 1}}</div>
+
+        <div class="lottery__winner-win">
+          <div class="lottery__small-label mobile">{{'lotteries.prize' | translate}}</div>
+          <div class="lottery__small-value">
+            <ng-container *ngIf="prize.fs_amount">
+              {{prize.fs_amount}} FS
+            </ng-container>
+
+            <ng-container *ngIf="prize.bonus_amount">
+              {{ prize.bonus_amount[lottery.currency_code] | currency:lottery.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+            </ng-container>
+
+            <ng-container *ngIf="!prize.fs_amount && !prize.bonus_amount">
+              -
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="lottery__btn-show" *ngIf="lottery.prizes && (limitCount < lottery.prizes.length)"
+            style="width: 100%">
+        <button class="green-text-button"
+                style="width: 100%"
+                (click)="onChangeLimitCount()">
+          {{'buttons.show_next' | translate}}
+        </button>
+      </div>
+
+    </div>
+
+    <div class="lottery__block lottery__block_winners" *ngIf="lottery.awarded">
+
+      <div class="lottery__block-header" *ngIf="lottery.ended">{{'lotteries.lottery_result' | translate}}</div>
+
+      <div class="lottery__fields">
+        <div class="lottery__field-member">{{'lotteries.participant' | translate}}</div>
+        <div class="lottery__field-score">{{'lotteries.ticket_number' | translate}}</div>
+        <div class="lottery__field-win">{{'lotteries.prize' | translate}}</div>
+      </div>
+
+      <div class="lottery__winner"
+           *ngFor="let winner of lottery.winners | slice: 0 : limitCount; let index = index"
+           [ngClass]="{'lottery__winner-current': winner.winning}"> <!-- [ngClass]="{'lottery__winner-current': index == 3 && lottery.ended}" -->
+
+        <!--
+        <div *ngIf="index == 3 && lottery.ended" class="lottery__winner-current-place">
+          {{'tournaments.your_position_short' | translate}}
+        </div>
+        -->
+
+        <div *ngIf="index < 3" class="lottery__place-image"
+             [ngClass]="'lottery__place-image-'+(index + 1)"></div>
+
+        <div *ngIf="index > 2" class="lottery__place-number">{{index + 1}}</div>
+
+        <div class="lottery__winner-member">
+          <div class="lottery__small-label mobile">{{'lotteries.participant' | translate}}</div>
+          <div class="lottery__small-value">{{winner.email}}</div>
+        </div>
+
+        <div class="lottery__winner-score">
+          <div class="lottery__small-label mobile">{{'lotteries.ticket_number' | translate}}</div>
+          <div class="lottery__small-value">{{winner.ticket_number}}</div>
+        </div>
+
+        <div class="lottery__winner-win">
+          <div class="lottery__small-label mobile">{{'lotteries.prize' | translate}}</div>
+          <div class="lottery__small-value">
+            <ng-container *ngIf="winner.fs_amount">
+              {{winner.fs_amount}} FS
+            </ng-container>
+
+            <ng-container *ngIf="winner.bonus_amount">
+              {{ winner.bonus_amount[lottery.currency_code] | currency:lottery.currency_code : 'symbol-narrow' : '1.0-0' : 'ru' }}
+            </ng-container>
+
+            <ng-container *ngIf="!winner.fs_amount && !winner.bonus_amount">
+              -
+            </ng-container>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lottery__btn-show" *ngIf="lottery.winners && (limitCount < lottery.winners.length)"
+            style="width: 100%">
+        <button class="green-text-button"
+                style="width: 100%"
+                (click)="onChangeLimitCount()">
+          {{'buttons.show_next' | translate}}
+        </button>
+      </div>
+
+    </div>
+
+    <div class="lottery__block">
+      <div class="lottery__block-header">{{'lotteries.rules' | translate}}</div>
+      <div class="lottery__text">
+        <p class="description" *ngIf="lottery.description" [innerHTML]="lottery.description"></p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

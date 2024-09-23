@@ -1,0 +1,94 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form-create-campaign">
+
+
+  <div class="group">
+
+    <div ngbDropdown class="dropdown-component__dropdown">
+
+      <button type="button" class="form-control dropdown-component__dropdown-toggle" ngbDropdownToggle id="dropdownPaymentServices">
+        <span class="label">{{'forms.choose_a_tariff' | translate}}</span>
+        <span class="form-create-campaign__value" *ngIf="selectedTariff">{{ selectedTariff.strategy_title}} - {{selectedTariff.title }}</span>
+      </button>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownPaymentServices">
+        <button type="button" *ngFor="let tariff of tariffs"
+                (click)="onChangeTariff(tariff)"
+                class="dropdown-item">
+          <span>{{tariff.strategy_title}} - {{tariff.title}}</span>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="submitted && f.tariffId.errors" class="error-bl">
+      <div *ngIf="f.tariffId.errors.required">{{'forms.required_to_fill' | translate}}</div>
+    </div>
+
+    <div *ngFor="let error_value of errors['tariffId']" class="error-bl">{{ error_value }}</div>
+
+  </div>
+
+
+  <div class="group">
+
+    <div ngbDropdown class="dropdown-component__dropdown">
+
+      <button type="button" class="form-control dropdown-component__dropdown-toggle" ngbDropdownToggle id="dropdownCurrencySecond">
+        <span class="label">{{'forms.choose_a_currency' | translate}}</span>
+        <span class="form-create-campaign__value" *ngIf="selectedCurrencyCode">{{ selectedCurrencyCode }}</span>
+      </button>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownCurrencySecond">
+        <button type="button" *ngFor="let currency of currencies"
+                (click)="onChangeCurrency(currency.code)"
+                class="dropdown-item">
+
+          <span>{{ currency.code }}</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div *ngIf="submitted && f.currencyCode.errors" class="error-bl">
+      <div *ngIf="f.currencyCode.errors.required">{{'forms.required_to_fill' | translate}}</div>
+    </div>
+
+    <div *ngFor="let error_value of errors['currencyCode']" class="error-bl">{{ error_value }}</div>
+
+  </div>
+
+
+  <div class="group">
+
+    <input
+      type="text"
+      formControlName="title"
+      class="title-input">
+
+    <label>{{'profile.enter_title' | translate}}</label>
+
+    <div class="error-bl" *ngIf="submitted && f.title.errors">
+
+      <span *ngIf="f.title.errors.required">
+        {{'forms.required_to_fill' | translate}}
+      </span>
+
+      <span *ngIf="f.title.errors.minlength">
+        {{'forms.too_short' | translate: {value: f.title.errors.minlength.requiredLength} }}
+      </span>
+
+      <span *ngIf="f.title.errors.maxlength">
+        {{'forms.too_long' | translate: {value: f.title.errors.maxlength.requiredLength} }}
+      </span>
+
+    </div>
+
+  </div>
+
+  <div class="modal-common__buttons-right">
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+    <button [disabled]="loading" type="submit" class="form-create-campaign__button button-large">
+      {{'buttons.create' | translate}}
+    </button>
+  </div>
+
+</form>

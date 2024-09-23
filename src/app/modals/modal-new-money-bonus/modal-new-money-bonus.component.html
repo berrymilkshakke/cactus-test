@@ -1,0 +1,53 @@
+<div class="modal-common">
+
+  <a class="modals-popup-close" (click)="closeModal()"></a>
+
+  <div class="modal-common__header left">
+    <span>{{'notifications.congratulations' | translate}}</span>
+  </div>
+
+  <div class="modal-common__info">
+    <div class="modal-new-money__icon"></div>
+    {{'notifications.you_won' | translate}}
+    {{ bonus.amount | currency: bonus.currencyCode : 'symbol-narrow' : '1.0-0' : 'ru' }}.
+  </div>
+
+  <div class="modal-common__text">
+
+    <span *ngIf="bonus.activated">
+      {{'project.notifications.bonus_added_and_activated' | translate}}
+      <span class="modal-common__lowercase" *ngIf="bonus.unlockAfterDeposit">
+        ({{'forms.min_deposit' | translate}} - {{bonus.unlockAfterDeposit | currency: bonus.currencyCode : 'symbol-narrow' : '1.0-0' : 'ru' }})
+      </span>.
+    </span>
+
+    <span *ngIf="!bonus.activated">
+      {{'notifications.bonus_added' | translate}}
+    </span>
+
+    <span *ngIf="!bonus.activated && !bonus.wageringExpiresAt">
+      {{'notifications.you_can_activate_and_wager_bonus_for_real_money' | translate}}
+    </span>
+    <span *ngIf="!bonus.activated && bonus.wageringExpiresAt">
+      {{'notifications.you_can_activate_and_wager_bonus_for_real_money_until' | translate:{'wageringExpiresAt': bonus.wageringExpiresAt | toDateObj | date : 'short'  : null  : 'ru'} }}
+    </span>
+
+    <span *ngIf="bonus.activated && !bonus.wageringExpiresAt">
+      {{'notifications.you_can_wager_bonus_for_real_money' | translate}}
+    </span>
+    <span *ngIf="bonus.activated && bonus.wageringExpiresAt">
+      {{'project.notifications.you_can_wager_bonus_for_real_money_until' | translate:{'wageringExpiresAt': bonus.wageringExpiresAt | toDateObj | date : 'short'  : null  : 'ru'} }}
+    </span>
+  </div>
+
+  <div class="modal-common__buttons-right">
+    <a (click)="closeModal()" class="green-text-button">{{'buttons.close' | translate}}</a>
+    <a *ngIf="bonus.unlockAfterDeposit" (click)="closeModal()" routerLink="/wallet/deposit" class="button-large">
+      {{ 'buttons.deposit' | translate }}
+    </a>
+    <a *ngIf="!bonus.unlockAfterDeposit" (click)="closeModal()" routerLink="/bonuses/active" class="button-large">
+      {{ 'profile.my_bonuses' | translate }}
+    </a>
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+.modal-select-currency {
+  position: relative;
+  background-color: $background-secondary;
+  padding: 24px 16px;
+  border-radius: 8px;
+
+  &__mobile {
+    max-height: calc(var(--vh, 1vh) * 100 - 214px);
+    overflow: scroll;
+    margin: 0px -10px 16px 0;
+  }
+
+  &__header {
+    @extend .header2;
+    color: $text-primary;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__close {
+    text-align: right;
+  }
+
+  &__close-button {
+    display: inline-block;
+    @extend .button-mini;
+  }
+}
+

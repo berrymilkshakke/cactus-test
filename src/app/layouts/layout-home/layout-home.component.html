@@ -1,0 +1,92 @@
+<div class="home_page__content">
+
+  <app-banners style="width: 100%"></app-banners>
+
+  <app-games-menu [showSearch]="true" [pageName]="'home'" style="width: 100%"></app-games-menu>
+
+  <!-- <app-search-home [showProvidersFilter]="false" style="width: 100%" class="home_page__search"></app-search-home> -->
+
+  <app-recent-games-mobile *ngIf="isAuthorized()" style="width: 100%" class="home_page__recently_played"></app-recent-games-mobile>
+
+  <app-section-header class="home_page__header"
+                      type="new"
+                      title="{{'menu.new_games' | translate}}"
+                      seeMoreUrl="/games/new"
+                      style="width: 100%">
+  </app-section-header>
+
+  <app-games-list-carousel [categoryName]="'new'" style="width: 100%"></app-games-list-carousel>
+
+  <app-see-more url="/games/new" style="width: 100%;" class="mobile"></app-see-more>
+
+  <div class="home_page__jackpot-container" *ngFor="let item of jackpots | slice: 0 : 1">
+    <app-jackpot-item [jackpot]="item" class="home_page__jackpot"></app-jackpot-item>
+    <div class="home_page__winners desktop">
+      <app-recent-wins [pageName]="'home'"></app-recent-wins>
+    </div>
+  </div>
+
+  <app-section-header class="home_page__header"
+                      type="bonuses"
+                      title="{{'menu.bonuses' | translate}}"
+                      seeMoreUrl="/bonuses/available"
+                      style="width: 100%">
+  </app-section-header>
+
+  <app-bonuses-list style="width: 100%;"></app-bonuses-list>
+
+  <app-see-more url="/bonuses/available" style="width: 100%;" class="mobile"></app-see-more>
+
+  <app-divider style="width: 100%" class="home_page__divider"></app-divider>
+
+  <app-section-header class="home_page__header"
+                      type="popular"
+                      title="{{'menu.popular' | translate}}"
+                      seeMoreUrl="/games/popular"
+                      style="width: 100%">
+  </app-section-header>
+
+  <app-games-list-home style="width: 100%;" [categoryName]="'popular'"></app-games-list-home>
+
+  <app-see-more url="/games/popular" style="width: 100%;" class="mobile"></app-see-more>
+
+  <app-divider *ngIf="isShowLiveCategory && !isShowAllowedGames()" style="width: 100%" class="home_page__divider"></app-divider>
+
+  <app-section-header *ngIf="isShowLiveCategory && !isShowAllowedGames()" class="home_page__header"
+                      type="live"
+                      title="{{'menu.live' | translate}}"
+                      seeMoreUrl="/games/live"
+                      style="width: 100%">
+  </app-section-header>
+
+  <app-games-list-static *ngIf="isShowLiveCategory && !isShowAllowedGames()" style="width: 100%;" [categoryName]="'live'"></app-games-list-static>
+
+  <app-see-more *ngIf="isShowLiveCategory && !isShowAllowedGames()" url="/games/live" style="width: 100%;" class="mobile"></app-see-more>
+
+  <app-divider style="width: 100%" class="home_page__divider"></app-divider>
+
+  <div class="home_page__tournaments-and-lottery">
+
+    <div class="home_page__tournaments">
+      <app-section-header class="home_page__small_header" type="tournaments" title="{{'menu.tournaments' | translate}}"
+                          style="width: 100%"></app-section-header>
+      <div class="home_page__tournament-cards">
+        <div class="home_page__tl-card" *ngFor="let item of tournaments | slice: 0 : 2">
+          <app-tournament-item [tournament]="item" [pageName]="'home'" style="height: 100%;"></app-tournament-item>
+        </div>
+      </div>
+    </div>
+
+    <div class="home_page__lottery">
+      <app-section-header class="home_page__small_header" type="lottery" title="{{'titles.lottery' | translate}}"
+                          style="width: 100%"></app-section-header>
+      <div class="home_page__lottery-cards">
+        <div class="home_page__tl-card" *ngFor="let item of lotteries | slice: 0 : 1">
+          <app-lottery-item [lottery]="item" [pageName]="'home'" style="height: 100%;"></app-lottery-item>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

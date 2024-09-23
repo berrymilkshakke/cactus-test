@@ -1,0 +1,78 @@
+<div class="bonus-item-simple"
+     [ngClass]="{'bonus-item-simple_selected': getSelectedBonus() && getSelectedBonusId() == bonus.id}"
+     (click)="selectBonus(bonus.id)">
+
+  <img class="bonus-item-simple__image"
+       *ngIf="bonus.image"
+       src="{{getImagePatch(bonus.image)}}"
+       (error)="errorHandler($event)" alt="">
+
+  <img class="bonus-item-simple__image"
+       *ngIf="!bonus.image"
+       src="{{getGameImagePatch()}}"
+       (error)="errorHandler($event)" alt="">
+
+  <div class="bonus-item-simple__header">
+
+    <div class="bonus-item-simple__title">
+
+      <ng-container *ngIf="getBonusOptionValue(bonus, 'fs_amount')">
+        {{getBonusOptionValue(bonus, 'fs_amount')}}
+      </ng-container>
+
+      <ng-container> {{'bonuses.freespin_in_game' | translate}} </ng-container>
+
+      <br>
+
+      <ng-container *ngIf="getBonusOptionValue(bonus, 'game')">
+        {{ getGameTitle(getBonusOptionValue(bonus, 'game')) | truncate:[22] }}
+      </ng-container>
+
+    </div>
+
+    <div class="bonus-item-simple__info">
+
+      <app-bonus-item-currencies-value
+        *ngIf="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+        [title]="'forms.min_deposit'"
+        [values]="getBonusConditionValue(bonus, 'minimum_deposit_amount')"
+        [style]="'data-row-inline'">
+      </app-bonus-item-currencies-value>
+
+    </div>
+
+  </div>
+
+  <div class="bonus-item-simple__data">
+
+    <app-bonus-item-string-value
+      *ngIf="getBonusOptionValue(bonus, 'fs_amount')"
+      [title]="'profile.amount'"
+      [value]="getBonusOptionValue(bonus, 'fs_amount')"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+
+    <app-bonus-item-string-value
+      *ngIf="getBonusOptionValue(bonus, 'amount_percent')"
+      [title]="'bonuses.bonus_size'"
+      [value]="'+' + getBonusOptionValue(bonus, 'amount_percent') + '%'"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+
+    <app-bonus-item-string-value
+      *ngIf="getPlayerCurrencyCode() && getBonusOptionValue(bonus, 'bet_amount') && getBonusOptionValue(bonus, 'lines_count') && getBonusOptionValue(bonus, 'denomination')"
+      [title]="'bonuses.bet_amount'"
+      value="{{calculateBetAmount(getPlayerCurrencyCode()) | currency: getPlayerCurrencyCode() : 'symbol-narrow' : '1.2-2' : 'ru'}}"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+
+    <app-bonus-item-string-value
+      *ngIf="getOptionMoneyBonus(bonus, 'wager')"
+      [title]="'other.wager'"
+      [value]="'x' + getOptionMoneyBonus(bonus, 'wager')"
+      [style]="'data-row'">
+    </app-bonus-item-string-value>
+
+  </div>
+
+</div>

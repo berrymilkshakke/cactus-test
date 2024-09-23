@@ -1,0 +1,496 @@
+@import "src/assets/scss/_variables.scss";
+@import "src/assets/scss/_styles.scss";
+@import "src/assets/scss/_utils.scss";
+
+
+@mixin block__icon($icon) {
+  top: 16px;
+  left: 16px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  @include imgBg($icon);
+}
+
+
+.page_content {
+  padding: 32px 16px 0;
+  @include breakpoint(laptop) {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 48px 0 0;
+  }
+
+  &.page_content-application {
+    @media (min-width: 1200px) {
+      width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 48px 0 0;
+    }
+    @media (min-width: 1000px) and (max-width: 1200px) {
+      padding: 32px 16px 0;
+      width: calc(100vw - 64px);
+    }
+  }
+
+  app-subheader-l1 > div {
+    margin-bottom: 8px;
+  }
+
+  &__submenu {
+    display: block;
+    margin-left: -16px;
+    width: calc(100% + 32px);
+    @include breakpoint(laptop) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  &.page-content__menu {
+    @media (max-width: 1100px) {
+      padding: 32px 16px 0;
+    }
+  }
+}
+
+
+.lottery {
+
+  @media (max-width: 1100px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @include breakpoint(laptop) {
+    padding: 0;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__btn-show {
+    margin-top: 16px;
+    button {
+      background: none !important;
+      border: none !important;
+    }
+  }
+
+  &__back {
+    display: block;
+    margin-top: 34px;
+    cursor: pointer;
+  }
+
+  &__header {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 24px;
+  }
+
+  &__top-part {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .lottery__block {
+      flex-grow: 1;
+    }
+
+    @media (min-width: $mobile-layout) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto;
+      column-gap: 16px;
+      row-gap: 8px;
+      margin-top: 8px;
+
+      .lottery__block_with-image {
+        grid-column-start: 2;
+        grid-row-start: 1;
+        grid-row-end: 4;
+        height: 100%;
+
+        .lottery__tournament-image {
+          border-radius: 8px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  &__bottom-part {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .lottery__block {
+      flex-grow: 1;
+    }
+
+    @media (min-width: $mobile-layout) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      column-gap: 16px;
+      row-gap: 8px;
+      margin-top: 16px;
+
+      .lottery__block_winners {
+        grid-row-start: 1;
+        grid-row-end: 3
+      }
+    }
+  }
+
+  &__block_with-image {
+    padding: 0 !important;
+  }
+
+  &__block_with-icon {
+    padding-left: 80px !important;
+  }
+
+  &__tag-active {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    padding: 4px 8px;
+    @extend .caption;
+    color: $text-primary;
+    background-color: $accent-success;
+    border-radius: 8px;
+    z-index: 1;
+  }
+
+  &__tag-completed {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    padding: 4px 8px;
+    @extend .caption;
+    color: $text-primary;
+    background-color: $accent-error;
+    border-radius: 8px;
+    z-index: 1;
+  }
+
+  &__block {
+    position: relative;
+    padding: 16px;
+    background-color: $background-secondary;
+    border-radius: 8px;
+  }
+
+  &__tournament-image {
+    width: 100%;
+    height: 100%;
+
+    &_gray {
+      filter: grayscale(100%);
+    }
+  }
+
+  &__icon {
+    &-calendar {
+      @include block__icon('/icons/calendar_small.svg');
+    }
+
+    &-ranking {
+      @include block__icon('/icons/ranking.svg');
+    }
+
+    &-place {
+      @include block__icon('/icons/place.svg');
+    }
+
+    &-ticket {
+      @include block__icon('/icons/ticket.svg');
+    }
+  }
+
+  &__label {
+    @extend .body2;
+    color: $text-secondary;
+  }
+
+  &__value {
+    @extend .header4;
+    color: $text-primary;
+    margin-bottom: 4px;
+  }
+
+  &__buy-tickets {
+    display: inline-block;
+    @extend .button-mini;
+    margin-top: 16px;
+  }
+
+  &__link {
+    position: relative;
+    @extend .body2;
+    display: inline-block;
+    margin-top: 16px;
+    color: $text-link;
+
+    &::after {
+      content: '';
+      background: url("/assets/img/icons/arrow-square-right.svg") no-repeat;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      right: -16px;
+      top: 4px;
+    }
+  }
+
+  &__expand {
+    position: relative;
+    @extend .body2;
+    display: inline-block;
+    margin-top: 16px;
+    color: $text-link;
+
+    &::after {
+      content: '';
+      background: url("/assets/img/icons/arrow_down.svg") no-repeat;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      right: -24px;
+      top: 2px;
+      filter: brightness(0) saturate(100%) invert(73%) sepia(8%) saturate(2994%) hue-rotate(173deg) brightness(100%) contrast(102%);
+    }
+  }
+
+  &__congratulate-header {
+    @extend .header4;
+    color: $button-active;
+  }
+
+  &__congratulate-info {
+    @extend .body2;
+    color: $text-primary;
+    margin-top: 4px;
+  }
+
+  &__lottery-win {
+    position: relative;
+    margin-top: 16px;
+    margin-left: -64px;
+    background-color: $background-tertiary;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    gap: 12px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background: url("/assets/img/icons/info_outline.svg");
+      width: 24px;
+      height: 24px;
+      top: 8px;
+      right: 8px;
+    }
+
+    &-image {
+      width: 72px;
+      height: 72px;
+    }
+
+    &-data {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-right: 44px;
+    }
+
+    &-title {
+      @extend .subheader1;
+      color: $text-primary;
+    }
+
+    &-info {
+      @extend .body2;
+      color: $text-secondary;
+    }
+  }
+
+  &__position {
+    margin-top: 8px;
+    display: flex;
+  }
+
+  &__place {
+    flex-grow: 1;
+  }
+
+  &__block-header {
+    color: $text-primary;
+    @extend .header4;
+    margin-bottom: 16px;
+  }
+
+  &__fields {
+    display: none;
+    @media (min-width: $mobile-layout) {
+      display: flex;
+    }
+    @extend .caption;
+    color: $text-secondary;
+    padding: 8px 16px;
+  }
+
+  &__field-member {
+    flex-basis: 30%;
+  }
+
+  &__field-score {
+    flex-basis: 30%;
+  }
+
+  &__field-win {
+    flex-basis: 40%;
+  }
+
+  &__winner-current {
+    // Положение пользователя в турнире/лотерее
+    border: 2px solid $divider-border-active;
+
+    .lottery__place-number {
+      background-color: $divider-border-active;
+    }
+
+    .lottery__winner-current-place {
+      // Надпись "Ваша позиция", если пользователь занял какое-то место в турнире/лотерее
+      position: absolute;
+      line-height: 32px;
+      top: 8px;
+      right: 60px;
+      @extend .caption;
+      display: block;
+      @media (min-width: $mobile-layout) {
+        display: none;
+      }
+      color: $divider-border-active;
+      white-space: nowrap;
+    }
+  }
+
+  &__winner {
+    // Победитель турнира/лотереи из списка участников
+    position: relative;
+    background: $background-tertiary;
+    border-radius: 8px;
+    margin-top: 8px;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 16px;
+
+    &-member {
+      flex-basis: 100%;
+      @media (min-width: $mobile-layout) {
+        flex-basis: 30%;
+      }
+    }
+
+    &-score {
+      flex-basis: 50%;
+      @media (min-width: $mobile-layout) {
+        flex-basis: 30%;
+      }
+    }
+
+    &-win {
+      flex-basis: 50%;
+      @media (min-width: $mobile-layout) {
+        flex-basis: 40%;
+      }
+    }
+  }
+
+  &__place-image {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+
+    &-1 {
+      @include imgBg('icons/prize_1.svg');
+    }
+
+    &-2 {
+      @include imgBg('icons/prize_2.svg');
+    }
+
+    &-3 {
+      @include imgBg('icons/prize_3.svg');
+    }
+  }
+
+  &__place-number {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    @extend .body2;
+    background-color: $background-secondary;
+    border-radius: 999px;
+    width: 32px;
+    height: 32px;
+    color: $text-primary;
+    text-align: center;
+    line-height: 32px !important;
+  }
+
+  &__small-label {
+    color: $text-secondary;
+    @extend .caption;
+  }
+
+  &__small-value {
+    color: $text-primary;
+    @extend .body2;
+    margin: 0;
+  }
+
+  &__text {
+    @extend .body2;
+    color: $text-primary;
+  }
+
+  &__section-header {
+    color: $text-primary;
+    @extend .header4;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__rules-list {
+    &__item {
+      @extend .body2;
+      color: $text-primary;
+      list-style-type: disc;
+      margin-left: 24px;
+    }
+  }
+
+  &__completed {
+    display: inline-block;
+    @extend .caption;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 4px 8px;
+    color: $brand-secondary;
+    background-color: $accent-success;
+    border-radius: 8px;
+  }
+}

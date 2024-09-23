@@ -1,0 +1,9 @@
+<div class="jackpot" routerLink="/jackpots" *ngIf="jackpot">
+  <div class="jackpot__wrapper">
+    <div class="jackpot__title">{{jackpot.title_in_locale}}</div>
+
+    <div class="jackpot__text">
+      {{jackpot.current_amount | currency: jackpot.currency_code : 'symbol-narrow' : '1.2-2' : 'ru'}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<router-outlet name="game"></router-outlet>
+
+<div class="page_content page-content__menu">
+  <app-subheader-l1 title="{{'menu.games' | translate}}"></app-subheader-l1>
+  <app-search-games></app-search-games>
+  <app-games-menu></app-games-menu>
+  <app-selected-providers class="page_content__providers"></app-selected-providers>
+
+  <app-games-list *ngIf="categoryName == 'live' && !isSeparateLiveCategory"
+                  class="page_content__games"
+                  [categoryName]="categoryName"
+                  [brandName]="brandName"
+                  [showMoreButton]="true"
+                  [isShowSearchResult]="true"
+                  [pageName]="'game'">
+  </app-games-list>
+
+  <app-games-list *ngIf="categoryName != 'live'"
+                  class="page_content__games"
+                  [categoryName]="categoryName"
+                  [brandName]="brandName"
+                  [showMoreButton]="true"
+                  [isShowSearchResult]="true"
+                  [pageName]="'game'">
+  </app-games-list>
+
+  <div *ngIf="categoryName =='live' && isSeparateLiveCategory">
+
+    <app-section-header class="home_page__header"
+                        type="roulette"
+                        title="{{'categories.roulette' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/roulette"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'roulette'"></app-games-list-static>
+
+    <app-section-header class="home_page__header"
+                        type="baccarat"
+                        title="{{'categories.baccarat' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/baccarat"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'baccarat'"></app-games-list-static>
+
+    <app-section-header class="home_page__header"
+                        type="blackjack"
+                        title="{{'categories.blackjack' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/blackjack"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'blackjack'"></app-games-list-static>
+
+    <app-section-header class="home_page__header"
+                        type="poker"
+                        title="{{'categories.poker' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/poker"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'poker'"></app-games-list-static>
+
+    <app-section-header class="home_page__header"
+                        type="game_show"
+                        title="{{'categories.game_show' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/game_show"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'game_show'"></app-games-list-static>
+
+    <app-section-header class="home_page__header"
+                        type="lotto"
+                        title="{{'categories.lotto' | translate}}"
+                        [pageName]="'games-live'"
+                        seeMoreUrl="/games/lotto"
+                        style="width: 100%">
+    </app-section-header>
+    <app-games-list-static [pageName]="'games-live'" [categoryName]="'lotto'"></app-games-list-static>
+
+  </div>
+
+</div>

@@ -1,0 +1,26 @@
+<div *ngIf="isDesktop()" class="new-games-list-carousel">
+  <ngx-slick-carousel [config]="slideConfig" >
+    <app-game-item class="new-games-list-carousel__game"
+                   ngxSlickItem
+                   *ngFor="let game of games | slice:0: limitCount"
+                   [game]="game"
+                   [isBig]="true"
+                   [ngClass]="{'d-none': isAuthorized() &&
+                                         !game.allowed &&
+                                         isActiveBonus() &&
+                                         isShowAllowedGames()}">
+    </app-game-item>
+  </ngx-slick-carousel>
+</div>
+
+<div class="new-games-list" *ngIf="!isDesktop()">
+  <ng-container *ngFor="let game of games | slice:0: limitCount">
+    <app-game-item [game]="game"
+                   [isBig]="true"
+                   [ngClass]="{'d-none': isAuthorized() &&
+                                         !game.allowed &&
+                                         isActiveBonus() &&
+                                         isShowAllowedGames()}">
+    </app-game-item>
+  </ng-container>
+</div>

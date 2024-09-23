@@ -1,0 +1,6 @@
+<div class="selected-providers" *ngIf="brands && selectedBrands && selectedBrands.length > 0">
+  <div class="selected-providers__item" *ngFor="let brandName of selectedBrands">
+    {{brands[brandName].title}}
+    <div (click)="removeBrand(brandName)" [routerLink]="['/games', categoryName]" class="selected-providers__remove"></div>
+  </div>
+</div>

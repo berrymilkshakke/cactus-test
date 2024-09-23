@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form-promo-code">
+
+    <div class="form-promo-code">
+
+      <div class="group">
+
+          <input trim
+                 type="text"
+                 formControlName="code">
+
+          <label>{{'forms.promocode' | translate}}</label>
+
+        <div class="error-bl" *ngIf="submitted && f.code.errors">
+          <span *ngIf="f.code.errors.required">{{'forms.required_to_fill' | translate}}</span>
+          <span *ngIf="f.code.errors.minlength">
+            {{'forms.too_short' | translate: {value: f.code.errors.minlength.requiredLength} }}
+          </span>
+        </div>
+
+      </div>
+
+      <button type="submit" class="form-promo-code__button" [disabled]="loading">
+        {{'buttons.apply' | translate}}
+      </button>
+
+    </div>
+
+</form>
